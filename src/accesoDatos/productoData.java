@@ -64,6 +64,7 @@ public class productoData {
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "PRODUCTO MODIFICADO");
             }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA PRODUCTO");
         }
