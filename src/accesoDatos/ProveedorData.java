@@ -97,7 +97,6 @@ public class ProveedorData {
                 proveedor.setEstado(true);
             }
             ps.close();
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER LA TABLA PROVEEDOR");
         }
@@ -121,7 +120,6 @@ public class ProveedorData {
                 proveedor.setEstado(rs.getBoolean("estado"));
             }
             ps.close();
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER LA TABLA PROVEEDOR");
         }
@@ -134,23 +132,17 @@ public class ProveedorData {
         ArrayList<Proveedor> proveedores = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-
                 Proveedor proveedor = new Proveedor();
                 proveedor.setIdProveedor(rs.getInt("idProveedor"));
                 proveedor.setRazonSocial(rs.getString("razonSocial"));
                 proveedor.setDomicilio(rs.getString("domicilio"));
                 proveedor.setTelefono(rs.getString("telefono"));
-                
                 proveedor.setEstado(true);
-
                 proveedores.add(proveedor);
             }
-
             ps.close();
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA PROVEEDOR");
         }
