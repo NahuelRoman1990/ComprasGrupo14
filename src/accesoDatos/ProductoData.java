@@ -17,11 +17,11 @@ import javax.swing.JOptionPane;
  *
  * @author roman
  */
-public class productoData {
+public class ProductoData {
 
     private Connection con = null;
 
-    public productoData() {
+    public ProductoData() {
 
         con = Conexion.getConnection();
     }

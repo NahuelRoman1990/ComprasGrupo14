@@ -1,36 +1,40 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package entidades;
 
-/**
- *
- * @author roman
- */
 public class Proveedor {
     
     private int idProveedor;
     private String razonSocial;
     private String domicilio;
     private String telefono;
+    private boolean estado;
 
     public Proveedor() {
     }
 
-    public Proveedor(String razonSocial, String domicilio, String telefono) {
-        this.razonSocial = razonSocial;
-        this.domicilio = domicilio;
-        this.telefono = telefono;
-    }
-
-    public Proveedor(int idProveedor, String razonSocial, String domicilio, String telefono) {
+    public Proveedor(int idProveedor, String razonSocial, String domicilio, String telefono, boolean estado) {
         this.idProveedor = idProveedor;
         this.razonSocial = razonSocial;
         this.domicilio = domicilio;
         this.telefono = telefono;
+        this.estado = estado;
     }
+
+    public Proveedor(String razonSocial, String domicilio, String telefono, boolean estado) {
+        this.razonSocial = razonSocial;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+        this.estado = estado;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
 
     public int getIdProveedor() {
         return idProveedor;

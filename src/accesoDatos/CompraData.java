@@ -11,11 +11,11 @@ import java.sql.Connection;
  *
  * @author roman
  */
-public class compraData {
+public class CompraData {
     
     private Connection con = null;
     
-    public compraData() {
+    public CompraData() {
     
     con = Conexion.getConnection();
 }
