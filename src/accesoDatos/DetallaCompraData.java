@@ -52,6 +52,8 @@ public class DetallaCompraData {
             JOptionPane.showMessageDialog(null, "NO SE PUDO ACCEDER A LA TABLA DETALLE DE COMPRAS");
         }
     }
+    
+    ///Agregar metodo listar detalle compra(idProveedor)
      public List<DetalleCompra> listarDetalleCompras(int idCompra) {
         String sql = "SELECT idDetalle, cantidad, precioCosto, idProducto FROM detallecompra WHERE idCompra = ?";
         ArrayList<DetalleCompra> detalles = new ArrayList<>();
