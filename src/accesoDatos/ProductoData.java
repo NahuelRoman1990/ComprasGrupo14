@@ -27,7 +27,7 @@ public class ProductoData {
     }
 
     public void guardarProducto(Producto producto) {
-        String sql = "INSERT INTO producto(nombreProducto, descripcion, precioActual, stock, estado VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO producto(nombreProducto, descripcion, precioActual, stock, estado) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, producto.getNombreProducto());
