@@ -23,19 +23,21 @@ public class ProveedorData {
     }
     
     public void guardarProveedor(Proveedor proveedor) {
-        String sql = "INSERT INTO proveedor (razonSocial, domicilio ,telefono  VALUES (?,?,?)";
+        String sql = "INSERT INTO proveedor (razonSocial, domicilio ,telefono, estado)  VALUES (?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, proveedor.getRazonSocial());
             ps.setString(2, proveedor.getDomicilio());
             ps.setString(3, proveedor.getTelefono());
+            ps.setBoolean(4,proveedor.isEstado());
             
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                proveedor.setIdProveedor(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "PROVEEDOR GUARDADO CON EXITO");
+                int id = rs.getInt(1);
+                proveedor.setIdProveedor(id);
+                JOptionPane.showMessageDialog(null, "PROVEEDOR GUARDADO CON EL ID: "+id);
 
             }
         } catch (SQLException ex) {
