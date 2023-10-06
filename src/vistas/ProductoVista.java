@@ -61,22 +61,23 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jtStock.setText("");
         jtIDProducto.setText("");
     }
-    
-    private void editableOno(){
+
+    private void editableOno() {
         jtDescripcion.setEditable(false);
         jtPrecio.setEditable(false);
         jtNombre.setEditable(false);
         jtStock.setEditable(false);
-        
+
     }
-    
-    private void editableoSi(){
+
+    private void editableoSi() {
         jtDescripcion.setEditable(true);
         jtPrecio.setEditable(true);
         jtNombre.setEditable(true);
         jtStock.setEditable(true);
-        
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -320,7 +321,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPrecioActionPerformed
-        
+
     }//GEN-LAST:event_jtPrecioActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -333,7 +334,10 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             int id = Integer.parseInt(jtIDProducto.getText());
             Producto producto = pd.buscarProducto(id);
             borrarFilas();
+            editableOno();
+            borrarCampos();
             modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getPrecioActual(), producto.getStock()});
+            JOptionPane.showMessageDialog(null, "ID encontrado. ", "Confirmado                 ", JOptionPane.DEFAULT_OPTION);
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(null, "Ingrese un ID válido. ", "Error                       ", JOptionPane.ERROR_MESSAGE);
 
@@ -374,7 +378,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         borrarCampos();
         editableoSi();
-        
+
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
@@ -424,15 +428,15 @@ public class ProductoVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombreActionPerformed
-       
+
     }//GEN-LAST:event_jtNombreActionPerformed
 
     private void jtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtDescripcionActionPerformed
-        
+
     }//GEN-LAST:event_jtDescripcionActionPerformed
 
     private void jtStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtStockActionPerformed
-        
+
     }//GEN-LAST:event_jtStockActionPerformed
 
 
