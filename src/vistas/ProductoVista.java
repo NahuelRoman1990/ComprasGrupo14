@@ -339,7 +339,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             Producto producto = pd.buscarProducto(id);
             borrarFilas();
             ///editableOno();
-            borrarCampos();
+            //borrarCampos();
             modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getPrecioActual(), producto.getStock()});
             JOptionPane.showMessageDialog(null, "ID encontrado. ", "Confirmado                 ", JOptionPane.DEFAULT_OPTION);
         } catch (NumberFormatException nf) {
