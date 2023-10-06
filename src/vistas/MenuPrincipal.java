@@ -7,7 +7,9 @@ package vistas;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 /**
@@ -22,6 +24,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        
+        String rutaImagen = "D:\\NetBeans\\ComprasGrupo14\\build\\Data\\fondo.jpg";
+        ImageIcon fondo = new ImageIcon(rutaImagen);
+        JLabel label = new JLabel(fondo);
+        label.setBounds(0, 0, fondo.getIconWidth(), fondo.getIconHeight());
+        jdEscritorio.add(label, new Integer(Integer.MIN_VALUE));
   
     }
       
