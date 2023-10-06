@@ -9,6 +9,8 @@ import accesoDatos.ProductoData;
 import entidades.Producto;
 import entidades.Proveedor;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -32,6 +34,11 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jbModificar.setToolTipText("<html>Busca un ID antes de modificar<br>Completa los datos,<br> presiona modificar</html>");
         jbNuevo.setToolTipText("<html>Limpia los datos,<br> para poder ingresar uno nuevo</html>");
         ///editableOno();
+        String rutaImagen = "img\\fondo.jpg";
+        ImageIcon fondo = new ImageIcon(rutaImagen);
+        JLabel label = new JLabel(fondo);
+        label.setBounds(0, 0, fondo.getIconWidth(), fondo.getIconHeight());
+        jdEscritorioProducto.add(label, new Integer(Integer.MIN_VALUE));
     }
 
     private void cargarCabecera() {
@@ -109,7 +116,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jdEscritorioProducto = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
         jtIDProducto = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -130,7 +137,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jbActualizar = new javax.swing.JButton();
 
-        jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
+        jdEscritorioProducto.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("ID Producto");
@@ -239,42 +246,42 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             }
         });
 
-        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jtIDProducto, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jtNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jtDescripcion, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jtPrecio, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jtStock, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jbGuardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jbNuevo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jbBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jbEliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jbModificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jbSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jbActualizar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jtIDProducto, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jtNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jtDescripcion, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jtPrecio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jtStock, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jbGuardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jbNuevo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jbBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jbEliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jbModificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jbSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioProducto.setLayer(jbActualizar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jdEscritorioProductoLayout = new javax.swing.GroupLayout(jdEscritorioProducto);
+        jdEscritorioProducto.setLayout(jdEscritorioProductoLayout);
+        jdEscritorioProductoLayout.setHorizontalGroup(
+            jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdEscritorioProductoLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jdEscritorioProductoLayout.createSequentialGroup()
+                        .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jdEscritorioProductoLayout.createSequentialGroup()
+                                .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel5))
                                 .addGap(53, 53, 53)
-                                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jtPrecio)
                                     .addComponent(jtIDProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jtDescripcion)
@@ -282,58 +289,58 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                                     .addComponent(jtNombre)))
                             .addComponent(jLabel4))
                         .addGap(181, 181, 181)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jbBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jbGuardar)
                             .addComponent(jbSalir))
                         .addGap(447, 447, 447)
                         .addComponent(jbEliminar))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                    .addGroup(jdEscritorioProductoLayout.createSequentialGroup()
                         .addComponent(jbModificar)
                         .addGap(3, 3, 3))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                    .addGroup(jdEscritorioProductoLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 983, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(51, 51, 51)
                         .addComponent(jbActualizar)))
                 .addGap(91, 91, 91))
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+        jdEscritorioProductoLayout.setVerticalGroup(
+            jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jdEscritorioProductoLayout.createSequentialGroup()
                 .addGap(58, 58, 58)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jdEscritorioProductoLayout.createSequentialGroup()
+                        .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jtIDProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbBuscar))
                         .addGap(28, 28, 28)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbNuevo))
                         .addGap(32, 32, 32)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbGuardar))
                         .addGap(41, 41, 41)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jbSalir))
                 .addGap(40, 40, 40)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdEscritorioProductoLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(77, 77, 77))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdEscritorioProductoLayout.createSequentialGroup()
                         .addComponent(jbModificar)
                         .addGap(18, 18, 18)
                         .addComponent(jbActualizar)
@@ -348,14 +355,14 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jDesktopPane1)
+                .addComponent(jdEscritorioProducto)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jDesktopPane1)
+                .addComponent(jdEscritorioProducto)
                 .addContainerGap())
         );
 
@@ -497,7 +504,6 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -511,6 +517,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JDesktopPane jdEscritorioProducto;
     private javax.swing.JTextField jtDescripcion;
     private javax.swing.JTextField jtIDProducto;
     private javax.swing.JTextField jtNombre;
