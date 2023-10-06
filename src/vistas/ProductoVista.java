@@ -25,6 +25,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         cargarCabecera();
         cargarProductos();
         jbEliminar.setToolTipText("<html>Elimina el IDproducto<br>que seleccionaste en<br>ID PRODUCTO</html>");
+        jbBuscar.setToolTipText("<html>Ingresa el ID del producto<br> que deseas buscar</html>");
         ///editableOno();
     }
 
@@ -35,6 +36,8 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         modelo.addColumn("Precio");
         modelo.addColumn("Stock");
         jtProducto.setModel(modelo);
+        
+        jtProducto.setDefaultEditor(Object.class, null);
     }
 
     private void borrarFilas() {
@@ -335,7 +338,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             int id = Integer.parseInt(jtIDProducto.getText());
             Producto producto = pd.buscarProducto(id);
             borrarFilas();
-            editableOno();
+            ///editableOno();
             borrarCampos();
             modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getPrecioActual(), producto.getStock()});
             JOptionPane.showMessageDialog(null, "ID encontrado. ", "Confirmado                 ", JOptionPane.DEFAULT_OPTION);
