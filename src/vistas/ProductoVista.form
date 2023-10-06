@@ -206,8 +206,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtNombre">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtNombreActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtDescripcion">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtDescripcionActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtPrecio">
           <Events>
@@ -215,6 +221,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtStock">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtStockActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbGuardar">
           <Properties>

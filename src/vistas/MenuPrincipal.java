@@ -93,6 +93,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jbSalir.setFocusable(false);
         jbSalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbSalir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbSalirMouseClicked(evt);
+            }
+        });
         jToolBar1.add(jbSalir);
 
         javax.swing.GroupLayout jdEscritorioLayout = new javax.swing.GroupLayout(jdEscritorio);
@@ -144,6 +149,10 @@ jdEscritorio.moveToFront(pv);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jbProductoActionPerformed
+
+    private void jbSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbSalirMouseClicked
+        dispose();
+    }//GEN-LAST:event_jbSalirMouseClicked
 
     /**
      * @param args the command line arguments

@@ -24,6 +24,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         initComponents();
         cargarCabecera();
         cargarProductos();
+        editableOno();
     }
 
     private void cargarCabecera() {
@@ -60,7 +61,22 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jtStock.setText("");
         jtIDProducto.setText("");
     }
-
+    
+    private void editableOno(){
+        jtDescripcion.setEditable(false);
+        jtPrecio.setEditable(false);
+        jtNombre.setEditable(false);
+        jtStock.setEditable(false);
+        
+    }
+    
+    private void editableoSi(){
+        jtDescripcion.setEditable(true);
+        jtPrecio.setEditable(true);
+        jtNombre.setEditable(true);
+        jtStock.setEditable(true);
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -126,9 +142,27 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Stock");
 
+        jtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtNombreActionPerformed(evt);
+            }
+        });
+
+        jtDescripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtDescripcionActionPerformed(evt);
+            }
+        });
+
         jtPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtPrecioActionPerformed(evt);
+            }
+        });
+
+        jtStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtStockActionPerformed(evt);
             }
         });
 
@@ -286,7 +320,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPrecioActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jtPrecioActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -328,6 +362,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
             cargarProductos();
             borrarCampos();
+            editableOno();
 
         } catch (NullPointerException np) {
             JOptionPane.showMessageDialog(this, " ");
@@ -338,7 +373,8 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         borrarCampos();
-        // TODO add your handling code here:
+        editableoSi();
+        
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
@@ -386,6 +422,18 @@ public class ProductoVista extends javax.swing.JInternalFrame {
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombreActionPerformed
+       
+    }//GEN-LAST:event_jtNombreActionPerformed
+
+    private void jtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtDescripcionActionPerformed
+        
+    }//GEN-LAST:event_jtDescripcionActionPerformed
+
+    private void jtStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtStockActionPerformed
+        
+    }//GEN-LAST:event_jtStockActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
