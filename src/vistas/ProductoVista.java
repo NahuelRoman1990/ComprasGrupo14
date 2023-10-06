@@ -28,6 +28,8 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jbEliminar.setToolTipText("<html>Elimina el IDproducto<br>que seleccionaste en<br>ID PRODUCTO</html>");
         jbBuscar.setToolTipText("<html>Ingresa el ID del producto<br> que deseas buscar</html>");
         jbGuardar.setToolTipText("<html>Completa los campos,<br> para agregar un producto<br>(ID Dejar vacio)</html>");
+        jbSalir.setToolTipText("Cierra la ventana producto");
+        jbModificar.setToolTipText("<html>Busca un ID antes de modificar<br>Completa los datos,<br> presiona modificar</html>");
         ///editableOno();
     }
 
