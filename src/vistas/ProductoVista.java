@@ -28,6 +28,9 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jbEliminar.setToolTipText("<html>Elimina el IDproducto<br>que seleccionaste en<br>ID PRODUCTO</html>");
         jbBuscar.setToolTipText("<html>Ingresa el ID del producto<br> que deseas buscar</html>");
         jbGuardar.setToolTipText("<html>Completa los campos,<br> para agregar un producto<br>(ID Dejar vacio)</html>");
+        jbSalir.setToolTipText("Cierra la ventana producto");
+        jbModificar.setToolTipText("<html>Busca un ID antes de modificar<br>Completa los datos,<br> presiona modificar</html>");
+        jbNuevo.setToolTipText("<html>Limpia los datos,<br> para poder ingresar uno nuevo</html>");
         ///editableOno();
     }
 
@@ -40,7 +43,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jtProducto.setModel(modelo);
         JTableHeader tableHeader = jtProducto.getTableHeader();
         tableHeader.setReorderingAllowed(false);
-       
+
         jtProducto.getColumnModel().getColumn(0).setPreferredWidth(10);
         jtProducto.getColumnModel().getColumn(0).setResizable(false);
         jtProducto.getColumnModel().getColumn(1).setPreferredWidth(30);
@@ -51,8 +54,8 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jtProducto.getColumnModel().getColumn(3).setResizable(false);
         jtProducto.getColumnModel().getColumn(4).setPreferredWidth(20);
         jtProducto.getColumnModel().getColumn(4).setResizable(false);
-         jtProducto.setDefaultEditor(Object.class, null);
-        
+        jtProducto.setDefaultEditor(Object.class, null);
+
     }
 
     private void borrarFilas() {
@@ -125,6 +128,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jbEliminar = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
+        jbActualizar = new javax.swing.JButton();
 
         jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -228,6 +232,13 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             }
         });
 
+        jbActualizar.setText("Actualizar");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
+
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jtIDProducto, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -245,6 +256,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jDesktopPane1.setLayer(jbEliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbModificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jbSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jbActualizar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -252,7 +264,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
@@ -269,19 +281,22 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                                     .addComponent(jtStock, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                                     .addComponent(jtNombre)))
                             .addComponent(jLabel4))
-                        .addGap(174, 174, 174)
+                        .addGap(181, 181, 181)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jbBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jbGuardar)
-                            .addComponent(jbSalir)))
+                            .addComponent(jbSalir))
+                        .addGap(447, 447, 447)
+                        .addComponent(jbEliminar))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(jbModificar)
+                        .addGap(3, 3, 3))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 983, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbEliminar)
-                            .addComponent(jbModificar))))
+                        .addGap(51, 51, 51)
+                        .addComponent(jbActualizar)))
                 .addGap(91, 91, 91))
         );
         jDesktopPane1Layout.setVerticalGroup(
@@ -319,21 +334,29 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(77, 77, 77))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(jbEliminar)
-                        .addGap(91, 91, 91)
                         .addComponent(jbModificar)
-                        .addGap(117, 117, 117))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jbActualizar)
+                        .addGap(12, 12, 12)
+                        .addComponent(jbEliminar)
+                        .addGap(128, 128, 128))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jDesktopPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jDesktopPane1)
+                .addContainerGap())
         );
 
         pack();
@@ -353,6 +376,12 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             int id = Integer.parseInt(jtIDProducto.getText());
             Producto producto = pd.buscarProducto(id);
             borrarFilas();
+            jtDescripcion.setText(producto.getDescripcion());
+            jtNombre.setText(producto.getNombreProducto());
+            jtPrecio.setText(producto.getPrecioActual()+"");
+            jtStock.setText(producto.getStock()+"");
+            
+            
             ///editableOno();
             //borrarCampos();
             modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getPrecioActual(), producto.getStock()});
@@ -390,7 +419,9 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         } catch (NullPointerException np) {
             JOptionPane.showMessageDialog(this, " ");
         }
-
+        catch(NumberFormatException nf){
+            JOptionPane.showMessageDialog(this, "Los campos precio y stock deben ser numericos");
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -401,8 +432,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        
-        
+
         int fila = jtProducto.getSelectedRow();
         if (fila != -1) {
             int idProdu = (Integer) jtProducto.getValueAt(fila, 0);
@@ -449,6 +479,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
     private void jtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombreActionPerformed
 
+
     }//GEN-LAST:event_jtNombreActionPerformed
 
     private void jtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtDescripcionActionPerformed
@@ -459,6 +490,11 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jtStockActionPerformed
 
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+        cargarProductos();
+        JOptionPane.showMessageDialog(this, "Tabla actualizada");
+    }//GEN-LAST:event_jbActualizarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -468,6 +504,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
