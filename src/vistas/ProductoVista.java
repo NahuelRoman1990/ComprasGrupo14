@@ -24,7 +24,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         initComponents();
         cargarCabecera();
         cargarProductos();
-        editableOno();
+        ///editableOno();
     }
 
     private void cargarCabecera() {
@@ -366,7 +366,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
             cargarProductos();
             borrarCampos();
-            editableOno();
+            ///editableOno();
 
         } catch (NullPointerException np) {
             JOptionPane.showMessageDialog(this, " ");
@@ -377,7 +377,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         borrarCampos();
-        editableoSi();
+        ///editableoSi();
 
     }//GEN-LAST:event_jbNuevoActionPerformed
 
