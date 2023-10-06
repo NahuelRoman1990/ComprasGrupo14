@@ -5,18 +5,26 @@
  */
 package vistas;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author Erni
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
+
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
         initComponents();
+  
     }
+      
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -167,7 +175,9 @@ jdEscritorio.moveToFront(pv);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuPrincipal().setVisible(true);
+            MenuPrincipal frame = new MenuPrincipal();
+            frame.setLocationRelativeTo(null); // Centrar la ventana en la pantalla
+            frame.setVisible(true);
             }
         });
     }
