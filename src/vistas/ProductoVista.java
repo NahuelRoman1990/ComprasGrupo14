@@ -159,6 +159,11 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtProductoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtProducto);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -353,17 +358,11 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jdEscritorioProducto)
-                .addContainerGap())
+            .addComponent(jdEscritorioProducto, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jdEscritorioProducto)
-                .addContainerGap())
+            .addComponent(jdEscritorioProducto)
         );
 
         pack();
@@ -385,17 +384,19 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             borrarFilas();
             jtDescripcion.setText(producto.getDescripcion());
             jtNombre.setText(producto.getNombreProducto());
-            jtPrecio.setText(producto.getPrecioActual()+"");
-            jtStock.setText(producto.getStock()+"");
-            
-            
+            jtPrecio.setText(producto.getPrecioActual() + "");
+            jtStock.setText(producto.getStock() + "");
+
             ///editableOno();
             //borrarCampos();
             modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getPrecioActual(), producto.getStock()});
             JOptionPane.showMessageDialog(null, "ID encontrado. ", "Confirmado                 ", JOptionPane.DEFAULT_OPTION);
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(null, "Ingrese un ID válido. ", "Error                       ", JOptionPane.ERROR_MESSAGE);
-
+            cargarProductos();
+        } catch (NullPointerException np) {
+            JOptionPane.showMessageDialog(this, "Este articulo  no existe", "Error                       ", JOptionPane.ERROR_MESSAGE);
+            cargarProductos();
         }
 
         // TODO add your handling code here:
@@ -425,8 +426,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
         } catch (NullPointerException np) {
             JOptionPane.showMessageDialog(this, " ");
-        }
-        catch(NumberFormatException nf){
+        } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(this, "Los campos precio y stock deben ser numericos");
         }
         // TODO add your handling code here:
@@ -444,7 +444,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         if (fila != -1) {
             int idProdu = (Integer) jtProducto.getValueAt(fila, 0);
             pd.eliminarProducto(idProdu);
-
+            borrarCampos();
             borrarFilas();
             cargarProductos();
 
@@ -456,7 +456,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-
+        
         try {
             if (jtIDProducto.getText().isEmpty() || jtDescripcion.getText().isEmpty() || jtNombre.getText().isEmpty() || jtPrecio.getText().isEmpty() || jtStock.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "No debe haber campos vacios", "Error                       ", JOptionPane.ERROR_MESSAGE);
@@ -467,13 +467,20 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             String descripcion = jtDescripcion.getText();
             double precio = Double.parseDouble(jtPrecio.getText());
             int stock = Integer.parseInt(jtStock.getText());
-
-            Producto producto = new Producto(id, nombre, descripcion, precio, stock, true);
+            Boolean estado;
+            if (stock >0) {
+           estado = true;
+                
+            }else{
+           estado = false;
+           
+            }
+                 Producto producto = new Producto(id, nombre, descripcion, precio, stock, estado);
             pd.modificarProducto(producto);
 
             cargarProductos();
             borrarCampos();
-
+            
         } catch (NullPointerException np) {
             JOptionPane.showMessageDialog(this, " ");
         }
@@ -481,7 +488,8 @@ public class ProductoVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        dispose();        // TODO add your handling code here:
+        dispose();
+        // TODO add your handling code here:
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombreActionPerformed
@@ -499,8 +507,26 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         cargarProductos();
+        borrarCampos();
         JOptionPane.showMessageDialog(this, "Tabla actualizada");
     }//GEN-LAST:event_jbActualizarActionPerformed
+
+    private void jtProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtProductoMouseClicked
+       int fila = jtProducto.getSelectedRow();
+         if (fila != -1) {
+            int idProdu = (Integer) jtProducto.getValueAt(fila, 0);
+            Producto producto = pd.buscarProducto(idProdu);
+            jtDescripcion.setText(producto.getDescripcion());
+            jtNombre.setText(producto.getNombreProducto());
+            jtIDProducto.setText(producto.getIdProducto()+"");
+            jtPrecio.setText(producto.getPrecioActual()+"");
+            jtStock.setText(producto.getStock()+"");
+          
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un producto.");
+        }
+    }//GEN-LAST:event_jtProductoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
