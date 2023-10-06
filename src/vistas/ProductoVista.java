@@ -24,6 +24,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         initComponents();
         cargarCabecera();
         cargarProductos();
+        jbEliminar.setToolTipText("<html>Elimina el IDproducto<br>que seleccionaste en<br>ID PRODUCTO</html>");
         ///editableOno();
     }
 
@@ -382,7 +383,8 @@ public class ProductoVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-
+        
+        
         int fila = jtProducto.getSelectedRow();
         if (fila != -1) {
             int idProdu = (Integer) jtProducto.getValueAt(fila, 0);
