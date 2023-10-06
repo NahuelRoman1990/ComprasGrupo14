@@ -11,6 +11,7 @@ import entidades.Proveedor;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class ProductoVista extends javax.swing.JInternalFrame {
 
@@ -36,8 +37,21 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         modelo.addColumn("Precio");
         modelo.addColumn("Stock");
         jtProducto.setModel(modelo);
+        JTableHeader tableHeader = jtProducto.getTableHeader();
+        tableHeader.setReorderingAllowed(false);
+       
+        jtProducto.getColumnModel().getColumn(0).setPreferredWidth(10);
+        jtProducto.getColumnModel().getColumn(0).setResizable(false);
+        jtProducto.getColumnModel().getColumn(1).setPreferredWidth(30);
+        jtProducto.getColumnModel().getColumn(1).setResizable(false);
+        jtProducto.getColumnModel().getColumn(2).setPreferredWidth(40);
+        jtProducto.getColumnModel().getColumn(2).setResizable(false);
+        jtProducto.getColumnModel().getColumn(3).setPreferredWidth(20);
+        jtProducto.getColumnModel().getColumn(3).setResizable(false);
+        jtProducto.getColumnModel().getColumn(4).setPreferredWidth(20);
+        jtProducto.getColumnModel().getColumn(4).setResizable(false);
+         jtProducto.setDefaultEditor(Object.class, null);
         
-        jtProducto.setDefaultEditor(Object.class, null);
     }
 
     private void borrarFilas() {
