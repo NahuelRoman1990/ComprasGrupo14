@@ -25,7 +25,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     public MenuPrincipal() {
         initComponents();
         
-        String rutaImagen = "D:\\NetBeans\\ComprasGrupo14\\build\\Data\\fondo.jpg";
+        String rutaImagen = "D:\\NetBeans\\ComprasGrupo14\\Data\\fondo.jpg";
         ImageIcon fondo = new ImageIcon(rutaImagen);
         JLabel label = new JLabel(fondo);
         label.setBounds(0, 0, fondo.getIconWidth(), fondo.getIconHeight());
