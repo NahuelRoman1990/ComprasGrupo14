@@ -56,6 +56,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jToolBar1.setBackground(new java.awt.Color(255, 113, 43));
+        jToolBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jToolBar1.setForeground(new java.awt.Color(255, 255, 255));
         jToolBar1.setRollover(true);
 
         jbCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pequeño carrito png.png"))); // NOI18N
@@ -94,6 +97,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jbDetalle.setFocusable(false);
         jbDetalle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbDetalle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbDetalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbDetalleActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jbDetalle);
 
         jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salir0.5-100x100.png"))); // NOI18N
@@ -107,6 +115,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(jbSalir);
+
+        jdEscritorio.setBackground(new java.awt.Color(102, 102, 102));
 
         javax.swing.GroupLayout jdEscritorioLayout = new javax.swing.GroupLayout(jdEscritorio);
         jdEscritorio.setLayout(jdEscritorioLayout);
@@ -162,6 +172,10 @@ jdEscritorio.moveToFront(pv);
     private void jbSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbSalirMouseClicked
         dispose();
     }//GEN-LAST:event_jbSalirMouseClicked
+
+    private void jbDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDetalleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbDetalleActionPerformed
 
     /**
      * @param args the command line arguments
