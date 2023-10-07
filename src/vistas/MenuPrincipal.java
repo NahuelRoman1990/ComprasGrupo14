@@ -58,7 +58,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        jbCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/System/Qr_Code.png"))); // NOI18N
+        jbCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pequeño carrito png.png"))); // NOI18N
         jbCompras.setText("Compras");
         jbCompras.setFocusable(false);
         jbCompras.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -70,14 +70,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jToolBar1.add(jbCompras);
 
-        jbProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/System/Data.png"))); // NOI18N
+        jbProveedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Delivery0.5-100x100.png"))); // NOI18N
         jbProveedores.setText("Proveedores");
         jbProveedores.setFocusable(false);
         jbProveedores.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbProveedores.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jbProveedores);
 
-        jbProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/System/Mouse.png"))); // NOI18N
+        jbProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/producto0.5-100x100.png"))); // NOI18N
         jbProducto.setText("Producto");
         jbProducto.setFocusable(false);
         jbProducto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -89,14 +89,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jToolBar1.add(jbProducto);
 
-        jbDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/System/Bar_Bottom.png"))); // NOI18N
+        jbDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/detalles de compras0.5-100x100.png"))); // NOI18N
         jbDetalle.setText("Detalle compra");
         jbDetalle.setFocusable(false);
         jbDetalle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbDetalle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jbDetalle);
 
-        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos archivos/File/Folders.png"))); // NOI18N
+        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salir0.5-100x100.png"))); // NOI18N
         jbSalir.setText("Salir");
         jbSalir.setFocusable(false);
         jbSalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -116,7 +116,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         jdEscritorioLayout.setVerticalGroup(
             jdEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 609, Short.MAX_VALUE)
+            .addGap(0, 591, Short.MAX_VALUE)
         );
 
         jMenuBar1.add(jMenu1);
@@ -134,8 +134,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jdEscritorio)
                 .addContainerGap())
         );
