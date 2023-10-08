@@ -112,7 +112,7 @@ public class ProductoData {
     }
 
     public List<Producto> listarProducto() {
-        String sql = "SELECT idProducto, nombreProducto, descripcion, precioActual, stock, estado FROM producto";
+        String sql = "SELECT idProducto, nombreProducto, descripcion, precioActual, stock, estado FROM producto WHERE estado=1";
         ArrayList<Producto> productos = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -134,6 +134,10 @@ public class ProductoData {
             ps.close();
 
         } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA PRODUCTOS");
+        }catch(NullPointerException np){
+            np.printStackTrace();
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA PRODUCTOS");
         }
         return productos;
