@@ -431,7 +431,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(this, "Los campos precio y stock deben ser numericos");
         }
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
