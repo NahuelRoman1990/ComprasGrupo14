@@ -22,12 +22,12 @@ import javax.swing.JOptionPane;
  *
  * @author roman
  */
-public class DetallaCompraData {
+public class DetalleCompraData {
 
     private Connection con = null;
     private ProductoData pd = new ProductoData();
     private CompraData cd = new CompraData();
-    public DetallaCompraData() {
+    public DetalleCompraData() {
 
         con = Conexion.getConnection();
     }
