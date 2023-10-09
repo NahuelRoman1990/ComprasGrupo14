@@ -66,6 +66,16 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         }
 
     }
+    
+     private void borrarCampos() {
+        jtDomicilio.setText("");
+        jtIdProveedor.setText("");
+        jtRazonSocial.setText("");
+        jtTelefono.setText("");
+        jrbActivo.setSelected(false);
+        jrbInActivo.setSelected(false);
+    }
+
 
     private void cargarProveedor() {
 
@@ -304,26 +314,26 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
           try {
-            if (jtRazonSocial.getText().isEmpty() || jtDomicilio.getText().isEmpty() || jtTelefono.getText().isEmpty() || jtStock.getText().isEmpty()) {
+            if (jtRazonSocial.getText().isEmpty() || jtDomicilio.getText().isEmpty() || jtTelefono.getText().isEmpty() || (!jrbActivo.isSelected() && !jrbInActivo.isSelected())) {
                 JOptionPane.showMessageDialog(null, "No debe haber campos vacios", "Error                       ", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            String nombre = jtNombre.getText();
-            String descripcion = jtDescripcion.getText();
-            double precio = Double.parseDouble(jtPrecio.getText());
-            int stock = Integer.parseInt(jtStock.getText());
+            String razonSocial = jtRazonSocial.getText();
+            String domicilio = jtDomicilio.getText();
+            String telefono = jtTelefono.getText();
+            boolean estado = jrbActivo.isSelected();
 
-            Producto producto = new Producto(nombre, descripcion, precio, stock, true);
-            pd.guardarProducto(producto);
+            Proveedor proveedor = new Proveedor(razonSocial, domicilio, telefono, estado);
+            pd.guardarProveedor(proveedor);
 
-            cargarProductos();
+            cargarProveedor();
             borrarCampos();
             ///editableOno();
 
         } catch (NullPointerException np) {
             JOptionPane.showMessageDialog(this, " ");
         } catch (NumberFormatException nf) {
-            JOptionPane.showMessageDialog(this, "Los campos precio y stock deben ser numericos");
+            JOptionPane.showMessageDialog(this, " ");
         }
        
     }//GEN-LAST:event_jbGuardarActionPerformed
