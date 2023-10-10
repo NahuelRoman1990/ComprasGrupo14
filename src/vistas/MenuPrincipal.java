@@ -113,6 +113,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jbSalirMouseClicked(evt);
             }
         });
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jbSalir);
 
         javax.swing.GroupLayout jdEscritorioLayout = new javax.swing.GroupLayout(jdEscritorio);
@@ -187,6 +192,10 @@ jdEscritorio.add(pv);
         pv.setVisible(true);
         jdEscritorio.add(pv);
     }//GEN-LAST:event_jbProveedoresActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbSalirActionPerformed
 
     /**
      * @param args the command line arguments
