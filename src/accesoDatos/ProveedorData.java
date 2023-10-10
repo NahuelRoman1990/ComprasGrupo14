@@ -173,4 +173,50 @@ public class ProveedorData {
         return proveedores;
 
     }
+   
+    public List<Proveedor> listarProveedoresActivo() {
+        String sql = "SELECT idProveedor, razonSocial, domicilio, telefono, estado FROM proveedor WHERE estado=1";
+        ArrayList<Proveedor> proveedores = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Proveedor proveedor = new Proveedor();
+                proveedor.setIdProveedor(rs.getInt("idProveedor"));
+                proveedor.setRazonSocial(rs.getString("razonSocial"));
+                proveedor.setDomicilio(rs.getString("domicilio"));
+                proveedor.setTelefono(rs.getString("telefono"));
+                proveedor.setEstado(rs.getBoolean("estado"));
+                proveedores.add(proveedor);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA PROVEEDOR");
+        }
+        return proveedores;
+
+    }
+    
+     public List<Proveedor> listarProveedoresInactivo() {
+        String sql = "SELECT idProveedor, razonSocial, domicilio, telefono, estado FROM proveedor WHERE estado=0";
+        ArrayList<Proveedor> proveedores = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Proveedor proveedor = new Proveedor();
+                proveedor.setIdProveedor(rs.getInt("idProveedor"));
+                proveedor.setRazonSocial(rs.getString("razonSocial"));
+                proveedor.setDomicilio(rs.getString("domicilio"));
+                proveedor.setTelefono(rs.getString("telefono"));
+                proveedor.setEstado(rs.getBoolean("estado"));
+                proveedores.add(proveedor);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA PROVEEDOR");
+        }
+        return proveedores;
+
+    }
 }
