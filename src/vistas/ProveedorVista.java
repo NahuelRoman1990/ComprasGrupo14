@@ -79,8 +79,14 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
 
         borrarFilas();
         List<Proveedor> listaProveedores = pd.listarProveedores();
+        String estado = null;
         for (Proveedor proveedor : listaProveedores) {
-            modelo.addRow(new Object[]{proveedor.getIdProveedor(), proveedor.getRazonSocial(), proveedor.getDomicilio(), proveedor.getTelefono(), proveedor.isEstado()});
+            if (proveedor.isEstado()) {
+                estado = "Activo";
+            }else {
+                estado = "Inactivo";
+            }
+            modelo.addRow(new Object[]{proveedor.getIdProveedor(), proveedor.getRazonSocial(), proveedor.getDomicilio(), proveedor.getTelefono(), estado});
 
         }
     }
