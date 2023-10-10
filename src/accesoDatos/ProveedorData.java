@@ -63,7 +63,7 @@ public class ProveedorData {
   public void modificarProveedor(Proveedor proveedor) {
 
         String sql = "UPDATE proveedor SET razonSocial=?, domicilio =?, telefono=?, estado=?"
-                + "WHERE idProveedor =?";
+                + " WHERE idProveedor =?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -81,9 +81,31 @@ public class ProveedorData {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA PROVEEDOR");
         }
     }
+  public Proveedor buscarProveedores(int idProveedor) {
+        String sql = "SELECT idProveedor, razonSocial, domicilio, telefono, estado FROM proveedor "
+                + "WHERE idProveedor = ?";
+        Proveedor proveedor = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idProveedor);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                proveedor = new Proveedor();
+                proveedor.setIdProveedor(rs.getInt("idProveedor"));
+                proveedor.setRazonSocial(rs.getString("razonSocial"));
+                proveedor.setDomicilio(rs.getString("domicilio"));
+                proveedor.setTelefono(rs.getString("telefono"));
+                proveedor.setEstado(rs.getBoolean("estado"));
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER LA TABLA PROVEEDOR");
+        }
+        return proveedor;
+    }
   
   public Proveedor buscarProveedorActivo(int idProveedor) {
-        String sql = "SELECT idProveedor, razonSocial, domicilio, telefono FROM proveedor "
+        String sql = "SELECT idProveedor, razonSocial, domicilio, telefono, estado FROM proveedor "
                 + "WHERE idProveedor = ? AND estado = 1";
         Proveedor proveedor = null;
         try {
@@ -96,7 +118,7 @@ public class ProveedorData {
                 proveedor.setRazonSocial(rs.getString("razonSocial"));
                 proveedor.setDomicilio(rs.getString("domicilio"));
                 proveedor.setTelefono(rs.getString("telefono"));
-                proveedor.setEstado(true);
+                proveedor.setEstado(rs.getBoolean("estado"));
             }
             ps.close();
         } catch (SQLException ex) {
@@ -106,7 +128,7 @@ public class ProveedorData {
     }
   
   public Proveedor buscarProveedorInactivo(int idProveedor) {
-        String sql = "SELECT idProveedor, razonSocial, domicilio, telefono FROM proveedor "
+        String sql = "SELECT idProveedor, razonSocial, domicilio, telefono, estado FROM proveedor "
                 + "WHERE idProveedor = ? AND estado = 0";
         Proveedor proveedor = null;
         try {
@@ -130,7 +152,7 @@ public class ProveedorData {
   
   
    public List<Proveedor> listarProveedores() {
-        String sql = "SELECT idProveedor, razonSocial, domicilio, telefono FROM proveedor WHERE estado = 1";
+        String sql = "SELECT idProveedor, razonSocial, domicilio, telefono, estado FROM proveedor";
         ArrayList<Proveedor> proveedores = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -141,7 +163,53 @@ public class ProveedorData {
                 proveedor.setRazonSocial(rs.getString("razonSocial"));
                 proveedor.setDomicilio(rs.getString("domicilio"));
                 proveedor.setTelefono(rs.getString("telefono"));
-                proveedor.setEstado(true);
+                proveedor.setEstado(rs.getBoolean("estado"));
+                proveedores.add(proveedor);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA PROVEEDOR");
+        }
+        return proveedores;
+
+    }
+   
+    public List<Proveedor> listarProveedoresActivo() {
+        String sql = "SELECT idProveedor, razonSocial, domicilio, telefono, estado FROM proveedor WHERE estado=1";
+        ArrayList<Proveedor> proveedores = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Proveedor proveedor = new Proveedor();
+                proveedor.setIdProveedor(rs.getInt("idProveedor"));
+                proveedor.setRazonSocial(rs.getString("razonSocial"));
+                proveedor.setDomicilio(rs.getString("domicilio"));
+                proveedor.setTelefono(rs.getString("telefono"));
+                proveedor.setEstado(rs.getBoolean("estado"));
+                proveedores.add(proveedor);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA PROVEEDOR");
+        }
+        return proveedores;
+
+    }
+    
+     public List<Proveedor> listarProveedoresInactivo() {
+        String sql = "SELECT idProveedor, razonSocial, domicilio, telefono, estado FROM proveedor WHERE estado=0";
+        ArrayList<Proveedor> proveedores = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Proveedor proveedor = new Proveedor();
+                proveedor.setIdProveedor(rs.getInt("idProveedor"));
+                proveedor.setRazonSocial(rs.getString("razonSocial"));
+                proveedor.setDomicilio(rs.getString("domicilio"));
+                proveedor.setTelefono(rs.getString("telefono"));
+                proveedor.setEstado(rs.getBoolean("estado"));
                 proveedores.add(proveedor);
             }
             ps.close();

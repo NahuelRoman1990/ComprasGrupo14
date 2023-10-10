@@ -429,7 +429,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(this, "Los campos precio y stock deben ser numericos");
         }
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
@@ -467,15 +467,8 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             String descripcion = jtDescripcion.getText();
             double precio = Double.parseDouble(jtPrecio.getText());
             int stock = Integer.parseInt(jtStock.getText());
-            Boolean estado;
-            if (stock >0) {
-           estado = true;
-                
-            }else{
-           estado = false;
-           
-            }
-                 Producto producto = new Producto(id, nombre, descripcion, precio, stock, estado);
+            Boolean estado = (stock >0);
+            Producto producto = new Producto(id, nombre, descripcion, precio, stock, estado);
             pd.modificarProducto(producto);
 
             cargarProductos();
