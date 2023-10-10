@@ -469,15 +469,8 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             String descripcion = jtDescripcion.getText();
             double precio = Double.parseDouble(jtPrecio.getText());
             int stock = Integer.parseInt(jtStock.getText());
-            Boolean estado;
-            if (stock >0) {
-           estado = true;
-                
-            }else{
-           estado = false;
-           
-            }
-                 Producto producto = new Producto(id, nombre, descripcion, precio, stock, estado);
+            Boolean estado = (stock >0);
+            Producto producto = new Producto(id, nombre, descripcion, precio, stock, estado);
             pd.modificarProducto(producto);
 
             cargarProductos();

@@ -6,7 +6,6 @@
 package vistas;
 
 import accesoDatos.ProveedorData;
-import entidades.Producto;
 import entidades.Proveedor;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -66,8 +65,8 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         }
 
     }
-    
-     private void borrarCampos() {
+
+    private void borrarCampos() {
         jtDomicilio.setText("");
         jtIdProveedor.setText("");
         jtRazonSocial.setText("");
@@ -75,7 +74,6 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         jrbActivo.setSelected(false);
         jrbInActivo.setSelected(false);
     }
-
 
     private void cargarProveedor() {
 
@@ -109,10 +107,11 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         jbGuardar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbNuevo = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jbBuscar = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 2, 48)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("PROVEEDORES");
 
         jtProveedor.setModel(new javax.swing.table.DefaultTableModel(
@@ -126,14 +125,23 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtProveedorMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtProveedor);
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ID Proveedor");
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Razon Social");
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Domicilio");
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Telefono");
 
         jrbActivo.setText("Activo");
@@ -158,68 +166,73 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         });
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbNuevo.setText("Nuevo");
-
-        jButton4.setText("Buscar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jbNuevoActionPerformed(evt);
+            }
+        });
+
+        jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
             }
         });
 
         jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpProveedoresLayout = new javax.swing.GroupLayout(jpProveedores);
         jpProveedores.setLayout(jpProveedoresLayout);
         jpProveedoresLayout.setHorizontalGroup(
             jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpProveedoresLayout.createSequentialGroup()
+                .addGap(431, 431, 431)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jpProveedoresLayout.createSequentialGroup()
                 .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpProveedoresLayout.createSequentialGroup()
-                        .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpProveedoresLayout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jpProveedoresLayout.createSequentialGroup()
-                                        .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addGap(41, 41, 41)
-                                        .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jtIdProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                                .addComponent(jtDomicilio)
-                                                .addComponent(jtTelefono))
-                                            .addComponent(jtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jpProveedoresLayout.createSequentialGroup()
-                                        .addComponent(jbGuardar)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(jbEliminar)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(jbNuevo)
-                                        .addGap(25, 25, 25))))
-                            .addGroup(jpProveedoresLayout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jrbInActivo)
-                                    .addComponent(jrbActivo))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 272, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpProveedoresLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jbGuardar)
+                        .addGap(30, 30, 30)
+                        .addComponent(jbEliminar)
+                        .addGap(30, 30, 30)
+                        .addComponent(jbNuevo)
+                        .addGap(32, 32, 32)
+                        .addComponent(jbModificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE))
+                    .addGroup(jpProveedoresLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jrbActivo, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(41, 41, 41)
                         .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpProveedoresLayout.createSequentialGroup()
-                                .addGap(431, 431, 431)
-                                .addComponent(jLabel2))
-                            .addGroup(jpProveedoresLayout.createSequentialGroup()
-                                .addGap(173, 173, 173)
-                                .addComponent(jButton4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbModificar)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jtIdProveedor)
+                                .addComponent(jtDomicilio)
+                                .addComponent(jtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jrbInActivo))
+                        .addComponent(jbBuscar)
+                        .addGap(62, 62, 62)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(145, 145, 145))
         );
         jpProveedoresLayout.setVerticalGroup(
             jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,20 +241,14 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpProveedoresLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jpProveedoresLayout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4)
-                            .addComponent(jbModificar))
-                        .addGap(38, 38, 38)
+                        .addGap(76, 76, 76)
                         .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jpProveedoresLayout.createSequentialGroup()
                                 .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel1)
-                                    .addComponent(jtIdProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(33, 33, 33)
+                                    .addComponent(jtIdProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbBuscar))
+                                .addGap(31, 31, 31)
                                 .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
                                     .addComponent(jtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -252,16 +259,20 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
                                 .addGap(33, 33, 33)
                                 .addComponent(jLabel5))
                             .addComponent(jtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
-                        .addComponent(jrbActivo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jrbInActivo)
-                        .addGap(26, 26, 26)
+                        .addGap(29, 29, 29)
+                        .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jrbActivo)
+                            .addComponent(jrbInActivo))
+                        .addGap(73, 73, 73)
                         .addGroup(jpProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbGuardar)
                             .addComponent(jbEliminar)
-                            .addComponent(jbNuevo))
-                        .addGap(0, 24, Short.MAX_VALUE))))
+                            .addComponent(jbNuevo)
+                            .addComponent(jbModificar)))
+                    .addGroup(jpProveedoresLayout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 57, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -288,7 +299,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         jrbInActivo.setSelected(true);
     }//GEN-LAST:event_jrbInActivoActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 
         try {
             if (jtIdProveedor.getText().isEmpty()) {
@@ -297,23 +308,28 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
             }
             int id = Integer.parseInt(jtIdProveedor.getText());
             Proveedor proveedor = pd.buscarProveedores(id);
-            borrarFilas();
+
             jtRazonSocial.setText(proveedor.getRazonSocial());
             jtDomicilio.setText(proveedor.getDomicilio());
             jtTelefono.setText(proveedor.getTelefono() + "");
+            jrbActivo.setSelected(proveedor.isEstado());
+            jrbInActivo.setSelected(!proveedor.isEstado());
+
+            borrarFilas();
             modelo.addRow(new Object[]{proveedor.getIdProveedor(), proveedor.getRazonSocial(), proveedor.getDomicilio(), proveedor.getTelefono(), proveedor.isEstado()});
             JOptionPane.showMessageDialog(null, "ID encontrado. ", "Confirmado                 ", JOptionPane.DEFAULT_OPTION);
+
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(null, "Ingrese un ID válido. ", "Error                       ", JOptionPane.ERROR_MESSAGE);
             cargarProveedor();
         } catch (NullPointerException np) {
-            JOptionPane.showMessageDialog(this, "Este articulo  no existe", "Error                       ", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Este proveedor no existe", "Error                       ", JOptionPane.ERROR_MESSAGE);
             cargarProveedor();
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-          try {
+        try {
             if (jtRazonSocial.getText().isEmpty() || jtDomicilio.getText().isEmpty() || jtTelefono.getText().isEmpty() || (!jrbActivo.isSelected() && !jrbInActivo.isSelected())) {
                 JOptionPane.showMessageDialog(null, "No debe haber campos vacios", "Error                       ", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -335,19 +351,83 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(this, " ");
         }
-       
+
     }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        borrarCampos();        // TODO add your handling code here:
+        cargarProveedor();
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        // TODO add your handling code here:
+          int fila = jtProveedor.getSelectedRow();
+        if (fila != -1) {
+            int idProveedor = (Integer) jtProveedor.getValueAt(fila, 0);
+            pd.eliminarProveedor(idProveedor);
+            borrarCampos();
+            borrarFilas();
+            cargarProveedor();
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un proveedor en la tabla.");
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (jtIdProveedor.getText().isEmpty() || jtDomicilio.getText().isEmpty() || jtRazonSocial.getText().isEmpty() || jtTelefono.getText().isEmpty()|| (!jrbActivo.isSelected() && !jrbInActivo.isSelected())) {
+                JOptionPane.showMessageDialog(null, "No debe haber campos vacios", "Error                       ", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            int id = Integer.parseInt(jtIdProveedor.getText());
+            String razonSocial = jtRazonSocial.getText();
+            String telefono = jtTelefono.getText();
+            String domicilio = jtDomicilio.getText();
+            boolean estado =jrbActivo.isSelected();
+            
+            
+                 Proveedor proveedor = new Proveedor(id,razonSocial, domicilio, telefono, estado);
+            pd.modificarProveedor(proveedor);
+
+            cargarProveedor();
+            borrarCampos();
+            
+        } catch (NullPointerException np) {
+            JOptionPane.showMessageDialog(this, " ");
+        }
+    }//GEN-LAST:event_jbModificarActionPerformed
+
+    private void jtProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtProveedorMouseClicked
+        // TODO add your handling code here:
+        int fila = jtProveedor.getSelectedRow();
+         if (fila != -1) {
+            int idProveedor = (Integer) jtProveedor.getValueAt(fila, 0);
+            Proveedor proveedor = pd.buscarProveedores(idProveedor);
+            jtIdProveedor.setText(proveedor.getIdProveedor()+"");
+            jtRazonSocial.setText(proveedor.getRazonSocial());
+            jtDomicilio.setText(proveedor.getDomicilio());
+            jtTelefono.setText(proveedor.getTelefono());
+            jrbActivo.setSelected(proveedor.isEstado());
+            jrbInActivo.setSelected(!proveedor.isEstado());
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un proveedor en la tabla.");
+        }
+     
+    }//GEN-LAST:event_jtProveedorMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbModificar;
