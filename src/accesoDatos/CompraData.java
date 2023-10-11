@@ -13,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -67,5 +69,22 @@ public class CompraData {
         }
         return compra;
     }
+   
+   public void buscarUltimoId () {
+       String sql = "SELECT LAST_INSERT_ID()";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery(rs.next());
+            if (ResultSet.next()) {
+                
+                
+            }
+                
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "NO SE PUDO CONECTAR CON LA TABLA COMPRAS");
+        }
+       
+       
+   }
 }
 

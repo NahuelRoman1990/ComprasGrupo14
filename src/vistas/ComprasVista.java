@@ -30,6 +30,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         cargarComboProducto();
         cargarComboProveedor();
         cargarCabecera();
+        jcbProductos.setEnabled(false);
         String rutaImagen = "img\\fondo.jpg";
         ImageIcon fondo = new ImageIcon(rutaImagen);
         JLabel label = new JLabel(fondo);
@@ -94,7 +95,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
         jdEscritorioCompras = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
-        jtIdCompra = new javax.swing.JTextField();
+        jtfCompra = new javax.swing.JTextField();
         jCalendar1 = new com.toedter.calendar.JCalendar();
         jLabel2 = new javax.swing.JLabel();
         jcbProveedor = new javax.swing.JComboBox<>();
@@ -118,9 +119,9 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
         jLabel1.setText("ID Compra");
 
-        jtIdCompra.addActionListener(new java.awt.event.ActionListener() {
+        jtfCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtIdCompraActionPerformed(evt);
+                jtfCompraActionPerformed(evt);
             }
         });
 
@@ -173,6 +174,11 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jLabel6.setText("Cantidad");
 
         jbComprar.setText("Comprar");
+        jbComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbComprarActionPerformed(evt);
+            }
+        });
 
         jbConfirmarCompra.setText("Confirmar Compra");
 
@@ -198,7 +204,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jbModificar.setText("Modificar");
 
         jdEscritorioCompras.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jdEscritorioCompras.setLayer(jtIdCompra, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioCompras.setLayer(jtfCompra, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jCalendar1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jcbProveedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -239,7 +245,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jdEscritorioComprasLayout.createSequentialGroup()
                                             .addComponent(jLabel1)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jtIdCompra))
+                                            .addComponent(jtfCompra))
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jdEscritorioComprasLayout.createSequentialGroup()
                                             .addComponent(jLabel4)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -296,7 +302,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                         .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
                         .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtIdCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)))
                     .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -340,9 +346,9 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtIdCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIdCompraActionPerformed
+    private void jtfCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCompraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtIdCompraActionPerformed
+    }//GEN-LAST:event_jtfCompraActionPerformed
 
     private void jtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtTotalActionPerformed
         // TODO add your handling code here:
@@ -363,6 +369,11 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     private void jbDescartarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDescartarActionPerformed
         
     }//GEN-LAST:event_jbDescartarActionPerformed
+
+    private void jbComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComprarActionPerformed
+        
+        jcbProductos.setEnabled(true);
+    }//GEN-LAST:event_jbComprarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -385,7 +396,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     private javax.swing.JDesktopPane jdEscritorioCompras;
     private javax.swing.JTextField jtCantidad;
     private javax.swing.JTable jtCompras;
-    private javax.swing.JTextField jtIdCompra;
     private javax.swing.JTextField jtTotal;
+    private javax.swing.JTextField jtfCompra;
     // End of variables declaration//GEN-END:variables
 }
