@@ -5,17 +5,82 @@
  */
 package vistas;
 
+import accesoDatos.ProductoData;
+import accesoDatos.ProveedorData;
+import entidades.Producto;
+import entidades.Proveedor;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+
 /**
  *
  * @author Erni
  */
 public class ComprasVista extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ComprasVista
-     */
+    ProveedorData pd = new ProveedorData();
+    ProductoData prd = new ProductoData();
+    private DefaultTableModel modelo = new DefaultTableModel();
+
     public ComprasVista() {
         initComponents();
+        cargarComboProducto();
+        cargarComboProveedor();
+        cargarCabecera();
+        String rutaImagen = "img\\fondo.jpg";
+        ImageIcon fondo = new ImageIcon(rutaImagen);
+        JLabel label = new JLabel(fondo);
+        label.setBounds(0, 0, fondo.getIconWidth(), fondo.getIconHeight());
+        jdEscritorioCompras.add(label, new Integer(Integer.MIN_VALUE));
+    }
+
+    private void cargarCabecera() {
+        modelo.addColumn("ID Producto");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Precio Costo");
+        modelo.addColumn("Cantidad");
+        jtCompras.setModel(modelo);
+        JTableHeader tableHeader = jtCompras.getTableHeader();
+        tableHeader.setReorderingAllowed(false);
+
+        jtCompras.getColumnModel().getColumn(0).setPreferredWidth(10);
+        jtCompras.getColumnModel().getColumn(0).setResizable(false);
+        jtCompras.getColumnModel().getColumn(1).setPreferredWidth(30);
+        jtCompras.getColumnModel().getColumn(1).setResizable(false);
+        jtCompras.getColumnModel().getColumn(2).setPreferredWidth(40);
+        jtCompras.getColumnModel().getColumn(2).setResizable(false);
+        jtCompras.getColumnModel().getColumn(3).setPreferredWidth(20);
+        jtCompras.getColumnModel().getColumn(3).setResizable(false);
+        jtCompras.getColumnModel().getColumn(4).setPreferredWidth(20);
+        jtCompras.getColumnModel().getColumn(4).setResizable(false);
+        jtCompras.setDefaultEditor(Object.class, null);
+
+    }
+
+    private void borrarFilas() {
+        int fila = jtCompras.getRowCount() - 1;
+        for (; fila >= 0; fila--) {
+            modelo.removeRow(fila);
+        }
+
+    }
+
+    private void cargarComboProveedor() {
+        for (Proveedor proveedor : pd.listarProveedoresActivo()) {
+
+            jcbProveedor.addItem(proveedor);
+        }
+    }
+
+    private void cargarComboProducto() {
+        for (Producto producto : prd.listarProducto()) {
+
+            jcbProductos.addItem(producto);
+        }
     }
 
     /**
@@ -39,7 +104,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jtTotal = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtCompras = new javax.swing.JTable();
         jbAgregar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jtCantidad = new javax.swing.JTextField();
@@ -61,14 +126,22 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Proveedor");
 
-        jcbProveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbProveedorActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         jLabel3.setText("COMPRAS");
 
         jLabel4.setText("Productos");
 
-        jcbProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbProductosActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("TOTAL:");
 
@@ -78,7 +151,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtCompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -89,7 +162,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtCompras);
 
         jbAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/Vector-10.png"))); // NOI18N
         jbAgregar.setText("Agregar");
@@ -108,8 +181,18 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jbDescartar.setMaximumSize(new java.awt.Dimension(128, 71));
         jbDescartar.setMinimumSize(new java.awt.Dimension(128, 71));
         jbDescartar.setPreferredSize(new java.awt.Dimension(128, 71));
+        jbDescartar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbDescartarActionPerformed(evt);
+            }
+        });
 
         jbCancelarCompra.setText("Cancelar Compra");
+        jbCancelarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCancelarCompraActionPerformed(evt);
+            }
+        });
 
         jbModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/editar-modificar.png"))); // NOI18N
         jbModificar.setText("Modificar");
@@ -265,6 +348,22 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtTotalActionPerformed
 
+    private void jcbProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProveedorActionPerformed
+
+    }//GEN-LAST:event_jcbProveedorActionPerformed
+
+    private void jcbProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProductosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbProductosActionPerformed
+
+    private void jbCancelarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarCompraActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbCancelarCompraActionPerformed
+
+    private void jbDescartarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDescartarActionPerformed
+        
+    }//GEN-LAST:event_jbDescartarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JCalendar jCalendar1;
@@ -275,17 +374,17 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbCancelarCompra;
     private javax.swing.JButton jbComprar;
     private javax.swing.JButton jbConfirmarCompra;
     private javax.swing.JButton jbDescartar;
     private javax.swing.JButton jbModificar;
-    private javax.swing.JComboBox<String> jcbProductos;
-    private javax.swing.JComboBox<String> jcbProveedor;
+    private javax.swing.JComboBox<Producto> jcbProductos;
+    private javax.swing.JComboBox<Proveedor> jcbProveedor;
     private javax.swing.JDesktopPane jdEscritorioCompras;
     private javax.swing.JTextField jtCantidad;
+    private javax.swing.JTable jtCompras;
     private javax.swing.JTextField jtIdCompra;
     private javax.swing.JTextField jtTotal;
     // End of variables declaration//GEN-END:variables
