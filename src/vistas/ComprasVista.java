@@ -12,6 +12,7 @@ import entidades.Proveedor;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -84,6 +85,54 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         }
     }
 
+    private void agregarCompra() {
+        try {
+            Producto producto = (Producto) jcbProductos.getSelectedItem();
+            int cantidad = Integer.parseInt(jtCantidad.getText());
+            if (cantidad == 0) {
+          JOptionPane.showMessageDialog(this, "CANTIDAD NO PUEDE SER '0' ", "Erorr", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            double precioCosto = producto.getPrecioActual() * 0.7;
+            modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), precioCosto, cantidad});
+        } catch (NumberFormatException np) {
+            JOptionPane.showMessageDialog(this, "INGRESE NUMEROS ENTEROS", "Error", JOptionPane.ERROR_MESSAGE);
+        }catch(NullPointerException nop){
+            JOptionPane.showMessageDialog(this, "CANTIDAD NO PUEDE SER UN CAMPO VACIO", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+     private void descartarCompra(){
+         int filaSeleccionada = jtCompras.getSelectedRow();
+         if (filaSeleccionada != -1) {
+             modelo.removeRow(filaSeleccionada);
+             
+         }else if(jtCompras.getRowCount()==0) {
+             JOptionPane.showMessageDialog(this, "TU LISTA ESTA VACIA", "Error", JOptionPane.ERROR_MESSAGE);
+         }else{
+             JOptionPane.showMessageDialog(this, "SELECCIONE EL PRODUCTO QUE DESEA DESCARTAR", "Error", JOptionPane.ERROR_MESSAGE);
+         }
+     }
+
+     private void modificarCompra(){
+         
+     }
+     
+     private void sumaTotal(){
+         int cantidadFilas = jtCompras.getRowCount();
+         if (cantidadFilas>0) {
+             for (int fila = 0; fila <= cantidadFilas-1; fila++) {
+            double precioCosto = Double.parseDouble(jtCompras.getValueAt(fila, 3).toString());
+            int cantidad = Integer.parseInt(jtCompras.getValueAt(fila, 4).toString());
+            double total =+(precioCosto*cantidad);
+            jtTotal.setText(total+"");
+       
+             }  }else{
+                 jtTotal.setText(0+"");
+                 }
+         
+         
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -146,6 +195,8 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
         jLabel5.setText("TOTAL:");
 
+        jtTotal.setEditable(false);
+        jtTotal.setText("0");
         jtTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtTotalActionPerformed(evt);
@@ -170,6 +221,11 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jbAgregar.setMaximumSize(new java.awt.Dimension(128, 71));
         jbAgregar.setMinimumSize(new java.awt.Dimension(128, 71));
         jbAgregar.setPreferredSize(new java.awt.Dimension(128, 71));
+        jbAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAgregarActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Cantidad");
 
@@ -230,9 +286,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
             .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbConfirmarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbConfirmarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
                         .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
@@ -367,13 +421,19 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbCancelarCompraActionPerformed
 
     private void jbDescartarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDescartarActionPerformed
-        
+        descartarCompra();
     }//GEN-LAST:event_jbDescartarActionPerformed
 
     private void jbComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComprarActionPerformed
-        
+
         jcbProductos.setEnabled(true);
     }//GEN-LAST:event_jbComprarActionPerformed
+
+    private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
+        agregarCompra();
+        jtCantidad.setText("");
+        sumaTotal();
+    }//GEN-LAST:event_jbAgregarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
