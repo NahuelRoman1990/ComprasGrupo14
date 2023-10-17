@@ -70,21 +70,21 @@ public class CompraData {
         return compra;
     }
    
-   public void buscarUltimoId () {
-       String sql = "SELECT LAST_INSERT_ID()";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery(rs.next());
-            if (ResultSet.next()) {
-                
-                
-            }
-                
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "NO SE PUDO CONECTAR CON LA TABLA COMPRAS");
-        }
-       
-       
-   }
+//   public void buscarUltimoId () {
+//       String sql = "SELECT LAST_INSERT_ID()";
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ResultSet rs = ps.executeQuery(rs.next());
+//            if (ResultSet.next()) {
+//                
+//                
+//            }
+//                
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "NO SE PUDO CONECTAR CON LA TABLA COMPRAS");
+//        }
+//       
+//       
+//   }
 }
 
