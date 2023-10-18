@@ -5,6 +5,7 @@
  */
 package vistas;
 
+import accesoDatos.CompraData;
 import accesoDatos.ProductoData;
 import accesoDatos.ProveedorData;
 import entidades.Producto;
@@ -13,15 +14,20 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.basic.BasicListUI;
+import javax.swing.plaf.basic.BasicListUI.ListSelectionHandler;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-
+import javax.swing.table.DefaultTableCellRenderer;
 /**
  *
  * @author Erni
  */
 public class ComprasVista extends javax.swing.JInternalFrame {
-
+    CompraData cd = new CompraData();
     ProveedorData pd = new ProveedorData();
     ProductoData prd = new ProductoData();
     private DefaultTableModel modelo = new DefaultTableModel();
@@ -48,7 +54,6 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jtCompras.setModel(modelo);
         JTableHeader tableHeader = jtCompras.getTableHeader();
         tableHeader.setReorderingAllowed(false);
-
         jtCompras.getColumnModel().getColumn(0).setPreferredWidth(10);
         jtCompras.getColumnModel().getColumn(0).setResizable(false);
         jtCompras.getColumnModel().getColumn(1).setPreferredWidth(30);
@@ -92,9 +97,12 @@ public class ComprasVista extends javax.swing.JInternalFrame {
             if (cantidad == 0) {
           JOptionPane.showMessageDialog(this, "CANTIDAD NO PUEDE SER '0' ", "Erorr", JOptionPane.ERROR_MESSAGE);
             }
-            
+//            for (int i=0; i <= cantidadFilas-1;i++) {
+//             int idTable = Integer.parseInt(jtCompras.getValueAt(i, 0).toString());
+//            }
             double precioCosto = producto.getPrecioActual() * 0.7;
             modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), precioCosto, cantidad});
+            jcbProductos.removeItem(producto);
         } catch (NumberFormatException np) {
             JOptionPane.showMessageDialog(this, "INGRESE NUMEROS ENTEROS", "Error", JOptionPane.ERROR_MESSAGE);
         }catch(NullPointerException nop){
@@ -115,8 +123,27 @@ public class ComprasVista extends javax.swing.JInternalFrame {
      }
 
      private void modificarCompra(){
+             int filaSeleccionada = jtCompras.getSelectedRow();
+             if (filaSeleccionada!=-1) {
+                 Producto producto = (Producto) jtCompras.getValueAt(filaSeleccionada,1);
+                 jcbProductos.setSelectedItem(producto);
+             }
+             
+         
+//         int filaSeleccionada = jtCompras.getSelectedRow();
+//         int productoTocado = Integer.parseInt(jtCompras.getValueAt(filaSeleccionada, 0).toString());
+//         jcbProductos.setSelectedItem(prd.buscarProducto(productoTocado));
          
      }
+    
+        
+         
+         
+     
+     private int idCompra(){
+         int ultimoId = cd.buscarUltimoId();
+       return  ultimoId+1;  
+     } 
      
      private void sumaTotal(){
          int cantidadFilas = jtCompras.getRowCount();
@@ -215,6 +242,11 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtCompras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtComprasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtCompras);
 
         jbAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/anadir-icomo-png-32.png"))); // NOI18N
@@ -430,7 +462,8 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbDescartarActionPerformed
 
     private void jbComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComprarActionPerformed
-
+        jtfCompra.setText(idCompra()+"");
+        jtfCompra.setHorizontalAlignment(SwingConstants.CENTER);
         jcbProductos.setEnabled(true);
     }//GEN-LAST:event_jbComprarActionPerformed
 
@@ -439,6 +472,10 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jtCantidad.setText("");
         sumaTotal();
     }//GEN-LAST:event_jbAgregarActionPerformed
+
+    private void jtComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtComprasMouseClicked
+        modificarCompra();
+    }//GEN-LAST:event_jtComprasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
