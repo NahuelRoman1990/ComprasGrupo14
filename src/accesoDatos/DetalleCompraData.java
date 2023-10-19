@@ -45,7 +45,7 @@ public class DetalleCompraData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 detalleCompra.setIdDetalle(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "DETALLE DE COMPRA GUARDADO");
+               // JOptionPane.showMessageDialog(null, "DETALLE DE COMPRA GUARDADO");
 
             }
         } catch (SQLException ex) {

@@ -30,24 +30,28 @@ public class CompraData {
     con = Conexion.getConnection();
 }
     
-   public void guardarCompra(Compra compra) {
+   public Compra guardarCompra(Compra compra) {
         String sql = "INSERT INTO compra (idProveedor, fecha) VALUES (?,?)";
-        ResultSet rs = null;
+       
+        
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, compra.getProveedor().getIdProveedor());
             ps.setDate(2, Date.valueOf(compra.getFecha()));
             ps.executeUpdate();
-            rs = ps.getGeneratedKeys();
+            ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 compra.setIdCompra(rs.getInt(1));
+                
                 JOptionPane.showMessageDialog(null, "COMPRA EXITOSA");
+                return compra;
 
             }
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "NO SE PUDO ACCEDER A LA TABLA COMPRAS");
         }
+        return null;
        
 
 }
@@ -72,21 +76,22 @@ public class CompraData {
         return compra;
     }
    
-   public int  buscarUltimoId () {
+   public int buscarUltimoId() {
        String sql = "SELECT LAST_INSERT_ID()";
-       int ultimoId = -1;
+       
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                ultimoId = rs.getInt(1);
-                
+                int ultimoId = rs.getInt(1);
+                return ultimoId;
             }
                 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "NO SE PUDO CONECTAR CON LA TABLA COMPRAS");
         }
-       return ultimoId;
+        return 0;
+       
        
    }
 }

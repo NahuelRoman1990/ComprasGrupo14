@@ -34,6 +34,7 @@ import javax.swing.table.DefaultTableCellRenderer;
  * @author Erni
  */
 public class ComprasVista extends javax.swing.JInternalFrame {
+
     DetalleCompraData dcd = new DetalleCompraData();
     CompraData cd = new CompraData();
     ProveedorData pd = new ProveedorData();
@@ -131,9 +132,9 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     private void descartarCompra() {
         int filaSeleccionada = jtCompras.getSelectedRow();
         if (filaSeleccionada != -1) {
-            Producto producto = prd.buscarProducto(Integer.parseInt(jtCompras.getValueAt(filaSeleccionada,0).toString()));
+            Producto producto = prd.buscarProducto(Integer.parseInt(jtCompras.getValueAt(filaSeleccionada, 0).toString()));
             modelo.removeRow(filaSeleccionada);
-            
+
             jcbProductos.addItem(producto);
 
         } else if (jtCompras.getRowCount() == 0) {
@@ -162,26 +163,25 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
     private void sumaTotal() {
         int cantidadFilas = jtCompras.getRowCount();
-        try{
-        if (cantidadFilas > 0) {
+        try {
+            if (cantidadFilas > 0) {
 
-            for (int fila = 0; fila <= cantidadFilas - 1; fila++) {
-                double precioCosto = Double.parseDouble(jtCompras.getValueAt(fila, 3).toString());
-                int cantidad = Integer.parseInt(jtCompras.getValueAt(fila, 4).toString());
-                double total = +(precioCosto * cantidad);
-                jtTotal.setText(total + "");
+                for (int fila = 0; fila <= cantidadFilas - 1; fila++) {
+                    double precioCosto = Double.parseDouble(jtCompras.getValueAt(fila, 3).toString());
+                    int cantidad = Integer.parseInt(jtCompras.getValueAt(fila, 4).toString());
+                    double total = +(precioCosto * cantidad);
+                    jtTotal.setText(total + "");
 
+                }
+            } else {
+                jtTotal.setText(0 + "");
             }
-        } else {
-            jtTotal.setText(0 + "");
-        }
-        }catch(NumberFormatException nf){
+        } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(this, "La cantidad debe ser un numero entero");
         }
 
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -499,10 +499,10 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     private void jbDescartarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDescartarActionPerformed
         descartarCompra();
         sumaTotal();
-        if (jtCompras.getRowCount()==0) {
-          jcbProveedor.setEnabled(true);  
+        if (jtCompras.getRowCount() == 0) {
+            jcbProveedor.setEnabled(true);
         }
-        
+
     }//GEN-LAST:event_jbDescartarActionPerformed
 
     private void jbComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComprarActionPerformed
@@ -530,31 +530,35 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
     private void jbConfirmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarCompraActionPerformed
         jcbProveedor.setEnabled(true);
-        Proveedor proveedor = (Proveedor)jcbProveedor.getSelectedItem();
-        int idProveedor = proveedor.getIdProveedor();
-        LocalDate fechaCompra = jcCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        Compra compra = new Compra(proveedor, fechaCompra);
-        cd.guardarCompra(compra);
-        int idCompra = compra.getIdCompra();
-        int filaTotales = jtCompras.getRowCount();
-        for (int i = 0;i<= filaTotales -1 ; i++) {
-          int  cantidad = Integer.parseInt(jtCompras.getValueAt(i, 4).toString());
-          double precioCosto = Double.parseDouble(jtCompras.getValueAt(i, 3).toString());
-          int idProducto = Integer.parseInt(jtCompras.getValueAt(i, 0).toString());
-          Producto producto = prd.buscarProducto(idProducto);
-          Compra compra1 = cd.buscarCompra(cd.buscarUltimoId());
-          DetalleCompra detalleCompra = new DetalleCompra(cantidad, precioCosto, compra1, producto);
-          dcd.guardarDetalleCompra(detalleCompra);
-        }
         
-        String mensajeCompra = "COMPRA REALIZADA CON EXITO:\n"+
-                               "FECHA: "+fechaCompra+"\n"+
-                               "ID COMPRA: "+cd.buscarUltimoId()+"\n"+
-                               "TOTAL: $"+jtTotal.getText();
+        Compra compra = generarCompra();
+
+        int filaTotales = jtCompras.getRowCount();
+        for (int i = 0; i <= filaTotales - 1; i++) {
+            int cantidad = Integer.parseInt(jtCompras.getValueAt(i, 4).toString());
+            double precioCosto = Double.parseDouble(jtCompras.getValueAt(i, 3).toString());
+            int idProducto = Integer.parseInt(jtCompras.getValueAt(i, 0).toString());
+            Producto producto = prd.buscarProducto(idProducto);
+            
+            DetalleCompra detalleCompra = new DetalleCompra(cantidad, precioCosto, compra, producto);
+            dcd.guardarDetalleCompra(detalleCompra);
+        }
+
+        String mensajeCompra = "COMPRA REALIZADA CON EXITO:\n"
+               // + "FECHA: " + fechaCompra + "\n"
+                + "ID COMPRA: " + cd.buscarUltimoId() + "\n"
+                + "TOTAL: $" + jtTotal.getText();
         javax.swing.JOptionPane.showMessageDialog(this, mensajeCompra, "DETALLE COMPRA", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jbConfirmarCompraActionPerformed
 
-
+    private Compra generarCompra(){
+        Proveedor proveedor = (Proveedor) jcbProveedor.getSelectedItem();
+        LocalDate fechaCompra = jcCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Compra compra = new Compra(proveedor, fechaCompra);
+        Compra compraRealizada = cd.guardarCompra(compra);
+        return compraRealizada;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
