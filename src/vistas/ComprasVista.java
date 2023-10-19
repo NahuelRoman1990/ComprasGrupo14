@@ -6,10 +6,16 @@
 package vistas;
 
 import accesoDatos.CompraData;
+import accesoDatos.DetalleCompraData;
 import accesoDatos.ProductoData;
 import accesoDatos.ProveedorData;
+import entidades.Compra;
+import entidades.DetalleCompra;
 import entidades.Producto;
 import entidades.Proveedor;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -28,7 +34,7 @@ import javax.swing.table.DefaultTableCellRenderer;
  * @author Erni
  */
 public class ComprasVista extends javax.swing.JInternalFrame {
-
+    DetalleCompraData dcd = new DetalleCompraData();
     CompraData cd = new CompraData();
     ProveedorData pd = new ProveedorData();
     ProductoData prd = new ProductoData();
@@ -175,6 +181,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -187,7 +194,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jdEscritorioCompras = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
         jtfCompra = new javax.swing.JTextField();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
+        jcCalendario = new com.toedter.calendar.JCalendar();
         jLabel2 = new javax.swing.JLabel();
         jcbProveedor = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
@@ -329,7 +336,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
         jdEscritorioCompras.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jtfCompra, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jdEscritorioCompras.setLayer(jCalendar1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioCompras.setLayer(jcCalendario, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jcbProveedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -392,7 +399,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                                 .addComponent(jbCancelarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(110, 110, 110))
                             .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
-                                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jcCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(47, 47, 47))
@@ -424,7 +431,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                             .addComponent(jbComprar)
                             .addComponent(jbCancelarCompra))
                         .addGap(18, 18, 18)
-                        .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jcCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -492,6 +499,9 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     private void jbDescartarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDescartarActionPerformed
         descartarCompra();
         sumaTotal();
+        if (jtCompras.getRowCount()==0) {
+          jcbProveedor.setEnabled(true);  
+        }
         
     }//GEN-LAST:event_jbDescartarActionPerformed
 
@@ -499,10 +509,12 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jtfCompra.setText(idCompra() + "");
         jtfCompra.setHorizontalAlignment(SwingConstants.CENTER);
         jcbProductos.setEnabled(true);
+        jcbProveedor.setEnabled(false);
     }//GEN-LAST:event_jbComprarActionPerformed
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
         agregarCompra();
+        jcbProveedor.setEnabled(false);
         jtCantidad.setText("");
         sumaTotal();
     }//GEN-LAST:event_jbAgregarActionPerformed
@@ -517,12 +529,33 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbConfirmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarCompraActionPerformed
-        // TODO add your handling code here:
+        jcbProveedor.setEnabled(true);
+        Proveedor proveedor = (Proveedor)jcbProveedor.getSelectedItem();
+        int idProveedor = proveedor.getIdProveedor();
+        LocalDate fechaCompra = jcCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Compra compra = new Compra(proveedor, fechaCompra);
+        cd.guardarCompra(compra);
+        int idCompra = compra.getIdCompra();
+        int filaTotales = jtCompras.getRowCount();
+        for (int i = 0;i<= filaTotales -1 ; i++) {
+          int  cantidad = Integer.parseInt(jtCompras.getValueAt(i, 4).toString());
+          double precioCosto = Double.parseDouble(jtCompras.getValueAt(i, 3).toString());
+          int idProducto = Integer.parseInt(jtCompras.getValueAt(i, 0).toString());
+          Producto producto = prd.buscarProducto(idProducto);
+          Compra compra1 = cd.buscarCompra(cd.buscarUltimoId());
+          DetalleCompra detalleCompra = new DetalleCompra(cantidad, precioCosto, compra1, producto);
+          dcd.guardarDetalleCompra(detalleCompra);
+        }
+        
+        String mensajeCompra = "COMPRA REALIZADA CON EXITO:\n"+
+                               "FECHA: "+fechaCompra+"\n"+
+                               "ID COMPRA: "+cd.buscarUltimoId()+"\n"+
+                               "TOTAL: $"+jtTotal.getText();
+        javax.swing.JOptionPane.showMessageDialog(this, mensajeCompra, "DETALLE COMPRA", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jbConfirmarCompraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -536,6 +569,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbConfirmarCompra;
     private javax.swing.JButton jbDescartar;
     private javax.swing.JButton jbModificar;
+    private com.toedter.calendar.JCalendar jcCalendario;
     private javax.swing.JComboBox<Producto> jcbProductos;
     private javax.swing.JComboBox<Proveedor> jcbProveedor;
     private javax.swing.JDesktopPane jdEscritorioCompras;

@@ -32,22 +32,24 @@ public class CompraData {
     
    public void guardarCompra(Compra compra) {
         String sql = "INSERT INTO compra (idProveedor, fecha) VALUES (?,?)";
+        ResultSet rs = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, compra.getProveedor().getIdProveedor());
             ps.setDate(2, Date.valueOf(compra.getFecha()));
-            
             ps.executeUpdate();
-
-            ResultSet rs = ps.getGeneratedKeys();
+            rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 compra.setIdCompra(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "COMPRA EXITOSA");
 
             }
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "NO SE PUDO ACCEDER A LA TABLA COMPRAS");
         }
+       
+
 }
    public Compra buscarCompra(int idCompra) {
         String sql = "SELECT idProveedor, fecha FROM compra "
