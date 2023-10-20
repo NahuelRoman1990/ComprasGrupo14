@@ -27,6 +27,8 @@ public class CompraData {
     
     private Connection con = null;
     private ProveedorData pvd = new ProveedorData();
+    
+            
     public CompraData() {
     
     con = Conexion.getConnection();
@@ -43,7 +45,9 @@ public class CompraData {
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
+                 
                 compra.setIdCompra(rs.getInt(1));
+                
                 
                 JOptionPane.showMessageDialog(null, "COMPRA EXITOSA");
                 return compra;
@@ -54,9 +58,13 @@ public class CompraData {
             JOptionPane.showMessageDialog(null, "NO SE PUDO ACCEDER A LA TABLA COMPRAS");
         }
         return null;
-       
+     
+         
 
 }
+   
+ 
+   
    public Compra buscarCompra(int idCompra) {
         String sql = "SELECT idProveedor, fecha FROM compra "
                 + "WHERE idCompra = ? ";
@@ -98,21 +106,24 @@ public class CompraData {
 //        }
         return null;
     }
+   
    public int buscarUltimoId() {
-       String sql = "SELECT LAST_INSERT_ID()";
-       
+       String sql = "SELECT MAX(`idCompra`) FROM compra";
+       int ultimoId;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+            
             if (rs.next()) {
-                int ultimoId = rs.getInt(1);
+                ultimoId = rs.getInt(1);
                 return ultimoId;
             }
-                
+                  
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "NO SE PUDO CONECTAR CON LA TABLA COMPRAS");
         }
         return 0;
+        
        
        
    }

@@ -156,10 +156,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 //         jcbProductos.setSelectedItem(prd.buscarProducto(productoTocado));
     }
 
-    private int idCompra() {
-        int ultimoId = cd.buscarUltimoId();
-        return ultimoId + 1;
-    }
+  
 
     private void sumaTotal() {
         int cantidadFilas = jtCompras.getRowCount();
@@ -218,6 +215,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ID Compra");
 
+        jtfCompra.setEditable(false);
         jtfCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfCompraActionPerformed(evt);
@@ -505,7 +503,9 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbDescartarActionPerformed
 
     private void jbComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComprarActionPerformed
-        jtfCompra.setText(idCompra() + "");
+        int ultimoId = cd.buscarUltimoId();
+        
+        jtfCompra.setText(ultimoId + 1 + "");
         jtfCompra.setHorizontalAlignment(SwingConstants.CENTER);
         jcbProductos.setEnabled(true);
         jcbProveedor.setEnabled(false);
