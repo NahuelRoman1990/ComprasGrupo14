@@ -34,7 +34,7 @@ import javax.swing.table.DefaultTableCellRenderer;
  * @author Erni
  */
 public class ComprasVista extends javax.swing.JInternalFrame {
-
+    
     DetalleCompraData dcd = new DetalleCompraData();
     CompraData cd = new CompraData();
     ProveedorData pd = new ProveedorData();
@@ -48,21 +48,23 @@ public class ComprasVista extends javax.swing.JInternalFrame {
             }
         }
     };
-
+    
     public ComprasVista() {
         initComponents();
         cargarComboProducto();
         cargarComboProveedor();
         cargarCabecera();
         sumaTotal();
+        jcCalendario.setWeekOfYearVisible(false);
         jcbProductos.setEnabled(false);
         String rutaImagen = "img\\Fondo1.jpg";
         ImageIcon fondo = new ImageIcon(rutaImagen);
         JLabel label = new JLabel(fondo);
         label.setBounds(0, 0, fondo.getIconWidth(), fondo.getIconHeight());
         jdEscritorioCompras.add(label, new Integer(Integer.MIN_VALUE));
+        jcCalendario.setEnabled(true);
     }
-
+    
     private void cargarCabecera() {
         modelo.addColumn("ID Producto");
         modelo.addColumn("Nombre");
@@ -85,31 +87,29 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         //jtCompras.setDefaultEditor(Object.class, null);
 
     }
-
+    
     private void borrarFilas() {
         int fila = jtCompras.getRowCount() - 1;
         for (; fila >= 0; fila--) {
             modelo.removeRow(fila);
         }
-
+        
     }
-
+    
     private void cargarComboProveedor() {
         for (Proveedor proveedor : pd.listarProveedoresActivo()) {
-
+            
             jcbProveedor.addItem(proveedor);
         }
     }
     
-   
-
     private void cargarComboProducto() {
         for (Producto producto : prd.listarProducto()) {
-
+            
             jcbProductos.addItem(producto);
         }
     }
-
+    
     private void agregarCompra() {
         try {
             Producto producto = (Producto) jcbProductos.getSelectedItem();
@@ -128,24 +128,24 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         } catch (NullPointerException nop) {
             JOptionPane.showMessageDialog(this, "CANTIDAD NO PUEDE SER UN CAMPO VACIO", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
+        
     }
-
+    
     private void descartarCompra() {
         int filaSeleccionada = jtCompras.getSelectedRow();
         if (filaSeleccionada != -1) {
             Producto producto = prd.buscarProducto(Integer.parseInt(jtCompras.getValueAt(filaSeleccionada, 0).toString()));
             modelo.removeRow(filaSeleccionada);
-
+            
             jcbProductos.addItem(producto);
-
+            
         } else if (jtCompras.getRowCount() == 0) {
             JOptionPane.showMessageDialog(this, "TU LISTA ESTA VACIA", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "SELECCIONE EL PRODUCTO QUE DESEA DESCARTAR", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
     private void modificarCompra() {
         int filaSeleccionada = jtCompras.getSelectedRow();
         if (filaSeleccionada != -1) {
@@ -157,20 +157,18 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 //         int productoTocado = Integer.parseInt(jtCompras.getValueAt(filaSeleccionada, 0).toString());
 //         jcbProductos.setSelectedItem(prd.buscarProducto(productoTocado));
     }
-
-  
-
+    
     private void sumaTotal() {
         int cantidadFilas = jtCompras.getRowCount();
         try {
             if (cantidadFilas > 0) {
-
+                
                 for (int fila = 0; fila <= cantidadFilas - 1; fila++) {
                     double precioCosto = Double.parseDouble(jtCompras.getValueAt(fila, 3).toString());
                     int cantidad = Integer.parseInt(jtCompras.getValueAt(fila, 4).toString());
                     double total = +(precioCosto * cantidad);
                     jtTotal.setText(total + "");
-
+                    
                 }
             } else {
                 jtTotal.setText(0 + "");
@@ -178,7 +176,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(this, "La cantidad debe ser un numero entero");
         }
-
+        
     }
 
     /**
@@ -223,6 +221,11 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                 jtfCompraActionPerformed(evt);
             }
         });
+
+        jcCalendario.setBackground(new java.awt.Color(102, 102, 102));
+        jcCalendario.setDecorationBackgroundColor(new java.awt.Color(153, 153, 153));
+        jcCalendario.setFont(new java.awt.Font("Arial Black", 1, 10)); // NOI18N
+        jcCalendario.setTodayButtonVisible(true);
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -336,7 +339,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
         jdEscritorioCompras.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jtfCompra, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jdEscritorioCompras.setLayer(jcCalendario, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioCompras.setLayer(jcCalendario, javax.swing.JLayeredPane.PALETTE_LAYER);
         jdEscritorioCompras.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jcbProveedor, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -440,7 +443,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
@@ -534,7 +537,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jcbProveedor.setEnabled(true);
         
         Compra compra = generarCompra();
-
+        
         int filaTotales = jtCompras.getRowCount();
         for (int i = 0; i <= filaTotales - 1; i++) {
             int cantidad = Integer.parseInt(jtCompras.getValueAt(i, 4).toString());
@@ -546,27 +549,27 @@ public class ComprasVista extends javax.swing.JInternalFrame {
             dcd.guardarDetalleCompra(detalleCompra);
         }
         
-       jtfCompra.setText(" ");
-       jtfCompra.setEnabled(false);
-       borrarFilas();
-       jcbProductos.removeAllItems();
-       cargarComboProducto();
-
+        jtfCompra.setText(" ");
+        jtfCompra.setEnabled(false);
+        borrarFilas();
+        jcbProductos.removeAllItems();
+        cargarComboProducto();
+        
         String mensajeCompra = "COMPRA REALIZADA CON EXITO:\n"
                 + "FECHA: " + compra.getFecha() + "\n"
                 + "ID COMPRA: " + cd.buscarUltimoId() + "\n"
                 + "TOTAL: $" + jtTotal.getText();
         javax.swing.JOptionPane.showMessageDialog(this, mensajeCompra, "DETALLE COMPRA", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jbConfirmarCompraActionPerformed
-
-    private Compra generarCompra(){
+    
+    private Compra generarCompra() {
         Proveedor proveedor = (Proveedor) jcbProveedor.getSelectedItem();
         LocalDate fechaCompra = jcCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         Compra compra = new Compra(proveedor, fechaCompra);
         Compra compraRealizada = cd.guardarCompra(compra);
         return compraRealizada;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -581,7 +584,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbConfirmarCompra;
     private javax.swing.JButton jbDescartar;
     private javax.swing.JButton jbModificar;
-    private com.toedter.calendar.JCalendar jcCalendario;
+    private static com.toedter.calendar.JCalendar jcCalendario;
     private javax.swing.JComboBox<Producto> jcbProductos;
     private javax.swing.JComboBox<Proveedor> jcbProveedor;
     private javax.swing.JDesktopPane jdEscritorioCompras;
