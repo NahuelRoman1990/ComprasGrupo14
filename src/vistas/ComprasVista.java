@@ -319,7 +319,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         });
 
         jbCancelarCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/cancelar compras-negro-png.png"))); // NOI18N
-        jbCancelarCompra.setText("Cancelar Compra");
+        jbCancelarCompra.setText("Salir");
         jbCancelarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbCancelarCompraActionPerformed(evt);
@@ -395,31 +395,32 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                         .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
                                 .addComponent(jbComprar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(189, 189, 189)
-                                .addComponent(jbCancelarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(110, 110, 110))
+                                .addGap(434, 434, 434))
                             .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
                                 .addComponent(jcCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(47, 47, 47))
             .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
-                .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
-                        .addGap(506, 506, 506)
-                        .addComponent(jLabel3))
-                    .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(jLabel2)
-                        .addGap(34, 34, 34)
-                        .addComponent(jcbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(130, 130, 130)
+                .addComponent(jLabel2)
+                .addGap(34, 34, 34)
+                .addComponent(jcbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
+                .addGap(506, 506, 506)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbCancelarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
         jdEscritorioComprasLayout.setVerticalGroup(
             jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel3)
+                .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jbCancelarCompra))
                 .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
                         .addGap(2, 2, 2)
@@ -427,9 +428,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2)
                             .addComponent(jcbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
-                        .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbComprar)
-                            .addComponent(jbCancelarCompra))
+                        .addComponent(jbComprar)
                         .addGap(18, 18, 18)
                         .addComponent(jcCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -459,7 +458,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                             .addComponent(jtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbConfirmarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -545,7 +544,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         }
 
         String mensajeCompra = "COMPRA REALIZADA CON EXITO:\n"
-               // + "FECHA: " + fechaCompra + "\n"
+                + "FECHA: " + compra.getFecha() + "\n"
                 + "ID COMPRA: " + cd.buscarUltimoId() + "\n"
                 + "TOTAL: $" + jtTotal.getText();
         javax.swing.JOptionPane.showMessageDialog(this, mensajeCompra, "DETALLE COMPRA", javax.swing.JOptionPane.INFORMATION_MESSAGE);

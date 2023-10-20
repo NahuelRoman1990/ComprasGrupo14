@@ -80,5 +80,7 @@ public class DetalleCompraData {
         return detalles;
 
     }
+     
+   
 
 }

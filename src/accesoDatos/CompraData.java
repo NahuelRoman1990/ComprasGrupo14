@@ -13,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -76,6 +78,26 @@ public class CompraData {
         return compra;
     }
    
+   public List<Compra> buscarCompraPorFecha(LocalDate fecha) {
+        String sql = "SELECT idCompra, idProveedor FROM compra "
+                + "WHERE fecha = ? ";
+        Compra compra = null;
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setInt(1, idCompra);
+//            ResultSet rs = ps.executeQuery();
+//            if (rs.next()) {
+//                compra = new Compra();
+//                compra.setFecha(rs.getDate("fecha").toLocalDate());
+//                compra.setProveedor(pvd.buscarProveedorActivo(rs.getInt("idProveedor")));
+//            }
+//            ps.close();
+//
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER LA TABLA COMPRAS");
+//        }
+        return null;
+    }
    public int buscarUltimoId() {
        String sql = "SELECT LAST_INSERT_ID()";
        

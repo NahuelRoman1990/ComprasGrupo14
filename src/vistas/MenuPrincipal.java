@@ -93,7 +93,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jToolBar1.add(jbProducto);
 
         jbDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/detalles de compras0.5-100x100.png"))); // NOI18N
-        jbDetalle.setText("Detalle compra");
+        jbDetalle.setText("Consultas");
         jbDetalle.setFocusable(false);
         jbDetalle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbDetalle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -186,7 +186,7 @@ jdEscritorio.add(pv);
     private void jbDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDetalleActionPerformed
         jdEscritorio.removeAll();
         jdEscritorio.repaint();
-        DetalleCompraVista dc = new DetalleCompraVista();
+        ConsultasVista dc = new ConsultasVista();
         dc.setVisible(true);
         jdEscritorio.add(dc);
     }//GEN-LAST:event_jbDetalleActionPerformed
