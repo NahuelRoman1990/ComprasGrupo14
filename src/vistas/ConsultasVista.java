@@ -7,29 +7,39 @@ package vistas;
 
 import accesoDatos.CompraData;
 import accesoDatos.ProductoData;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.Header;
 import java.sql.Connection;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.plaf.TableHeaderUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 /**
  *
  * @author roman
  */
 public class ConsultasVista extends javax.swing.JInternalFrame {
-    
+
     private Connection con = null;
     private ProductoData pd = new ProductoData();
     private CompraData cd = new CompraData();
     private DefaultTableModel modelo = new DefaultTableModel();
-    
+    private DefaultTableModel modelo1 = new DefaultTableModel();
+
     public ConsultasVista() {
         initComponents();
         jtConsultas.setVisible(false);
         jdcDesde.setVisible(false);
         jdcHasta.setVisible(false);
         jcbSelectProveedor.setVisible(false);
+        JTableHeader header = jtConsultas.getTableHeader();
+        TableColumn primeraColum = header.getColumnModel().getColumn(0);
+        TableColumn segundaColum = header.getColumnModel().getColumn(1);
+        TableColumn terceraColum = header.getColumnModel().getColumn(2);
+        TableColumn cuartaColum = header.getColumnModel().getColumn(3);
+        TableColumn quintaColum = header.getColumnModel().getColumn(4);
         String rutaImagen = "img\\fondo.jpg";
         ImageIcon fondo = new ImageIcon(rutaImagen);
         JLabel label = new JLabel(fondo);
@@ -37,54 +47,52 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         jpEscritorio.add(label, new Integer(Integer.MIN_VALUE));
     }
 
-    private void cargarCabecera() {
-        modelo.addColumn("ID");
-        modelo.addColumn("Cantidad");
-        modelo.addColumn("Precio Costo");
-        modelo.addColumn("ID Compra");
-        modelo.addColumn("Producto");
-        jtConsultas.setModel(modelo);
-        JTableHeader tableHeader = jtConsultas.getTableHeader();
-        tableHeader.setReorderingAllowed(false);
-        
-        jtConsultas.getColumnModel().getColumn(0).setPreferredWidth(20);
-        jtConsultas.getColumnModel().getColumn(0).setResizable(false);
-        jtConsultas.getColumnModel().getColumn(1).setPreferredWidth(20);
-        jtConsultas.getColumnModel().getColumn(1).setResizable(false);
-        jtConsultas.getColumnModel().getColumn(2).setPreferredWidth(20);
-        jtConsultas.getColumnModel().getColumn(2).setResizable(false);
-        jtConsultas.getColumnModel().getColumn(3).setPreferredWidth(20);
-        jtConsultas.getColumnModel().getColumn(3).setResizable(false);
-        jtConsultas.getColumnModel().getColumn(4).setPreferredWidth(20);
-        jtConsultas.getColumnModel().getColumn(4).setResizable(false);
-        jtConsultas.setDefaultEditor(Object.class, null);
-        
-    }
-    
-    private void cargarCabeceraProducto() {
-        modelo.addColumn("ID");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Descripción");
-        modelo.addColumn("Precio");
-        modelo.addColumn("Stock");
-        jtConsultas.setModel(modelo);
-        JTableHeader tableHeader = jtConsultas.getTableHeader();
-        tableHeader.setReorderingAllowed(false);
-
-        jtConsultas.getColumnModel().getColumn(0).setPreferredWidth(10);
-        jtConsultas.getColumnModel().getColumn(0).setResizable(false);
-        jtConsultas.getColumnModel().getColumn(1).setPreferredWidth(30);
-        jtConsultas.getColumnModel().getColumn(1).setResizable(false);
-        jtConsultas.getColumnModel().getColumn(2).setPreferredWidth(40);
-        jtConsultas.getColumnModel().getColumn(2).setResizable(false);
-        jtConsultas.getColumnModel().getColumn(3).setPreferredWidth(20);
-        jtConsultas.getColumnModel().getColumn(3).setResizable(false);
-        jtConsultas.getColumnModel().getColumn(4).setPreferredWidth(20);
-        jtConsultas.getColumnModel().getColumn(4).setResizable(false);
-        jtConsultas.setDefaultEditor(Object.class, null);
-
-    }
-
+//    private void cargarCabeceraCompraProveedor() {
+//        modelo1.addColumn("ID Compra");
+//        modelo1.addColumn("Proveedor");
+//        modelo1.addColumn("Producto");
+//        modelo1.addColumn("Cantidad");
+//        modelo1.addColumn("Costo Total");
+//        jtConsultas.setModel(modelo1);
+//        JTableHeader tableHeader = jtConsultas.getTableHeader();
+//        tableHeader.setReorderingAllowed(false);
+//
+//        jtConsultas.getColumnModel().getColumn(0).setPreferredWidth(20);
+//        jtConsultas.getColumnModel().getColumn(0).setResizable(false);
+//        jtConsultas.getColumnModel().getColumn(1).setPreferredWidth(20);
+//        jtConsultas.getColumnModel().getColumn(1).setResizable(false);
+//        jtConsultas.getColumnModel().getColumn(2).setPreferredWidth(20);
+//        jtConsultas.getColumnModel().getColumn(2).setResizable(false);
+//        jtConsultas.getColumnModel().getColumn(3).setPreferredWidth(20);
+//        jtConsultas.getColumnModel().getColumn(3).setResizable(false);
+//        jtConsultas.getColumnModel().getColumn(4).setPreferredWidth(20);
+//        jtConsultas.getColumnModel().getColumn(4).setResizable(false);
+//        jtConsultas.setDefaultEditor(Object.class, null);
+//
+//    }
+//    private void cargarCabeceraProducto() {
+//        modelo.addColumn("ID");
+//        modelo.addColumn("Nombre");
+//        modelo.addColumn("Descripción");
+//        modelo.addColumn("Precio");
+//        modelo.addColumn("Stock");
+//        jtConsultas.setModel(modelo);
+//        JTableHeader tableHeader = jtConsultas.getTableHeader();
+//        tableHeader.setReorderingAllowed(false);
+//
+//        jtConsultas.getColumnModel().getColumn(0).setPreferredWidth(10);
+//        jtConsultas.getColumnModel().getColumn(0).setResizable(false);
+//        jtConsultas.getColumnModel().getColumn(1).setPreferredWidth(30);
+//        jtConsultas.getColumnModel().getColumn(1).setResizable(false);
+//        jtConsultas.getColumnModel().getColumn(2).setPreferredWidth(40);
+//        jtConsultas.getColumnModel().getColumn(2).setResizable(false);
+//        jtConsultas.getColumnModel().getColumn(3).setPreferredWidth(20);
+//        jtConsultas.getColumnModel().getColumn(3).setResizable(false);
+//        jtConsultas.getColumnModel().getColumn(4).setPreferredWidth(20);
+//        jtConsultas.getColumnModel().getColumn(4).setResizable(false);
+//        jtConsultas.setDefaultEditor(Object.class, null);
+//
+//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -104,15 +112,23 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 
         jtConsultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "CONSULTA", "CONSULTA", "CONSULTA", "CONSULTA", "CONSULTA"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jtConsultas);
 
         jbSalir.setText("SALIR");
@@ -229,23 +245,45 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 
     private void jcbConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbConsultaActionPerformed
         String seleccion = (String) jcbConsulta.getSelectedItem();
+        DefaultTableModel emptyModel = new DefaultTableModel();
+        JTableHeader tableHeader = jtConsultas.getTableHeader();
+        JTableHeader header = jtConsultas.getTableHeader();
+        TableColumn primeraColum = header.getColumnModel().getColumn(0);
+        TableColumn segundaColum = header.getColumnModel().getColumn(1);
+        TableColumn terceraColum = header.getColumnModel().getColumn(2);
+        TableColumn cuartaColum = header.getColumnModel().getColumn(3);
+        TableColumn quintaColum = header.getColumnModel().getColumn(4);
+
         if (seleccion.equals("Productos/Fecha")) {
+            jcbSelectProveedor.setVisible(false);
             jdcDesde.setVisible(true);
             jdcHasta.setVisible(true);
-            cargarCabeceraProducto();
-            jtConsultas.setVisible(true);
-        } else {
+            tableHeader.setVisible(false);
+            primeraColum.setHeaderValue("FECHA");
+            segundaColum.setHeaderValue("ID");
+            terceraColum.setHeaderValue("NOMBRE");
+            cuartaColum.setHeaderValue("CANTIDAD");
+            quintaColum.setHeaderValue("PRECIO C/U");
+            tableHeader.setVisible(true);
+
+        } else if (seleccion.equals("Compras/Proveedor")) {
             jdcDesde.setVisible(false);
             jdcHasta.setVisible(false);
-            jtConsultas.setVisible(false);
-        }
-        
-        if (seleccion.equals("Compras/Proveedor")) {
             jcbSelectProveedor.setVisible(true);
-            
-        }else {
+            jtConsultas.setModel(emptyModel);
+            tableHeader.setVisible(false);
+
+            tableHeader.setVisible(true);
+
+        } else {
+            // Si no es ninguna de las opciones anteriores, oculta los componentes
+            jdcDesde.setVisible(false);
+            jdcHasta.setVisible(false);
             jcbSelectProveedor.setVisible(false);
+            // Limpia la tabla y la cabecera
+            jtConsultas.setModel(emptyModel);
         }
+
     }//GEN-LAST:event_jcbConsultaActionPerformed
 
 
