@@ -60,6 +60,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jbCompras.setText("Compras");
         jbCompras.setFocusable(false);
         jbCompras.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbCompras.setMaximumSize(new java.awt.Dimension(82, 82));
+        jbCompras.setMinimumSize(new java.awt.Dimension(82, 82));
         jbCompras.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jbCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,6 +74,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jbProveedores.setText("Proveedores");
         jbProveedores.setFocusable(false);
         jbProveedores.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbProveedores.setMaximumSize(new java.awt.Dimension(82, 82));
+        jbProveedores.setMinimumSize(new java.awt.Dimension(82, 82));
         jbProveedores.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jbProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +88,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jbProducto.setText("Producto");
         jbProducto.setFocusable(false);
         jbProducto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbProducto.setMaximumSize(new java.awt.Dimension(82, 82));
+        jbProducto.setMinimumSize(new java.awt.Dimension(82, 82));
         jbProducto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jbProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +102,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jbDetalle.setText("Consultas");
         jbDetalle.setFocusable(false);
         jbDetalle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbDetalle.setMaximumSize(new java.awt.Dimension(82, 82));
+        jbDetalle.setMinimumSize(new java.awt.Dimension(82, 82));
         jbDetalle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jbDetalle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +116,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jbSalir.setText("Salir");
         jbSalir.setFocusable(false);
         jbSalir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbSalir.setMaximumSize(new java.awt.Dimension(82, 82));
+        jbSalir.setMinimumSize(new java.awt.Dimension(82, 82));
         jbSalir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jbSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -125,11 +135,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jdEscritorio.setLayout(jdEscritorioLayout);
         jdEscritorioLayout.setHorizontalGroup(
             jdEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1275, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jdEscritorioLayout.setVerticalGroup(
             jdEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 687, Short.MAX_VALUE)
+            .addGap(0, 711, Short.MAX_VALUE)
         );
 
         jMenuBar1.add(jMenu1);
@@ -142,15 +152,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1287, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jdEscritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jdEscritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jdEscritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

@@ -53,7 +53,7 @@
                                       <Component id="jcbConsulta" pref="217" max="32767" attributes="0"/>
                                       <Component id="jdcDesde" max="32767" attributes="0"/>
                                       <Component id="jdcHasta" max="32767" attributes="0"/>
-                                      <Component id="jcbSelectProveedor" max="32767" attributes="0"/>
+                                      <Component id="jcbSelectProveedoroProducto" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -90,7 +90,7 @@
                           <Component id="jbSalir" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jcbSelectProveedor" min="-2" max="-2" attributes="0"/>
+                          <Component id="jcbSelectProveedoroProducto" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jdcDesde" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -196,7 +196,7 @@
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jdcHasta">
         </Component>
-        <Component class="javax.swing.JComboBox" name="jcbSelectProveedor">
+        <Component class="javax.swing.JComboBox" name="jcbSelectProveedoroProducto">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
