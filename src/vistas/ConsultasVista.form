@@ -57,7 +57,7 @@
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jbVolver" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jbCargar" min="-2" max="-2" attributes="0"/>
                                       <Component id="jbBuscar" min="-2" max="-2" attributes="0"/>
                                       <Component id="jbSalir" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
                                   </Group>
@@ -85,7 +85,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jbVolver" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbCargar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jbSalir" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -181,9 +181,9 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="jbVolver">
+        <Component class="javax.swing.JButton" name="jbCargar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="VOLVER"/>
+            <Property name="text" type="java.lang.String" value="CARGAR"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[74, 36]"/>
             </Property>

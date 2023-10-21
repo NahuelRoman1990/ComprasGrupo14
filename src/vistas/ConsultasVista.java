@@ -122,7 +122,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jbBuscar = new javax.swing.JButton();
         jcbConsulta = new javax.swing.JComboBox<>();
-        jbVolver = new javax.swing.JButton();
+        jbCargar = new javax.swing.JButton();
         jdcDesde = new com.toedter.calendar.JDateChooser();
         jdcHasta = new com.toedter.calendar.JDateChooser();
         jcbSelectProveedoroProducto = new javax.swing.JComboBox<>();
@@ -176,9 +176,9 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             }
         });
 
-        jbVolver.setText("VOLVER");
-        jbVolver.setMaximumSize(new java.awt.Dimension(74, 36));
-        jbVolver.setMinimumSize(new java.awt.Dimension(74, 36));
+        jbCargar.setText("CARGAR");
+        jbCargar.setMaximumSize(new java.awt.Dimension(74, 36));
+        jbCargar.setMinimumSize(new java.awt.Dimension(74, 36));
 
         javax.swing.GroupLayout jpEscritorioLayout = new javax.swing.GroupLayout(jpEscritorio);
         jpEscritorio.setLayout(jpEscritorioLayout);
@@ -204,7 +204,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
                                     .addComponent(jcbSelectProveedoroProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbVolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbCargar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jbBuscar)
                                     .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 871, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -224,7 +224,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpEscritorioLayout.createSequentialGroup()
-                        .addComponent(jbVolver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbCargar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpEscritorioLayout.createSequentialGroup()
@@ -327,8 +327,8 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbCargar;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JButton jbVolver;
     private javax.swing.JComboBox<String> jcbConsulta;
     private javax.swing.JComboBox<String> jcbSelectProveedoroProducto;
     private com.toedter.calendar.JDateChooser jdcDesde;
