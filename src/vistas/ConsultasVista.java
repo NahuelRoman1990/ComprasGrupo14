@@ -6,15 +6,21 @@
 package vistas;
 
 import accesoDatos.CompraData;
+import accesoDatos.DetalleCompraData;
 import accesoDatos.ProductoData;
 import accesoDatos.ProveedorData;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.Header;
+import entidades.Compra;
+import entidades.DetalleCompra;
 import entidades.Producto;
 import entidades.Proveedor;
 import java.sql.Connection;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.TableHeaderUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -27,6 +33,7 @@ import javax.swing.table.TableColumn;
 public class ConsultasVista extends javax.swing.JInternalFrame {
 
     private Connection con = null;
+    private DetalleCompraData dcd = new DetalleCompraData();
     private ProveedorData prd = new ProveedorData();
     private ProductoData pd = new ProductoData();
     private CompraData cd = new CompraData();
@@ -37,8 +44,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
     public ConsultasVista() {
         initComponents();
         jtConsultas.setVisible(false);
-        jdcDesde.setVisible(false);
-        jdcHasta.setVisible(false);
+        jdcFechaSelect.setVisible(false);
         jcbSelectProveedoroProducto.setVisible(false);
         String rutaImagen = "img\\fondo.jpg";
         ImageIcon fondo = new ImageIcon(rutaImagen);
@@ -61,6 +67,28 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         for (Producto productos : producto) {
             jcbSelectProveedoroProducto.addItem(productos.getNombreProducto());
 
+        }
+    }
+
+    private void listarDetallesFecha() {
+        java.util.Date fechaSeleccionada = jdcFechaSelect.getDate();
+        if (fechaSeleccionada != null) {
+            java.time.LocalDate fechaLocal = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            List<Compra> compra = cd.buscarCompraPorFecha(fechaLocal);
+            List<DetalleCompra> todosLosDetalles = new ArrayList<>();
+
+            for (Compra compras : compra) {
+                int idCompra = compras.getIdCompra();
+                List<DetalleCompra> detallesCompra = dcd.listarDetalleCompras(idCompra);
+                for (DetalleCompra detalle : detallesCompra) {
+                     modelo.addRow(new Object[]{
+                        fechaLocal,
+                        detalle.getIdDetalle(),
+                        detalle.getProducto().getNombreProducto(),
+                        detalle.getCantidad(),
+                        detalle.getPrecioCosto(),
+                     });
+                             }}
         }
     }
 //    private void cargarCabeceraCompraProveedor() {
@@ -123,8 +151,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         jbBuscar = new javax.swing.JButton();
         jcbConsulta = new javax.swing.JComboBox<>();
         jbCargar = new javax.swing.JButton();
-        jdcDesde = new com.toedter.calendar.JDateChooser();
-        jdcHasta = new com.toedter.calendar.JDateChooser();
+        jdcFechaSelect = new com.toedter.calendar.JDateChooser();
         jcbSelectProveedoroProducto = new javax.swing.JComboBox<>();
 
         jtConsultas.setModel(new javax.swing.table.DefaultTableModel(
@@ -177,8 +204,11 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         });
 
         jbCargar.setText("CARGAR");
-        jbCargar.setMaximumSize(new java.awt.Dimension(74, 36));
-        jbCargar.setMinimumSize(new java.awt.Dimension(74, 36));
+        jbCargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCargarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpEscritorioLayout = new javax.swing.GroupLayout(jpEscritorio);
         jpEscritorio.setLayout(jpEscritorioLayout);
@@ -199,12 +229,11 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
                             .addGroup(jpEscritorioLayout.createSequentialGroup()
                                 .addGroup(jpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jcbConsulta, 0, 217, Short.MAX_VALUE)
-                                    .addComponent(jdcDesde, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jdcHasta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jdcFechaSelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jcbSelectProveedoroProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbCargar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbCargar)
                                     .addComponent(jbBuscar)
                                     .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 871, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -224,16 +253,14 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpEscritorioLayout.createSequentialGroup()
-                        .addComponent(jbCargar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbCargar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpEscritorioLayout.createSequentialGroup()
                         .addComponent(jcbSelectProveedoroProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jdcDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jdcHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
+                        .addComponent(jdcFechaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(52, 52, 52)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(72, Short.MAX_VALUE))
         );
@@ -273,8 +300,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 
         if (seleccion.equals("Productos/Fecha")) {
             jcbSelectProveedoroProducto.setVisible(false);
-            jdcDesde.setVisible(true);
-            jdcHasta.setVisible(true);
+            jdcFechaSelect.setVisible(true);
             tableHeader.setVisible(false);
             primeraColum.setHeaderValue("FECHA");
             segundaColum.setHeaderValue("ID");
@@ -284,8 +310,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             tableHeader.setVisible(true);
 
         } else if (seleccion.equals("Compras/Proveedor")) {
-            jdcDesde.setVisible(false);
-            jdcHasta.setVisible(false);
+            jdcFechaSelect.setVisible(false);
             jcbSelectProveedoroProducto.setVisible(true);
             jcbSelectProveedoroProducto.removeAllItems();
             comboProveedor();
@@ -298,8 +323,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 
             tableHeader.setVisible(true);
         } else if (seleccion.equals("Productos/Compra")) {
-            jdcDesde.setVisible(false);
-            jdcHasta.setVisible(false);
+            jdcFechaSelect.setVisible(false);
             jcbSelectProveedoroProducto.setVisible(true);
             jcbSelectProveedoroProducto.removeAllItems();
             comboProducto();
@@ -313,14 +337,21 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 
         } else {
             // Si no es ninguna de las opciones anteriores, oculta los componentes
-            jdcDesde.setVisible(false);
-            jdcHasta.setVisible(false);
+            jdcFechaSelect.setVisible(false);
             jcbSelectProveedoroProducto.setVisible(false);
             // Limpia la tabla y la cabecera
 
         }
 
     }//GEN-LAST:event_jcbConsultaActionPerformed
+
+    private void jbCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarActionPerformed
+        if (jcbConsulta.equals("Productos/Fecha")) {
+            jbCargar.setEnabled(true);
+            listarDetallesFecha();
+        }
+        
+    }//GEN-LAST:event_jbCargarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -331,8 +362,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<String> jcbConsulta;
     private javax.swing.JComboBox<String> jcbSelectProveedoroProducto;
-    private com.toedter.calendar.JDateChooser jdcDesde;
-    private com.toedter.calendar.JDateChooser jdcHasta;
+    private com.toedter.calendar.JDateChooser jdcFechaSelect;
     private javax.swing.JLabel jlIdDetalle;
     private javax.swing.JPanel jpEscritorio;
     private javax.swing.JTable jtConsultas;
