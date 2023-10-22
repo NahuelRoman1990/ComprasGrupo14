@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -87,25 +88,51 @@ public class CompraData {
     }
    
    public List<Compra> buscarCompraPorFecha(LocalDate fecha) {
-        String sql = "SELECT idCompra, idProveedor FROM compra "
-                + "WHERE fecha = ? ";
-        Compra compra = null;
-//        try {
-//            PreparedStatement ps = con.prepareStatement(sql);
-//            ps.setInt(1, idCompra);
-//            ResultSet rs = ps.executeQuery();
-//            if (rs.next()) {
-//                compra = new Compra();
-//                compra.setFecha(rs.getDate("fecha").toLocalDate());
-//                compra.setProveedor(pvd.buscarProveedorActivo(rs.getInt("idProveedor")));
-//            }
-//            ps.close();
-//
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER LA TABLA COMPRAS");
-//        }
-        return null;
+    String sql = "SELECT idCompra, idProveedor FROM compra WHERE fecha = ?";
+    List<Compra> compras = new ArrayList<>();
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setDate(1, Date.valueOf(fecha)); // Convierte LocalDate a java.sql.Date
+
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Compra compra = new Compra();
+            compra.setIdCompra(rs.getInt("idCompra"));
+            compra.setFecha(fecha); // Establece la fecha proporcionada
+            compra.setProveedor(pvd.buscarProveedorActivo(rs.getInt("idProveedor")));
+            compras.add(compra);
+        }
+        ps.close();
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER LA TABLA COMPRAS POR FECHA");
     }
+
+    return compras;
+}
+
+   
+//   public List<Compra> buscarCompraPorFecha(LocalDate fecha) {
+//        String sql = "SELECT idCompra, idProveedor FROM compra "
+//                + "WHERE fecha = ? ";
+//        Compra compra = null;
+////        try {
+////            PreparedStatement ps = con.prepareStatement(sql);
+////            ps.setInt(1, idCompra);
+////            ResultSet rs = ps.executeQuery();
+////            if (rs.next()) {
+////                compra = new Compra();
+////                compra.setFecha(rs.getDate("fecha").toLocalDate());
+////                compra.setProveedor(pvd.buscarProveedorActivo(rs.getInt("idProveedor")));
+////            }
+////            ps.close();
+////
+////        } catch (SQLException ex) {
+////            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER LA TABLA COMPRAS");
+////        }
+//        return null;
+//    }
    
    public int buscarUltimoId() {
        String sql = "SELECT MAX(`idCompra`) FROM compra";

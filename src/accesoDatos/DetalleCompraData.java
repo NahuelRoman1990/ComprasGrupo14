@@ -23,15 +23,16 @@ import javax.swing.JOptionPane;
  * @author roman
  */
 public class DetalleCompraData {
-
+    
     private Connection con = null;
     private ProductoData pd = new ProductoData();
     private CompraData cd = new CompraData();
-    public DetalleCompraData() {
 
+    public DetalleCompraData() {
+        
         con = Conexion.getConnection();
     }
-
+    
     public void guardarDetalleCompra(DetalleCompra detalleCompra) {
         String sql = "INSERT INTO detallecompra (cantidad, precioCosto, idCompra, idProducto) VALUES (?,?,?,?)";
         try {
@@ -41,28 +42,28 @@ public class DetalleCompraData {
             ps.setInt(3, detalleCompra.getCompra().getIdCompra());
             ps.setInt(4, detalleCompra.getProducto().getIdProducto());
             ps.executeUpdate();
-
+            
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 detalleCompra.setIdDetalle(rs.getInt(1));
-               // JOptionPane.showMessageDialog(null, "DETALLE DE COMPRA GUARDADO");
+                // JOptionPane.showMessageDialog(null, "DETALLE DE COMPRA GUARDADO");
 
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "NO SE PUDO ACCEDER A LA TABLA DETALLE DE COMPRAS");
         }
     }
-    
+
     ///Agregar metodo listar detalle compra(idProveedor)
-     public List<DetalleCompra> listarDetalleCompras(int idCompra) {
+    public List<DetalleCompra> listarDetalleCompras(int idCompra) {
         String sql = "SELECT idDetalle, cantidad, precioCosto, idProducto FROM detallecompra WHERE idCompra = ?";
         ArrayList<DetalleCompra> detalles = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-
+            ps.setInt(1, idCompra);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-
+                
                 DetalleCompra detalleCompra = new DetalleCompra();
                 detalleCompra.setIdDetalle(rs.getInt("idDetalle"));
                 detalleCompra.setCantidad(rs.getInt("cantidad"));
@@ -71,16 +72,14 @@ public class DetalleCompraData {
                 detalleCompra.setCompra(cd.buscarCompra(idCompra));
                 detalles.add(detalleCompra);
             }
-
+            
             ps.close();
-
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA DETALLES DE COMPRA");
         }
         return detalles;
-
+        
     }
-     
-   
-
+    
 }

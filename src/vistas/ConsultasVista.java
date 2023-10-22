@@ -43,7 +43,6 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 
     public ConsultasVista() {
         initComponents();
-        jtConsultas.setVisible(false);
         jdcFechaSelect.setVisible(false);
         jcbSelectProveedoroProducto.setVisible(false);
         String rutaImagen = "img\\fondo.jpg";
@@ -72,25 +71,57 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 
     private void listarDetallesFecha() {
         java.util.Date fechaSeleccionada = jdcFechaSelect.getDate();
+        DefaultTableModel modelo = (DefaultTableModel) jtConsultas.getModel();
         if (fechaSeleccionada != null) {
             java.time.LocalDate fechaLocal = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            List<Compra> compra = cd.buscarCompraPorFecha(fechaLocal);
+            List<Compra> comprasPorFecha = cd.buscarCompraPorFecha(fechaLocal);
             List<DetalleCompra> todosLosDetalles = new ArrayList<>();
+            modelo.setRowCount(0);
 
-            for (Compra compras : compra) {
-                int idCompra = compras.getIdCompra();
+            for (Compra compra : comprasPorFecha) {
+                int idCompra = compra.getIdCompra();
                 List<DetalleCompra> detallesCompra = dcd.listarDetalleCompras(idCompra);
-                for (DetalleCompra detalle : detallesCompra) {
-                     modelo.addRow(new Object[]{
-                        fechaLocal,
-                        detalle.getIdDetalle(),
-                        detalle.getProducto().getNombreProducto(),
-                        detalle.getCantidad(),
-                        detalle.getPrecioCosto(),
-                     });
-                             }}
+                todosLosDetalles.addAll(detallesCompra);
+            }
+
+            for (DetalleCompra detalle : todosLosDetalles) {
+                jtConsultas.setModel(modelo);{
+//             
+                modelo.addRow(new Object[]{
+                    fechaLocal,
+                    detalle.getIdDetalle(),
+                    detalle.getProducto().getNombreProducto(),
+                    detalle.getCantidad(),
+                    detalle.getPrecioCosto(),});
+
+            }
         }
+    }else{
+           JOptionPane.showMessageDialog(this, "LA FECHA SELECCIONADA NO TIENE COMPRAS REALIZADAS");
+                }
     }
+//
+//    private void listarDetallesFecha() {
+//        java.util.Date fechaSeleccionada = jdcFechaSelect.getDate();
+//        if (fechaSeleccionada != null) {
+//            java.time.LocalDate fechaLocal = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//            List<Compra> compra = cd.buscarCompraPorFecha(fechaLocal);
+//            List<DetalleCompra> todosLosDetalles = new ArrayList<>();
+//
+//            for (Compra compras : compra) {
+//                int idCompra = compras.getIdCompra();
+//                List<DetalleCompra> detallesCompra = dcd.listarDetalleCompras(idCompra);
+//                for (DetalleCompra detalle : detallesCompra) {
+//                     modelo.addRow(new Object[]{
+//                        fechaLocal,
+//                        detalle.getIdDetalle(),
+//                        detalle.getProducto().getNombreProducto(),
+//                        detalle.getCantidad(),
+//                        detalle.getPrecioCosto(),
+//                     });
+//                             }}
+//        }
+//    }
 //    private void cargarCabeceraCompraProveedor() {
 //        modelo1.addColumn("ID Compra");
 //        modelo1.addColumn("Proveedor");
@@ -137,7 +168,6 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 //        jtConsultas.setDefaultEditor(Object.class, null);
 //
 //    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -346,11 +376,12 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcbConsultaActionPerformed
 
     private void jbCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarActionPerformed
-        if (jcbConsulta.equals("Productos/Fecha")) {
+        String seleccion = (String) jcbConsulta.getSelectedItem();
+        if ("Productos/Fecha".equals(seleccion)) {
             jbCargar.setEnabled(true);
             listarDetallesFecha();
         }
-        
+
     }//GEN-LAST:event_jbCargarActionPerformed
 
 
