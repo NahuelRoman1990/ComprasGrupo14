@@ -150,6 +150,27 @@ public class ProveedorData {
         return proveedor;
     }
   
+public int buscarProveedorPorNombre(String nombreProveedor) {
+    String sql = "SELECT idProveedor FROM proveedor WHERE razonSocial = ? AND estado = 0";
+    int idProveedor = -1;
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, nombreProveedor);
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next()) {
+            idProveedor = rs.getInt("idProveedor");
+        }
+        
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER LA TABLA PROVEEDOR");
+    }
+
+    return idProveedor;
+}
+
   
    public List<Proveedor> listarProveedores() {
         String sql = "SELECT idProveedor, razonSocial, domicilio, telefono, estado FROM proveedor";

@@ -102,8 +102,10 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
     }
     
     private void comprasAunProveedor(){
-        Proveedor proveedor = (Proveedor)jcbSelectProveedoroProducto.getSelectedItem();
-        int proveedorSelect = proveedor.getIdProveedor();
+        
+        String proveedor = jcbSelectProveedoroProducto.getSelectedItem().toString();
+        
+        int proveedorSelect = prd.buscarProveedorPorNombre(proveedor);
         DefaultTableModel modelo = (DefaultTableModel) jtConsultas.getModel();
         if (proveedorSelect != -1) {
            
@@ -115,11 +117,8 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
                 int idCompra = compra.getIdCompra();
                 List<DetalleCompra> detallesCompra = dcd.listarDetalleCompras(idCompra);
                 todosLosDetalles.addAll(detallesCompra);
-                modelo.addRow(new Object[]{
-                idCompra, "", "", "", ""
-            });
             }
-
+           
             for (DetalleCompra detalle : todosLosDetalles) {
                 String producto = detalle.getProducto().getNombreProducto();
                 int cantidad = detalle.getCantidad();
@@ -127,15 +126,16 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
                 jtConsultas.setModel(modelo);{
    
                 modelo.addRow(new Object[]{
-                    "",
-                    detalle.getProducto().getNombreProducto(),
-                    detalle.getCantidad(),
-                    detalle.getPrecioCosto(),});
+                    detalle.getCompra().getIdCompra(),
+                    proveedor,
+                    producto,
+                    cantidad,
+                    totalCosto,});
 
             }
         }
     }else{
-           JOptionPane.showMessageDialog(this, "SELECCIONE UN PROVEEDOR");
+           JOptionPane.showMessageDialog(this, "SELECCIONE UN PROVEEDOR CON COMPRAS");
                 }
         
     }
