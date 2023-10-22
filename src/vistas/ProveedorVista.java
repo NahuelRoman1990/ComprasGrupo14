@@ -28,6 +28,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         cargarCabecera();
         cargarProveedor();
         cargarCombo();
+        setResizable(false);
         String rutaImagen = "img\\fondo.jpg";
         ImageIcon fondo = new ImageIcon(rutaImagen);
         JLabel label = new JLabel(fondo);

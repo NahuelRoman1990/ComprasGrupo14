@@ -55,6 +55,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         cargarComboProveedor();
         cargarCabecera();
         sumaTotal();
+        setResizable(false);
         jcCalendario.setWeekOfYearVisible(false);
         jcbProductos.setEnabled(false);
         String rutaImagen = "img\\Fondo1.jpg";

@@ -50,6 +50,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         JLabel label = new JLabel(fondo);
         label.setBounds(0, 0, fondo.getIconWidth(), fondo.getIconHeight());
         jpEscritorio.add(label, new Integer(Integer.MIN_VALUE));
+        setResizable(false);
     }
 
     private void comboProveedor() {
@@ -85,8 +86,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             }
 
             for (DetalleCompra detalle : todosLosDetalles) {
-                jtConsultas.setModel(modelo);{
-//             
+                jtConsultas.setModel(modelo);{         
                 modelo.addRow(new Object[]{
                     fechaLocal,
                     detalle.getIdDetalle(),
@@ -99,6 +99,45 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
     }else{
            JOptionPane.showMessageDialog(this, "LA FECHA SELECCIONADA NO TIENE COMPRAS REALIZADAS");
                 }
+    }
+    
+    private void comprasAunProveedor(){
+        Proveedor proveedor = (Proveedor)jcbSelectProveedoroProducto.getSelectedItem();
+        int proveedorSelect = proveedor.getIdProveedor();
+        DefaultTableModel modelo = (DefaultTableModel) jtConsultas.getModel();
+        if (proveedorSelect != -1) {
+           
+            List<Compra> comprasProveedor = cd.buscarComprasPorProveedor(proveedorSelect);
+            List<DetalleCompra> todosLosDetalles = new ArrayList<>();
+            modelo.setRowCount(0);
+
+            for (Compra compra : comprasProveedor) {
+                int idCompra = compra.getIdCompra();
+                List<DetalleCompra> detallesCompra = dcd.listarDetalleCompras(idCompra);
+                todosLosDetalles.addAll(detallesCompra);
+                modelo.addRow(new Object[]{
+                idCompra, "", "", "", ""
+            });
+            }
+
+            for (DetalleCompra detalle : todosLosDetalles) {
+                String producto = detalle.getProducto().getNombreProducto();
+                int cantidad = detalle.getCantidad();
+                double totalCosto = cantidad*detalle.getPrecioCosto();
+                jtConsultas.setModel(modelo);{
+   
+                modelo.addRow(new Object[]{
+                    "",
+                    detalle.getProducto().getNombreProducto(),
+                    detalle.getCantidad(),
+                    detalle.getPrecioCosto(),});
+
+            }
+        }
+    }else{
+           JOptionPane.showMessageDialog(this, "SELECCIONE UN PROVEEDOR");
+                }
+        
     }
 //
 //    private void listarDetallesFecha() {
@@ -186,10 +225,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 
         jtConsultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "CONSULTA", "CONSULTA", "CONSULTA", "CONSULTA", "CONSULTA"
@@ -380,6 +416,10 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         if ("Productos/Fecha".equals(seleccion)) {
             jbCargar.setEnabled(true);
             listarDetallesFecha();
+        }else if ("Compras/Proveedor".equals(seleccion)) {
+            jbCargar.setEnabled(true);
+            comprasAunProveedor();
+            
         }
 
     }//GEN-LAST:event_jbCargarActionPerformed
