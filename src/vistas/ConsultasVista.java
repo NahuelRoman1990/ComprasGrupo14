@@ -57,7 +57,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         List<Proveedor> proveedor = prd.listarProveedores();
 
         for (Proveedor proveedores : proveedor) {
-            jcbSelectProveedoroProducto.addItem(proveedores.getRazonSocial());
+            jcbSelectProveedoroProducto.addItem(proveedores);
         }
     }
 
@@ -65,7 +65,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         List<Producto> producto = pd.listarProducto();
 
         for (Producto productos : producto) {
-            jcbSelectProveedoroProducto.addItem(productos.getNombreProducto());
+            jcbSelectProveedoroProducto.addItem(productos);
 
         }
     }
@@ -103,9 +103,9 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
     
     private void comprasAunProveedor(){
         
-        String proveedor = jcbSelectProveedoroProducto.getSelectedItem().toString();
+      Proveedor proveedor = (Proveedor)jcbSelectProveedoroProducto.getSelectedItem();
         
-        int proveedorSelect = prd.buscarProveedorPorNombre(proveedor);
+        int proveedorSelect = proveedor.getIdProveedor();
         DefaultTableModel modelo = (DefaultTableModel) jtConsultas.getModel();
         if (proveedorSelect != -1) {
            
@@ -117,22 +117,24 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
                 int idCompra = compra.getIdCompra();
                 List<DetalleCompra> detallesCompra = dcd.listarDetalleCompras(idCompra);
                 todosLosDetalles.addAll(detallesCompra);
-            }
-           
-            for (DetalleCompra detalle : todosLosDetalles) {
+                for (DetalleCompra detalle : todosLosDetalles) {
                 String producto = detalle.getProducto().getNombreProducto();
                 int cantidad = detalle.getCantidad();
                 double totalCosto = cantidad*detalle.getPrecioCosto();
-                jtConsultas.setModel(modelo);{
    
                 modelo.addRow(new Object[]{
-                    detalle.getCompra().getIdCompra(),
+                    idCompra,
                     proveedor,
                     producto,
                     cantidad,
-                    totalCosto,});
+                    totalCosto
+                });
+                 
+                         }
+           
+            
 
-            }
+            
         }
     }else{
            JOptionPane.showMessageDialog(this, "SELECCIONE UN PROVEEDOR CON COMPRAS");
@@ -221,7 +223,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         jcbConsulta = new javax.swing.JComboBox<>();
         jbCargar = new javax.swing.JButton();
         jdcFechaSelect = new com.toedter.calendar.JDateChooser();
-        jcbSelectProveedoroProducto = new javax.swing.JComboBox<>();
+        jcbSelectProveedoroProducto = new javax.swing.JComboBox();
 
         jtConsultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -413,6 +415,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 
     private void jbCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCargarActionPerformed
         String seleccion = (String) jcbConsulta.getSelectedItem();
+        jbCargar.setEnabled(false);
         if ("Productos/Fecha".equals(seleccion)) {
             jbCargar.setEnabled(true);
             listarDetallesFecha();
@@ -432,7 +435,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbCargar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<String> jcbConsulta;
-    private javax.swing.JComboBox<String> jcbSelectProveedoroProducto;
+    private javax.swing.JComboBox jcbSelectProveedoroProducto;
     private com.toedter.calendar.JDateChooser jdcFechaSelect;
     private javax.swing.JLabel jlIdDetalle;
     private javax.swing.JPanel jpEscritorio;
