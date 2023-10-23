@@ -48,11 +48,17 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
+                              <Component id="jScrollPane1" min="-2" pref="871" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jcbConsulta" pref="217" max="32767" attributes="0"/>
+                                      <Component id="jcbConsulta" max="32767" attributes="0"/>
                                       <Component id="jdcFechaSelect" max="32767" attributes="0"/>
                                       <Component id="jcbSelectProveedoroProducto" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jlIngreseIdCompra" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                          <Component id="jtIdCompra" min="-2" pref="96" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -61,7 +67,6 @@
                                       <Component id="jbSalir" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="jScrollPane1" min="-2" pref="871" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="197" max="32767" attributes="0"/>
                       </Group>
@@ -94,7 +99,12 @@
                           <Component id="jdcFechaSelect" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jtIdCompra" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlIngreseIdCompra" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="408" max="-2" attributes="0"/>
                   <EmptySpace pref="72" max="32767" attributes="0"/>
               </Group>
@@ -140,6 +150,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jlIdDetalle">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="FORMATO DE BUSQUEDA:"/>
           </Properties>
         </Component>
@@ -147,6 +160,9 @@
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial Black" size="36" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="CONSULTAS"/>
           </Properties>
@@ -197,6 +213,16 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jtIdCompra">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlIngreseIdCompra">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="INGRESE ID COMPRA:"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

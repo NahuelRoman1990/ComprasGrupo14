@@ -143,4 +143,34 @@ public class ProductoData {
         return productos;
 
     }
+    
+    public List<Producto> buscarProductosBajoStock(){
+        String sql = "SELECT idProducto, nombreProducto, descripcion, precioActual, stock "
+                + "FROM producto WHERE stock <5";
+        ArrayList<Producto> productos = new ArrayList<>();
+       
+        try {
+            PreparedStatement ps =con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+               Producto producto = new Producto();
+                producto.setIdProducto(rs.getInt("idProducto"));
+                producto.setNombreProducto(rs.getString("nombreProducto"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setPrecioActual(rs.getDouble("precioActual"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setEstado(rs.getBoolean("estado"));
+
+                productos.add(producto);
+                
+            }
+        } catch (SQLException ex) {
+             ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA PRODUCTOS");
+        }catch(NullPointerException np){
+            np.printStackTrace();
+            JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA PRODUCTOS");
+        }
+        return productos;
+    }
 }
