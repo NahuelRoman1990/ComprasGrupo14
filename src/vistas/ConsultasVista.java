@@ -32,14 +32,10 @@ import javax.swing.table.TableColumn;
  */
 public class ConsultasVista extends javax.swing.JInternalFrame {
 
-    private Connection con = null;
     private DetalleCompraData dcd = new DetalleCompraData();
     private ProveedorData prd = new ProveedorData();
     private ProductoData pd = new ProductoData();
     private CompraData cd = new CompraData();
-    private DefaultTableModel modelo = new DefaultTableModel();
-    private DefaultTableModel modelo1 = new DefaultTableModel();
-    private conboBoxMix<String> comboBox;
 
     public ConsultasVista() {
         initComponents();
@@ -144,94 +140,39 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 
     private void productosPorCompra() {
         int idCompra = Integer.parseInt(jtIdCompra.getText());
-       DefaultTableModel modelo = (DefaultTableModel) jtConsultas.getModel();
-            List<DetalleCompra> todosLosDetalles = dcd.listarDetalleCompras(idCompra);
-            modelo.setRowCount(0);
+        DefaultTableModel modelo = (DefaultTableModel) jtConsultas.getModel();
+        List<DetalleCompra> todosLosDetalles = dcd.listarDetalleCompras(idCompra);
+        modelo.setRowCount(0);
 
-            for (DetalleCompra detalle : todosLosDetalles) {
-                String producto = detalle.getProducto().getNombreProducto();
-                int cantidad = detalle.getCantidad();
-                double costoUnidad = detalle.getPrecioCosto();
-                double totalCosto = cantidad * detalle.getPrecioCosto();
+        for (DetalleCompra detalle : todosLosDetalles) {
+            String producto = detalle.getProducto().getNombreProducto();
+            int cantidad = detalle.getCantidad();
+            double costoUnidad = detalle.getPrecioCosto();
+            double totalCosto = cantidad * detalle.getPrecioCosto();
 
-                modelo.addRow(new Object[]{
-                    idCompra,
-                    producto,
-                    cantidad,
-                    costoUnidad,
-                    totalCosto
-                });
-            }}
+            modelo.addRow(new Object[]{
+                idCompra,
+                producto,
+                cantidad,
+                costoUnidad,
+                totalCosto
+            });
+        }
+    }
 
-//
-//    private void listarDetallesFecha() {
-//        java.util.Date fechaSeleccionada = jdcFechaSelect.getDate();
-//        if (fechaSeleccionada != null) {
-//            java.time.LocalDate fechaLocal = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//            List<Compra> compra = cd.buscarCompraPorFecha(fechaLocal);
-//            List<DetalleCompra> todosLosDetalles = new ArrayList<>();
-//
-//            for (Compra compras : compra) {
-//                int idCompra = compras.getIdCompra();
-//                List<DetalleCompra> detallesCompra = dcd.listarDetalleCompras(idCompra);
-//                for (DetalleCompra detalle : detallesCompra) {
-//                     modelo.addRow(new Object[]{
-//                        fechaLocal,
-//                        detalle.getIdDetalle(),
-//                        detalle.getProducto().getNombreProducto(),
-//                        detalle.getCantidad(),
-//                        detalle.getPrecioCosto(),
-//                     });
-//                             }}
-//        }
-//    }
-//    private void cargarCabeceraCompraProveedor() {
-//        modelo1.addColumn("ID Compra");
-//        modelo1.addColumn("Proveedor");
-//        modelo1.addColumn("Producto");
-//        modelo1.addColumn("Cantidad");
-//        modelo1.addColumn("Costo Total");
-//        jtConsultas.setModel(modelo1);
-//        JTableHeader tableHeader = jtConsultas.getTableHeader();
-//        tableHeader.setReorderingAllowed(false);
-//
-//        jtConsultas.getColumnModel().getColumn(0).setPreferredWidth(20);
-//        jtConsultas.getColumnModel().getColumn(0).setResizable(false);
-//        jtConsultas.getColumnModel().getColumn(1).setPreferredWidth(20);
-//        jtConsultas.getColumnModel().getColumn(1).setResizable(false);
-//        jtConsultas.getColumnModel().getColumn(2).setPreferredWidth(20);
-//        jtConsultas.getColumnModel().getColumn(2).setResizable(false);
-//        jtConsultas.getColumnModel().getColumn(3).setPreferredWidth(20);
-//        jtConsultas.getColumnModel().getColumn(3).setResizable(false);
-//        jtConsultas.getColumnModel().getColumn(4).setPreferredWidth(20);
-//        jtConsultas.getColumnModel().getColumn(4).setResizable(false);
-//        jtConsultas.setDefaultEditor(Object.class, null);
-//
-//    }
-//    private void cargarCabeceraProducto() {
-//        modelo.addColumn("ID");
-//        modelo.addColumn("Nombre");
-//        modelo.addColumn("Descripción");
-//        modelo.addColumn("Precio");
-//        modelo.addColumn("Stock");
-//        jtConsultas.setModel(modelo);
-//        JTableHeader tableHeader = jtConsultas.getTableHeader();
-//        tableHeader.setReorderingAllowed(false);
-//
-//        jtConsultas.getColumnModel().getColumn(0).setPreferredWidth(10);
-//        jtConsultas.getColumnModel().getColumn(0).setResizable(false);
-//        jtConsultas.getColumnModel().getColumn(1).setPreferredWidth(30);
-//        jtConsultas.getColumnModel().getColumn(1).setResizable(false);
-//        jtConsultas.getColumnModel().getColumn(2).setPreferredWidth(40);
-//        jtConsultas.getColumnModel().getColumn(2).setResizable(false);
-//        jtConsultas.getColumnModel().getColumn(3).setPreferredWidth(20);
-//        jtConsultas.getColumnModel().getColumn(3).setResizable(false);
-//        jtConsultas.getColumnModel().getColumn(4).setPreferredWidth(20);
-//        jtConsultas.getColumnModel().getColumn(4).setResizable(false);
-//        jtConsultas.setDefaultEditor(Object.class, null);
-//
-//    }
-            @SuppressWarnings("unchecked")
+    private void productoMasComprado() {
+     DefaultTableModel modelo = (DefaultTableModel) jtConsultas.getModel();
+     List<DetalleCompra> todosLosDetalles = dcd.listarDetalles();
+     modelo.setRowCount(0);
+        for (DetalleCompra detalle : todosLosDetalles) {
+            int idProducto = detalle.getProducto().getIdProducto();
+            
+            
+            
+        }
+    }
+
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -444,7 +385,19 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             cuartaColum.setHeaderValue("PRECIO UNITARIO");
             quintaColum.setHeaderValue("PRECIO TOTAL");
             tableHeader.setVisible(true);
-
+        } else if (seleccion.equals("Producto/MasComprado")) {
+            jtIdCompra.setVisible(true);
+            jlIngreseIdCompra.setVisible(true);
+            jdcFechaSelect.setVisible(false);
+            jcbSelectProveedoroProducto.setVisible(false);
+            jcbSelectProveedoroProducto.removeAllItems();
+            tableHeader.setVisible(false);
+            primeraColum.setHeaderValue("ID PRODUCTO");
+            segundaColum.setHeaderValue("PRODUCTO");
+            terceraColum.setHeaderValue("CANTIDAD");
+            cuartaColum.setHeaderValue("PRECIO UNITARIO");
+            quintaColum.setHeaderValue("PRECIO TOTAL");
+            tableHeader.setVisible(true);
         } else {
             // Si no es ninguna de las opciones anteriores, oculta los componentes
             jdcFechaSelect.setVisible(false);
@@ -465,7 +418,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             jbCargar.setEnabled(true);
             comprasAunProveedor();
 
-        }else if ("Productos/Compra".equals(seleccion)) {
+        } else if ("Productos/Compra".equals(seleccion)) {
             jbCargar.setEnabled(true);
             productosPorCompra();
             jtIdCompra.setText("");

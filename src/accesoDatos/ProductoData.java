@@ -173,4 +173,23 @@ public class ProductoData {
         }
         return productos;
     }
+    
+    public int buscarUltimoId() {
+        String sql = "SELECT MAX(`idProducto`) FROM producto";
+        int ultimoId;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                ultimoId = rs.getInt(1);
+                return ultimoId;
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "NO SE PUDO CONECTAR CON LA TABLA COMPRAS");
+        }
+        return 0;
+
+    }
 }
