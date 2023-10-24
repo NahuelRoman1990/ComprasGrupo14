@@ -1,41 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vistas;
 
 import accesoDatos.CompraData;
 import accesoDatos.DetalleCompraData;
 import accesoDatos.ProductoData;
 import accesoDatos.ProveedorData;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.Header;
+
 import entidades.Compra;
 import entidades.DetalleCompra;
 import entidades.Producto;
 import entidades.Proveedor;
-import java.sql.Connection;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.plaf.TableHeaderUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 
-/**
- *
- * @author roman
- */
 public class ConsultasVista extends javax.swing.JInternalFrame {
 
     private DetalleCompraData dcd = new DetalleCompraData();
     private ProveedorData prd = new ProveedorData();
     private ProductoData pd = new ProductoData();
     private CompraData cd = new CompraData();
+    
 
     public ConsultasVista() {
         initComponents();
@@ -43,7 +36,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         jlIngreseIdCompra.setVisible(false);
         jdcFechaSelect.setVisible(false);
         jcbSelectProveedoroProducto.setVisible(false);
-        String rutaImagen = "img\\fondo.jpg";
+        String rutaImagen = "img\\fondo1.jpg";
         ImageIcon fondo = new ImageIcon(rutaImagen);
         JLabel label = new JLabel(fondo);
         label.setBounds(0, 0, fondo.getIconWidth(), fondo.getIconHeight());
@@ -59,18 +52,18 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         }
     }
 
-    private void comboProducto() {
-        List<Producto> producto = pd.listarProducto();
-
-        for (Producto productos : producto) {
-            jcbSelectProveedoroProducto.addItem(productos);
-
-        }
-    }
-
+//    private void comboProducto() {
+//        List<Producto> producto = pd.listarProducto();
+//
+//        for (Producto productos : producto) {
+//            jcbSelectProveedoroProducto.addItem(productos);
+//
+//        }
+//    }
     private void listarDetallesFecha() {
         java.util.Date fechaSeleccionada = jdcFechaSelect.getDate();
         DefaultTableModel modelo = (DefaultTableModel) jtConsultas.getModel();
+
         if (fechaSeleccionada != null) {
             java.time.LocalDate fechaLocal = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             List<Compra> comprasPorFecha = cd.buscarCompraPorFecha(fechaLocal);
@@ -161,14 +154,55 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
     }
 
     private void productoMasComprado() {
-     DefaultTableModel modelo = (DefaultTableModel) jtConsultas.getModel();
-     List<DetalleCompra> todosLosDetalles = dcd.listarDetalles();
-     modelo.setRowCount(0);
-        for (DetalleCompra detalle : todosLosDetalles) {
-            int idProducto = detalle.getProducto().getIdProducto();
+       
+        List<DetalleCompra> todosLosDetalles = dcd.listarDetalles();
+        List<Producto> todosLosProductos = pd.listarProducto();
+        DefaultTableModel modelo = (DefaultTableModel) jtConsultas.getModel();
+        modelo.setRowCount(0);
+        Map<Integer, Integer> mapa = new TreeMap<>();
+        int cantidad;
+
+        for (Producto producto : todosLosProductos) {
+            int idProducto = producto.getIdProducto();
+            cantidad =0;
+
+            for (DetalleCompra detalle : todosLosDetalles) {
+                if (idProducto == detalle.getProducto().getIdProducto()) {
+
+                    cantidad += detalle.getCantidad();
+                    mapa.put(idProducto, cantidad);
+                }
+            }
+        }
+        
+        Comparator<Integer> comparadorPorValor = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer clave2, Integer clave1) {
+                // Comparar los valores numéricos asociados a las claves
+                return mapa.get(clave1).compareTo(mapa.get(clave2));
+            }
+        };
+        
+        Map<Integer, Integer> mapaOrdenado = new TreeMap<>(comparadorPorValor);
+        mapaOrdenado.putAll(mapa);
+        
+        for (Map.Entry<Integer, Integer> entry : mapaOrdenado.entrySet()) {
             
-            
-            
+            Producto producto = pd.buscarProducto(entry.getKey());
+            String Nombreproducto = producto.getNombreProducto();
+            int idProducto = producto.getIdProducto();
+            double precioVenta = producto.getPrecioActual();
+            double precioCompra = producto.getPrecioActual() * 0.7;
+            int cantidadTotal = mapaOrdenado.get(idProducto);
+
+            modelo.addRow(new Object[]{
+                idProducto,
+                Nombreproducto,
+                cantidadTotal,
+                precioVenta,
+                precioCompra
+            });
+
         }
     }
 
@@ -195,7 +229,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "CONSULTA", "CONSULTA", "CONSULTA", "CONSULTA", "CONSULTA"
+                "ID PRODUCTO", "NOMBRE", "CANTIDAD", "PRECIO VENTA", "PRECIO COMPRA"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -335,7 +369,6 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 
     private void jcbConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbConsultaActionPerformed
         String seleccion = (String) jcbConsulta.getSelectedItem();
-        DefaultTableModel emptyModel = new DefaultTableModel();
         JTableHeader tableHeader = jtConsultas.getTableHeader();
         JTableHeader header = jtConsultas.getTableHeader();
         TableColumn primeraColum = header.getColumnModel().getColumn(0);
@@ -386,8 +419,8 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             quintaColum.setHeaderValue("PRECIO TOTAL");
             tableHeader.setVisible(true);
         } else if (seleccion.equals("Producto/MasComprado")) {
-            jtIdCompra.setVisible(true);
-            jlIngreseIdCompra.setVisible(true);
+            jtIdCompra.setVisible(false);
+            jlIngreseIdCompra.setVisible(false);
             jdcFechaSelect.setVisible(false);
             jcbSelectProveedoroProducto.setVisible(false);
             jcbSelectProveedoroProducto.removeAllItems();
@@ -395,8 +428,8 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             primeraColum.setHeaderValue("ID PRODUCTO");
             segundaColum.setHeaderValue("PRODUCTO");
             terceraColum.setHeaderValue("CANTIDAD");
-            cuartaColum.setHeaderValue("PRECIO UNITARIO");
-            quintaColum.setHeaderValue("PRECIO TOTAL");
+            cuartaColum.setHeaderValue("PRECIO VENTA");
+            quintaColum.setHeaderValue("PRECIO COMPRA");
             tableHeader.setVisible(true);
         } else {
             // Si no es ninguna de las opciones anteriores, oculta los componentes
@@ -422,6 +455,10 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             jbCargar.setEnabled(true);
             productosPorCompra();
             jtIdCompra.setText("");
+        } else if ("Productos/MasComprado".equals(seleccion)) {
+            jbCargar.setEnabled(true);
+            productoMasComprado();
+            
         }
 
     }//GEN-LAST:event_jbCargarActionPerformed
