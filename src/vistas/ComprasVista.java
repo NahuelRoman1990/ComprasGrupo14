@@ -41,6 +41,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     CompraData cd = new CompraData();
     ProveedorData pd = new ProveedorData();
     ProductoData prd = new ProductoData();
+    DefaultTableModel modelo1 = (DefaultTableModel) jtStockBajo.getModel();
     private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
             if (c == 4) {
@@ -53,13 +54,11 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
     public ComprasVista() {
         initComponents();
-        jtStockBajo.setVisible(false);
         alertaStock();
         cargarComboProducto();
         cargarComboProveedor();
         cargarCabecera();
-        sumaTotal(); 
-        setResizable(false);
+        sumaTotal();
         jcCalendario.setWeekOfYearVisible(false);
         jcbProductos.setEnabled(false);
         String rutaImagen = "img\\Fondo1.jpg";
@@ -70,39 +69,33 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jcCalendario.setEnabled(true);
     }
 
-    private void cargarTablaStock() {
-        jtStockBajo.setVisible(true);
-        JTableHeader tableHeader1 = jtStockBajo.getTableHeader();
-        JTableHeader header = jtStockBajo.getTableHeader();
-        TableColumn primeraColum = header.getColumnModel().getColumn(0);
-        TableColumn segundaColum = header.getColumnModel().getColumn(1);
-        TableColumn terceraColum = header.getColumnModel().getColumn(2);
-        tableHeader1.setVisible(false);
-        primeraColum.setHeaderValue("ID PRODUCTO");
-        segundaColum.setHeaderValue("NOMBRE");
-        terceraColum.setHeaderValue("STOCK");
-        tableHeader1.setVisible(true);
-    }
+    
 
     private void alertaStock() {
+        
         List<Producto> productoStock = prd.listarProducto();
         List<Producto> productosBajos = new ArrayList<>();
-        jtStockBajo.setVisible(false);
+
+        int table = 0;
         for (Producto producto : productoStock) {
             int stock = producto.getStock();
-            int table = 0;
+
             if (stock < 5) {
                 productosBajos.add(producto);
-                table = 1;
-            if (table>0) {
-                cargarTablaStock();
-            }}
+                table++;
+                
+            }
         }
 
+        jtStockBajo.setVisible(table > 0);
+        if (table > 0) {
+            cargarCabeceraStock();
+        }
+        
+        modelo1.setRowCount(0);
         for (Producto producto : productosBajos) {
-            jtStockBajo.setModel(modelo);
             {
-                modelo.addRow(new Object[]{
+                modelo1.addRow(new Object[]{
                     producto.getIdProducto(),
                     producto.getNombreProducto(),
                     producto.getStock(),});
@@ -110,7 +103,19 @@ public class ComprasVista extends javax.swing.JInternalFrame {
             }
         }
     }
+    private void cargarCabeceraStock() {
+        modelo1.addColumn("ID PRODUCTO");
+        modelo1.addColumn("NOMBRE");
+        modelo1.addColumn("STOCK");
 
+        jtStockBajo.setModel(modelo1);
+        JTableHeader tableHeader = jtStockBajo.getTableHeader();
+        tableHeader.setReorderingAllowed(false);
+        jtStockBajo.getColumnModel().getColumn(0).setResizable(false);
+        jtStockBajo.getColumnModel().getColumn(1).setResizable(false);
+        jtStockBajo.getColumnModel().getColumn(2).setResizable(false);
+
+    }
     private void cargarCabecera() {
         modelo.addColumn("ID Producto");
         modelo.addColumn("Nombre");
@@ -398,6 +403,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtStockBajo.setEnabled(false);
         jScrollPane2.setViewportView(jtStockBajo);
 
         jdEscritorioCompras.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
