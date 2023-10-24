@@ -435,6 +435,8 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             // Si no es ninguna de las opciones anteriores, oculta los componentes
             jdcFechaSelect.setVisible(false);
             jcbSelectProveedoroProducto.setVisible(false);
+            jtIdCompra.setVisible(false);
+            jlIdDetalle.setVisible(false);
             // Limpia la tabla y la cabecera
 
         }
