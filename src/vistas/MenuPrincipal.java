@@ -1,12 +1,10 @@
 package vistas;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
-import javafx.scene.layout.Background;
+
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
+
 import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
+
 
 
 public class MenuPrincipal extends javax.swing.JFrame {

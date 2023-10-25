@@ -43,7 +43,12 @@ public class DetalleCompraData {
             ps.setInt(4, detalleCompra.getProducto().getIdProducto());
             ps.executeUpdate();
             
+            Producto producto = pd.buscarProducto(detalleCompra.getProducto().getIdProducto());
+            int stock = producto.getStock()+ detalleCompra.getCantidad();
+            producto.setStock(stock);
+            pd.modificarProducto(producto);
             ResultSet rs = ps.getGeneratedKeys();
+            
             if (rs.next()) {
                 detalleCompra.setIdDetalle(rs.getInt(1));
                 // JOptionPane.showMessageDialog(null, "DETALLE DE COMPRA GUARDADO");

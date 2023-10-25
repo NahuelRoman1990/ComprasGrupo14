@@ -13,7 +13,6 @@ import entidades.Compra;
 import entidades.DetalleCompra;
 import entidades.Producto;
 import entidades.Proveedor;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -22,26 +21,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.plaf.basic.BasicListUI;
-import javax.swing.plaf.basic.BasicListUI.ListSelectionHandler;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableColumn;
 
-/**
- *
- * @author Erni
- */
+
+
 public class ComprasVista extends javax.swing.JInternalFrame {
 
     DetalleCompraData dcd = new DetalleCompraData();
     CompraData cd = new CompraData();
     ProveedorData pd = new ProveedorData();
     ProductoData prd = new ProductoData();
-    DefaultTableModel modelo1 = (DefaultTableModel) jtStockBajo.getModel();
+    
+    private DefaultTableModel modelo1 = new DefaultTableModel();
     private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
             if (c == 4) {
@@ -54,11 +46,13 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
     public ComprasVista() {
         initComponents();
-        alertaStock();
         cargarComboProducto();
+        cargarCabeceraStock();
         cargarComboProveedor();
         cargarCabecera();
         sumaTotal();
+        alertaStock();
+        jtStockBajo.setVisible(false);
         jcCalendario.setWeekOfYearVisible(false);
         jcbProductos.setEnabled(false);
         String rutaImagen = "img\\Fondo1.jpg";
@@ -67,6 +61,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         label.setBounds(0, 0, fondo.getIconWidth(), fondo.getIconHeight());
         jdEscritorioCompras.add(label, new Integer(Integer.MIN_VALUE));
         jcCalendario.setEnabled(true);
+        alertaStock();
     }
 
     
@@ -88,32 +83,35 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         }
 
         jtStockBajo.setVisible(table > 0);
-        if (table > 0) {
-            cargarCabeceraStock();
-        }
+        
         
         modelo1.setRowCount(0);
         for (Producto producto : productosBajos) {
             {
+                
                 modelo1.addRow(new Object[]{
                     producto.getIdProducto(),
                     producto.getNombreProducto(),
-                    producto.getStock(),});
+                    producto.getStock()});
 
             }
         }
     }
     private void cargarCabeceraStock() {
+        
         modelo1.addColumn("ID PRODUCTO");
         modelo1.addColumn("NOMBRE");
         modelo1.addColumn("STOCK");
-
         jtStockBajo.setModel(modelo1);
+
+        
         JTableHeader tableHeader = jtStockBajo.getTableHeader();
         tableHeader.setReorderingAllowed(false);
         jtStockBajo.getColumnModel().getColumn(0).setResizable(false);
         jtStockBajo.getColumnModel().getColumn(1).setResizable(false);
         jtStockBajo.getColumnModel().getColumn(2).setResizable(false);
+        
+        
 
     }
     private void cargarCabecera() {
@@ -262,6 +260,8 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jbModificar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtStockBajo = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         jdEscritorioCompras.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -320,7 +320,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jtCompras.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -392,19 +392,19 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
+        ));
         jtStockBajo.setEnabled(false);
         jScrollPane2.setViewportView(jtStockBajo);
+
+        jLabel7.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Productos con bajo Stock");
+
+        jLabel8.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Productos en el carro de compra");
 
         jdEscritorioCompras.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jtfCompra, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -426,6 +426,8 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jdEscritorioCompras.setLayer(jbCancelarCompra, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jbModificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioCompras.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioCompras.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jdEscritorioComprasLayout = new javax.swing.GroupLayout(jdEscritorioCompras);
         jdEscritorioCompras.setLayout(jdEscritorioComprasLayout);
@@ -481,9 +483,12 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                                     .addComponent(jtTotal)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdEscritorioComprasLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane2))))))
+                                .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane2))
+                                    .addComponent(jLabel8))))))
                 .addGap(47, 47, 47))
         );
         jdEscritorioComprasLayout.setVerticalGroup(
@@ -493,31 +498,33 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jbCancelarCompra)))
-                .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jbCancelarCompra)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
-                        .addGap(93, 93, 93)
                         .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
-                                .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jbComprar)
-                                    .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jcbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addComponent(jcCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jtfCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jcbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
+                            .addComponent(jbComprar)
+                            .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel2)
+                                .addComponent(jcbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jcCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jtfCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jcbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -631,6 +638,8 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         borrarFilas();
         jcbProductos.removeAllItems();
         cargarComboProducto();
+        
+        alertaStock();
 
         String mensajeCompra = "COMPRA REALIZADA CON EXITO:\n"
                 + "FECHA: " + compra.getFecha() + "\n"
@@ -654,6 +663,8 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbAgregar;
