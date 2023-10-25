@@ -50,7 +50,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         cargarCabeceraStock();
         sumaTotal();
         mostrarOcultarTablaStockBajo(closable);
-        alertaStock();
+        
         ocultarDetalles();
 
         jtStockBajo.setVisible(false);
@@ -79,10 +79,6 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jtStockBajo.setVisible(mostrar);
         jlBajoStock.setVisible(mostrar);
         jScrollPane2.setVisible(mostrar);
-        if (mostrar) {
-            jdEscritorioCompras.revalidate();
-            jdEscritorioCompras.repaint();
-        }
 
     }
 
@@ -91,10 +87,9 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         DefaultTableModel modeloStockBajo = (DefaultTableModel) jtStockBajo.getModel();
         modeloStockBajo.setRowCount(0);
         boolean hayProductos = false;
-
+        String mensaje = "REVISA:\n  LA TABLA\n \nPRODUCTOS DE STOCK BAJO";
         for (Producto producto : prd.listarProducto()) {
             if (producto.getStock() <= 5) {
-
                 Object[] rowData = {
                     producto.getIdProducto(),
                     producto.getNombreProducto(),
@@ -104,7 +99,12 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                 hayProductos = true;
             }
         }
-        mostrarOcultarTablaStockBajo(hayProductos);
+        if (hayProductos) {
+            mostrarOcultarTablaStockBajo(true);
+            JOptionPane.showMessageDialog(null, mensaje, "ALERTA", JOptionPane.WARNING_MESSAGE);
+        } else {
+            mostrarOcultarTablaStockBajo(false);
+        }
     }
 
     private void cargarCabeceraStock() {
@@ -407,7 +407,6 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
             }
         ));
-        jtStockBajo.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jtStockBajo.setEnabled(false);
         jScrollPane2.setViewportView(jtStockBajo);
 
