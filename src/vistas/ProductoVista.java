@@ -213,7 +213,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             }
         });
 
-        jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono medianos guardar/Size=16, Theme=Filled.png"))); // NOI18N
+        jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/GUARDAR-PRODUCTO1.png"))); // NOI18N
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,6 +221,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             }
         });
 
+        jbNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/NUEVO-PRODUCTO.png"))); // NOI18N
         jbNuevo.setText("Nuevo");
         jbNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,6 +229,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             }
         });
 
+        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/BUSCAR-PRODUCTO.png"))); // NOI18N
         jbBuscar.setText("Buscar");
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,7 +237,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             }
         });
 
-        jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos delete/Size=32, Theme=Filled.png"))); // NOI18N
+        jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/ELIMINAR-PRODUCTO-32.png"))); // NOI18N
         jbEliminar.setText("Eliminar");
         jbEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,6 +253,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             }
         });
 
+        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/SALIR-´PRODUCTO1.png"))); // NOI18N
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,7 +261,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             }
         });
 
-        jbActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/actualizar icono peque.png"))); // NOI18N
+        jbActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/iconoa-ctualizado-32px.png"))); // NOI18N
         jbActualizar.setText("Actualizar");
         jbActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,7 +293,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jdEscritorioProductoLayout.setHorizontalGroup(
             jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jdEscritorioProductoLayout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
+                .addContainerGap(64, Short.MAX_VALUE)
                 .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jdEscritorioProductoLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 983, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -366,12 +369,12 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                             .addComponent(jtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(368, 368, 368))
                     .addGroup(jdEscritorioProductoLayout.createSequentialGroup()
-                        .addGap(128, 128, 128)
+                        .addGap(116, 116, 116)
                         .addComponent(jbNuevo)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(jbModificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
