@@ -52,13 +52,9 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         cargarCabecera();
         sumaTotal();
         alertaStock();
-        //modificacion
-        jtfCompra.setVisible(false);
-        jlCantidad.setVisible(false);
-        jlIdCompra.setVisible(false);
-        jlProductos.setVisible(false);
-        jcbProductos.setVisible(false);
-        jtCantidad.setVisible(false);
+        
+        ocultarDetalles();
+      
         
         jtStockBajo.setVisible(false);
         jcCalendario.setWeekOfYearVisible(false);
@@ -73,7 +69,14 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         
     }
 
-    
+    private void ocultarDetalles(){
+        jtfCompra.setVisible(false);
+        jlCantidad.setVisible(false);
+        jlIdCompra.setVisible(false);
+        jlProductos.setVisible(false);
+        jcbProductos.setVisible(false);
+        jtCantidad.setVisible(false);
+    }
 
     private void alertaStock() {
         
@@ -657,6 +660,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         cargarComboProducto();
         
         alertaStock();
+        ocultarDetalles();
 
         String mensajeCompra = "COMPRA REALIZADA CON EXITO:\n"
                 + "FECHA: " + compra.getFecha() + "\n"
