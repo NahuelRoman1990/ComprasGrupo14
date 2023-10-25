@@ -87,7 +87,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         DefaultTableModel modeloStockBajo = (DefaultTableModel) jtStockBajo.getModel();
         modeloStockBajo.setRowCount(0);
         boolean hayProductos = false;
-        String mensaje = "REVISA:\n  LA TABLA\n \nPRODUCTOS DE STOCK BAJO";
+        String mensaje = "REVISA LA TABLA:\nPRODUCTOS DE STOCK BAJO";
         for (Producto producto : prd.listarProducto()) {
             if (producto.getStock() <= 5) {
                 Object[] rowData = {
