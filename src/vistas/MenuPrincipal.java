@@ -20,7 +20,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
       
  
     private void  jdEscritorio(){
-         String rutaImagen = "img\\fondo.jpg";
+        String rutaImagen = "img\\fondo.jpg";
         jdEscritorio.setOpaque(false);
         ImageIcon fondo = new ImageIcon(rutaImagen);
         JLabel label = new JLabel(fondo);
