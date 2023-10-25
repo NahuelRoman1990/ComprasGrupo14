@@ -78,6 +78,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     private void mostrarOcultarTablaStockBajo(boolean mostrar) {
         jtStockBajo.setVisible(mostrar);
         jlBajoStock.setVisible(mostrar);
+        jScrollPane2.setVisible(mostrar);
         if (mostrar) {
             jdEscritorioCompras.revalidate();
             jdEscritorioCompras.repaint();
@@ -406,6 +407,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
             }
         ));
+        jtStockBajo.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jtStockBajo.setEnabled(false);
         jScrollPane2.setViewportView(jtStockBajo);
 
