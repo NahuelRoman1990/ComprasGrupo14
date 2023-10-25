@@ -24,15 +24,13 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-
-
 public class ComprasVista extends javax.swing.JInternalFrame {
 
     DetalleCompraData dcd = new DetalleCompraData();
     CompraData cd = new CompraData();
     ProveedorData pd = new ProveedorData();
     ProductoData prd = new ProductoData();
-    
+
     private DefaultTableModel modelo1 = new DefaultTableModel();
     private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
@@ -47,15 +45,14 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     public ComprasVista() {
         initComponents();
         cargarComboProducto();
-        cargarCabeceraStock();
         cargarComboProveedor();
         cargarCabecera();
+        cargarCabeceraStock();
         sumaTotal();
+        mostrarOcultarTablaStockBajo(closable);
         alertaStock();
-        
         ocultarDetalles();
-      
-        
+
         jtStockBajo.setVisible(false);
         jcCalendario.setWeekOfYearVisible(false);
         jcbProductos.setEnabled(false);
@@ -66,10 +63,10 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jdEscritorioCompras.add(label, new Integer(Integer.MIN_VALUE));
         jcCalendario.setEnabled(true);
         alertaStock();
-        
+
     }
 
-    private void ocultarDetalles(){
+    private void ocultarDetalles() {
         jtfCompra.setVisible(false);
         jlCantidad.setVisible(false);
         jlIdCompra.setVisible(false);
@@ -78,54 +75,52 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jtCantidad.setVisible(false);
     }
 
-    private void alertaStock() {
-        
-        List<Producto> productoStock = prd.listarProducto();
-        List<Producto> productosBajos = new ArrayList<>();
-
-        int table = 0;
-        for (Producto producto : productoStock) {
-            int stock = producto.getStock();
-
-            if (stock < 5) {
-                productosBajos.add(producto);
-                table++;
-                
-            }
+    private void mostrarOcultarTablaStockBajo(boolean mostrar) {
+        jtStockBajo.setVisible(mostrar);
+        jlBajoStock.setVisible(mostrar);
+        if (mostrar) {
+            jdEscritorioCompras.revalidate();
+            jdEscritorioCompras.repaint();
         }
 
-        jtStockBajo.setVisible(table > 0);
-        
-        
-        modelo1.setRowCount(0);
-        for (Producto producto : productosBajos) {
-            {
-                
-                modelo1.addRow(new Object[]{
+    }
+
+    private void alertaStock() {
+
+        DefaultTableModel modeloStockBajo = (DefaultTableModel) jtStockBajo.getModel();
+        modeloStockBajo.setRowCount(0);
+        boolean hayProductos = false;
+
+        for (Producto producto : prd.listarProducto()) {
+            if (producto.getStock() <= 5) {
+
+                Object[] rowData = {
                     producto.getIdProducto(),
                     producto.getNombreProducto(),
-                    producto.getStock()});
-
+                    producto.getStock()
+                };
+                modeloStockBajo.addRow(rowData);
+                hayProductos = true;
             }
         }
+        mostrarOcultarTablaStockBajo(hayProductos);
     }
+
     private void cargarCabeceraStock() {
-        
+
         modelo1.addColumn("ID PRODUCTO");
         modelo1.addColumn("NOMBRE");
         modelo1.addColumn("STOCK");
         jtStockBajo.setModel(modelo1);
 
-        
         JTableHeader tableHeader = jtStockBajo.getTableHeader();
         tableHeader.setReorderingAllowed(false);
         jtStockBajo.getColumnModel().getColumn(0).setResizable(false);
         jtStockBajo.getColumnModel().getColumn(1).setResizable(false);
         jtStockBajo.getColumnModel().getColumn(2).setResizable(false);
-        
-        
 
     }
+
     private void cargarCabecera() {
         modelo.addColumn("ID Producto");
         modelo.addColumn("Nombre");
@@ -272,7 +267,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jbModificar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtStockBajo = new javax.swing.JTable();
-        jLabel7 = new javax.swing.JLabel();
+        jlBajoStock = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
         jdEscritorioCompras.setBackground(new java.awt.Color(204, 204, 204));
@@ -414,9 +409,9 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jtStockBajo.setEnabled(false);
         jScrollPane2.setViewportView(jtStockBajo);
 
-        jLabel7.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Productos con bajo Stock");
+        jlBajoStock.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jlBajoStock.setForeground(new java.awt.Color(255, 255, 255));
+        jlBajoStock.setText("Productos con bajo Stock");
 
         jLabel8.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -442,7 +437,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jdEscritorioCompras.setLayer(jbCancelarCompra, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jbModificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jdEscritorioCompras.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioCompras.setLayer(jlBajoStock, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jdEscritorioComprasLayout = new javax.swing.GroupLayout(jdEscritorioCompras);
@@ -503,7 +498,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdEscritorioComprasLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
+                                    .addComponent(jlBajoStock)
                                     .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
                                         .addComponent(jScrollPane2))
@@ -519,7 +514,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jbCancelarCompra)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                        .addComponent(jLabel7)))
+                        .addComponent(jlBajoStock)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -607,7 +602,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
     private void jbComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbComprarActionPerformed
         int ultimoId = cd.buscarUltimoId();
-        
+
         jtfCompra.setVisible(true);
         jlCantidad.setVisible(true);
         jlIdCompra.setVisible(true);
@@ -658,7 +653,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         borrarFilas();
         jcbProductos.removeAllItems();
         cargarComboProducto();
-        
+
         alertaStock();
         ocultarDetalles();
 
@@ -681,7 +676,6 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -695,6 +689,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<Producto> jcbProductos;
     private javax.swing.JComboBox<Proveedor> jcbProveedor;
     private javax.swing.JDesktopPane jdEscritorioCompras;
+    private javax.swing.JLabel jlBajoStock;
     private javax.swing.JLabel jlCantidad;
     private javax.swing.JLabel jlIdCompra;
     private javax.swing.JLabel jlProductos;
