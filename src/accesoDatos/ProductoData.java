@@ -45,6 +45,8 @@ public class ProductoData {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "NO SE PUDO ACCEDER A LA TABLA PRODUCTO");
+        }catch(NullPointerException np){
+            
         }
     }
 

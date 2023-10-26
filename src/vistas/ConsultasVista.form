@@ -34,37 +34,29 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="319" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="jlIngreseIdCompra" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jtIdCompra" min="-2" pref="96" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jcbConsulta" min="-2" pref="233" max="-2" attributes="0"/>
-                                  <Component id="jlIdDetalle" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jcbSelectProveedoroProducto" alignment="0" min="-2" pref="233" max="-2" attributes="0"/>
-                                  <Component id="jdcFechaSelect" alignment="0" min="-2" pref="233" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jbBuscar" max="32767" attributes="0"/>
-                              <Component id="jbCargar" max="32767" attributes="0"/>
-                              <Component id="jbSalir" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
+                      <Component id="jcbSelectProveedoroProducto" min="-2" pref="233" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel1" min="-2" pref="281" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="871" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="jlIngreseIdCompra" min="-2" pref="142" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jtIdCompra" min="-2" pref="74" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jcbConsulta" alignment="0" min="-2" pref="233" max="-2" attributes="0"/>
+                              <Component id="jdcFechaSelect" min="-2" pref="233" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="204" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jbSalir" min="-2" pref="110" max="-2" attributes="0"/>
+                              <Component id="jbCargar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Component id="jLabel1" min="-2" pref="281" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="871" max="-2" attributes="0"/>
+                      <Component id="jlIdDetalle" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="197" max="32767" attributes="0"/>
               </Group>
@@ -79,13 +71,10 @@
                   <Component id="jlIdDetalle" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jbBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jcbConsulta" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jcbSelectProveedoroProducto" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jbCargar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jcbSelectProveedoroProducto" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -95,12 +84,12 @@
                               <Component id="jtIdCompra" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jlIngreseIdCompra" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="408" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jbSalir" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="50" max="32767" attributes="0"/>
+                  <EmptySpace pref="44" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="408" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -135,10 +124,10 @@
             </Property>
             <Property name="text" type="java.lang.String" value="SALIR"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[74, 36]"/>
+              <Dimension value="[110, 52]"/>
             </Property>
             <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[74, 36]"/>
+              <Dimension value="[110, 52]"/>
             </Property>
           </Properties>
           <Events>
@@ -163,17 +152,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="CONSULTAS"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jbBuscar">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/img/iconos de gui/BUSCAR-PRODUCTO.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="BUSCAR"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbBuscarActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="jcbConsulta">
           <Properties>
@@ -200,6 +178,8 @@
               <Image iconType="3" name="/img/iconos de gui/ACTUALIZAR-PRODUCTO-1.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="CARGAR"/>
+            <Property name="verticalAlignment" type="int" value="3"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCargarActionPerformed"/>
@@ -218,9 +198,17 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="jtIdCompra">
+          <Properties>
+            <Property name="keymap" type="javax.swing.text.Keymap" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="null"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jlIngreseIdCompra">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Arial Black" size="10" style="1"/>
+            </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>

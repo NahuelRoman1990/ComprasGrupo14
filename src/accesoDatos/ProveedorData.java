@@ -190,6 +190,8 @@ public int buscarProveedorPorNombre(String nombreProveedor) {
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERROR AL ACCEDER A LA TABLA PROVEEDOR");
+        } catch(NullPointerException np){
+            
         }
         return proveedores;
 

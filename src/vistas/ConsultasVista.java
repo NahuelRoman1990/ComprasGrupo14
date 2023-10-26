@@ -28,13 +28,12 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
     private ProveedorData prd = new ProveedorData();
     private ProductoData pd = new ProductoData();
     private CompraData cd = new CompraData();
-    
 
     public ConsultasVista() {
         initComponents();
         jtIdCompra.setVisible(false);
         jlIngreseIdCompra.setVisible(false);
-        jdcFechaSelect.setVisible(true);
+        jdcFechaSelect.setVisible(false);
         jcbSelectProveedoroProducto.setVisible(false);
         String rutaImagen = "img\\fondo2.jpg";
         ImageIcon fondo = new ImageIcon(rutaImagen);
@@ -42,6 +41,9 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         label.setBounds(0, 0, fondo.getIconWidth(), fondo.getIconHeight());
         jpEscritorio.add(label, new Integer(Integer.MIN_VALUE));
         setResizable(false);
+        jbCargar.setToolTipText("<html>Refresca los datos <br> cargados en la tabla<br>(Segun la eleccion busqueda)</html>");
+        jbSalir.setToolTipText("Cierra la ventana consulta");
+
     }
 
     private void comboProveedor() {
@@ -52,14 +54,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         }
     }
 
-//    private void comboProducto() {
-//        List<Producto> producto = pd.listarProducto();
-//
-//        for (Producto productos : producto) {
-//            jcbSelectProveedoroProducto.addItem(productos);
-//
-//        }
-//    }
+
     private void listarDetallesFecha() {
         java.util.Date fechaSeleccionada = jdcFechaSelect.getDate();
         DefaultTableModel modelo = (DefaultTableModel) jtConsultas.getModel();
@@ -132,38 +127,38 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
     }
 
     private void productosPorCompra() {
-        
-        try{
-            
-        int idCompra = Integer.parseInt(jtIdCompra.getText());
-        DefaultTableModel modelo = (DefaultTableModel) jtConsultas.getModel();
-        List<DetalleCompra> todosLosDetalles = dcd.listarDetalleCompras(idCompra);
-        modelo.setRowCount(0);
 
-        for (DetalleCompra detalle : todosLosDetalles) {
-            String producto = detalle.getProducto().getNombreProducto();
-            int cantidad = detalle.getCantidad();
-            double costoUnidad = detalle.getPrecioCosto();
-            double totalCosto = cantidad * detalle.getPrecioCosto();
+        try {
 
-            modelo.addRow(new Object[]{
-                idCompra,
-                producto,
-                cantidad,
-                costoUnidad,
-                totalCosto
-            });
-        }}
-        catch(NullPointerException np){
+            int idCompra = Integer.parseInt(jtIdCompra.getText());
+            DefaultTableModel modelo = (DefaultTableModel) jtConsultas.getModel();
+            List<DetalleCompra> todosLosDetalles = dcd.listarDetalleCompras(idCompra);
+            modelo.setRowCount(0);
+
+            for (DetalleCompra detalle : todosLosDetalles) {
+                String producto = detalle.getProducto().getNombreProducto();
+                int cantidad = detalle.getCantidad();
+                double costoUnidad = detalle.getPrecioCosto();
+                double totalCosto = cantidad * detalle.getPrecioCosto();
+
+                modelo.addRow(new Object[]{
+                    idCompra,
+                    producto,
+                    cantidad,
+                    costoUnidad,
+                    totalCosto
+                });
+            }
+        } catch (NullPointerException np) {
             JOptionPane.showMessageDialog(this, "No hay productos para el ID de compra ingresado");
-            
-        }catch(NumberFormatException nf){
+
+        } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(this, "Ingrese una ID de compra válido");
         }
     }
 
     private void productoMasComprado() {
-       
+
         List<DetalleCompra> todosLosDetalles = dcd.listarDetalles();
         List<Producto> todosLosProductos = pd.listarProducto();
         DefaultTableModel modelo = (DefaultTableModel) jtConsultas.getModel();
@@ -173,7 +168,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 
         for (Producto producto : todosLosProductos) {
             int idProducto = producto.getIdProducto();
-            cantidad =0;
+            cantidad = 0;
 
             for (DetalleCompra detalle : todosLosDetalles) {
                 if (idProducto == detalle.getProducto().getIdProducto()) {
@@ -183,7 +178,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
                 }
             }
         }
-        
+
         Comparator<Integer> comparadorPorValor = new Comparator<Integer>() {
             @Override
             public int compare(Integer clave2, Integer clave1) {
@@ -191,12 +186,12 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
                 return mapa.get(clave1).compareTo(mapa.get(clave2));
             }
         };
-        
+
         Map<Integer, Integer> mapaOrdenado = new TreeMap<>(comparadorPorValor);
         mapaOrdenado.putAll(mapa);
-        
+
         for (Map.Entry<Integer, Integer> entry : mapaOrdenado.entrySet()) {
-            
+
             Producto producto = pd.buscarProducto(entry.getKey());
             String Nombreproducto = producto.getNombreProducto();
             int idProducto = producto.getIdProducto();
@@ -225,7 +220,6 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         jbSalir = new javax.swing.JButton();
         jlIdDetalle = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jbBuscar = new javax.swing.JButton();
         jcbConsulta = new javax.swing.JComboBox<>();
         jbCargar = new javax.swing.JButton();
         jdcFechaSelect = new com.toedter.calendar.JDateChooser();
@@ -253,8 +247,8 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 
         jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/SALIR-´PRODUCTO1.png"))); // NOI18N
         jbSalir.setText("SALIR");
-        jbSalir.setMaximumSize(new java.awt.Dimension(74, 36));
-        jbSalir.setMinimumSize(new java.awt.Dimension(74, 36));
+        jbSalir.setMaximumSize(new java.awt.Dimension(110, 52));
+        jbSalir.setMinimumSize(new java.awt.Dimension(110, 52));
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
@@ -268,14 +262,6 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("CONSULTAS");
 
-        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/BUSCAR-PRODUCTO.png"))); // NOI18N
-        jbBuscar.setText("BUSCAR");
-        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBuscarActionPerformed(evt);
-            }
-        });
-
         jcbConsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Productos/Fecha", "Compras/Proveedor", "Productos/Compra", "Productos/MasComprado", " " }));
         jcbConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,12 +271,17 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 
         jbCargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/ACTUALIZAR-PRODUCTO-1.png"))); // NOI18N
         jbCargar.setText("CARGAR");
+        jbCargar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jbCargar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jbCargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbCargarActionPerformed(evt);
             }
         });
 
+        jtIdCompra.setKeymap(null);
+
+        jlIngreseIdCompra.setFont(new java.awt.Font("Arial Black", 1, 10)); // NOI18N
         jlIngreseIdCompra.setForeground(new java.awt.Color(255, 255, 255));
         jlIngreseIdCompra.setText("INGRESE ID COMPRA:");
 
@@ -299,29 +290,24 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         jpEscritorioLayout.setHorizontalGroup(
             jpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpEscritorioLayout.createSequentialGroup()
+                .addGap(197, 197, 197)
                 .addGroup(jpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcbSelectProveedoroProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jpEscritorioLayout.createSequentialGroup()
-                        .addGap(319, 319, 319)
-                        .addGroup(jpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jpEscritorioLayout.createSequentialGroup()
-                                .addComponent(jlIngreseIdCompra)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtIdCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jcbConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jlIdDetalle)
-                                .addComponent(jcbSelectProveedoroProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jdcFechaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(72, 72, 72)
-                        .addGroup(jpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jbBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbCargar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jpEscritorioLayout.createSequentialGroup()
-                        .addGap(197, 197, 197)
                         .addGroup(jpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 871, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jpEscritorioLayout.createSequentialGroup()
+                                .addComponent(jlIngreseIdCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtIdCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jcbConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jdcFechaSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(204, 204, 204)
+                        .addGroup(jpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbCargar)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 871, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlIdDetalle))
                 .addContainerGap(197, Short.MAX_VALUE))
         );
         jpEscritorioLayout.setVerticalGroup(
@@ -333,11 +319,9 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
                 .addComponent(jlIdDetalle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbBuscar)
-                    .addComponent(jcbConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbSelectProveedoroProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbCargar))
+                .addComponent(jcbSelectProveedoroProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpEscritorioLayout.createSequentialGroup()
@@ -345,11 +329,11 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
                         .addGap(14, 14, 14)
                         .addGroup(jpEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtIdCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlIngreseIdCompra))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jlIngreseIdCompra)))
                     .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -370,10 +354,6 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
-    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbBuscarActionPerformed
-
     private void jcbConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbConsultaActionPerformed
         String seleccion = (String) jcbConsulta.getSelectedItem();
         JTableHeader tableHeader = jtConsultas.getTableHeader();
@@ -385,9 +365,11 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         TableColumn quintaColum = header.getColumnModel().getColumn(4);
 
         if (seleccion.equals("Productos/Fecha")) {
+            jpEscritorio.repaint();
             jtIdCompra.setVisible(false);
             jlIngreseIdCompra.setVisible(false);
             jcbSelectProveedoroProducto.setVisible(false);
+            jcbSelectProveedoroProducto.removeAllItems();
             jdcFechaSelect.setVisible(true);
             tableHeader.setVisible(false);
             primeraColum.setHeaderValue("FECHA");
@@ -398,6 +380,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             tableHeader.setVisible(true);
 
         } else if (seleccion.equals("Compras/Proveedor")) {
+            jpEscritorio.repaint();
             jdcFechaSelect.setVisible(false);
             jtIdCompra.setVisible(false);
             jlIngreseIdCompra.setVisible(false);
@@ -413,6 +396,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
 
             tableHeader.setVisible(true);
         } else if (seleccion.equals("Productos/Compra")) {
+            jpEscritorio.repaint();
             jtIdCompra.setVisible(true);
             jlIngreseIdCompra.setVisible(true);
             jdcFechaSelect.setVisible(false);
@@ -426,11 +410,11 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             quintaColum.setHeaderValue("PRECIO TOTAL");
             tableHeader.setVisible(true);
         } else if (seleccion.equals("Producto/MasComprado")) {
+            jpEscritorio.repaint();
             jtIdCompra.setVisible(false);
             jlIngreseIdCompra.setVisible(false);
             jdcFechaSelect.setVisible(false);
             jcbSelectProveedoroProducto.setVisible(false);
-            jlIngreseIdCompra.setVisible(false);
             jcbSelectProveedoroProducto.removeAllItems();
             tableHeader.setVisible(false);
             primeraColum.setHeaderValue("ID PRODUCTO");
@@ -440,12 +424,10 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             quintaColum.setHeaderValue("PRECIO COMPRA");
             tableHeader.setVisible(true);
         } else {
-            // Si no es ninguna de las opciones anteriores, oculta los componentes
             jdcFechaSelect.setVisible(false);
             jcbSelectProveedoroProducto.setVisible(false);
             jtIdCompra.setVisible(false);
             jlIdDetalle.setVisible(false);
-            // Limpia la tabla y la cabecera
 
         }
 
@@ -468,7 +450,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         } else if ("Productos/MasComprado".equals(seleccion)) {
             jbCargar.setEnabled(true);
             productoMasComprado();
-            
+
         }
 
     }//GEN-LAST:event_jbCargarActionPerformed
@@ -477,7 +459,6 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbCargar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<String> jcbConsulta;
