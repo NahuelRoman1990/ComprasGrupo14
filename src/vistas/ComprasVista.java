@@ -49,6 +49,13 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         cargarCabeceraStock();
         sumaTotal();
         mostrarOcultarTablaStockBajo(closable);
+        
+        jbComprar.setToolTipText("<html>Realiza una compra a un <br>proveedor seleccionado<html>");
+        jbDescartar.setToolTipText("<html>Descarta el producto <br>seleccionado en el carro de compra<html>");
+        jbAgregar.setToolTipText("<html>Agrega un producto <br>al carro de compra<html>");
+        jbConfirmarCompra.setToolTipText("<html> Confirma la compra de <br>los productos añadidos en el <br>carro de compra<html>");
+        jbSalir.setToolTipText("<html>Cierra la ventana de compras<html>");
+        jtfCompra.setToolTipText("<html>ID de compra.<br>Se genera automaticamente<html>");
 
         ocultarDetalles();
 
@@ -264,7 +271,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jbComprar = new javax.swing.JButton();
         jbConfirmarCompra = new javax.swing.JButton();
         jbDescartar = new javax.swing.JButton();
-        jbCancelarCompra = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtStockBajo = new javax.swing.JTable();
         jlBajoStock = new javax.swing.JLabel();
@@ -382,11 +389,11 @@ public class ComprasVista extends javax.swing.JInternalFrame {
             }
         });
 
-        jbCancelarCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/icono salir-32px.png"))); // NOI18N
-        jbCancelarCompra.setText("Salir");
-        jbCancelarCompra.addActionListener(new java.awt.event.ActionListener() {
+        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/icono salir-32px.png"))); // NOI18N
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCancelarCompraActionPerformed(evt);
+                jbSalirActionPerformed(evt);
             }
         });
 
@@ -426,7 +433,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         jdEscritorioCompras.setLayer(jbComprar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jbConfirmarCompra, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jbDescartar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jdEscritorioCompras.setLayer(jbCancelarCompra, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdEscritorioCompras.setLayer(jbSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jlBajoStock, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioCompras.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -441,7 +448,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                     .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbCancelarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
                         .addGroup(jdEscritorioComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
@@ -494,7 +501,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addGroup(jdEscritorioComprasLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jbCancelarCompra)
+                        .addComponent(jbSalir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                         .addComponent(jlBajoStock)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -568,9 +575,9 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbProductosActionPerformed
 
-    private void jbCancelarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarCompraActionPerformed
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         dispose();
-    }//GEN-LAST:event_jbCancelarCompraActionPerformed
+    }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbDescartarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbDescartarActionPerformed
         descartarCompra();
@@ -664,10 +671,10 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbAgregar;
-    private javax.swing.JButton jbCancelarCompra;
     private javax.swing.JButton jbComprar;
     private javax.swing.JButton jbConfirmarCompra;
     private javax.swing.JButton jbDescartar;
+    private javax.swing.JButton jbSalir;
     private static com.toedter.calendar.JCalendar jcCalendario;
     private javax.swing.JComboBox<Producto> jcbProductos;
     private javax.swing.JComboBox<Proveedor> jcbProveedor;
