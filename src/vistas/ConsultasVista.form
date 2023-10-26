@@ -206,9 +206,6 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="jtIdCompra">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtIdCompraActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jlIngreseIdCompra">
           <Properties>

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vistas;
 
 import accesoDatos.ProveedorData;
@@ -14,10 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-/**
- *
- * @author roman
- */
+
 public class ProveedorVista extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modelo = new DefaultTableModel();
@@ -469,7 +462,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
                 cargarProveedorInactivo();
             }
             borrarCampos();
-            ///editableOno();
+            
 
         } catch (NullPointerException np) {
             JOptionPane.showMessageDialog(this, " ");
@@ -480,12 +473,12 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        borrarCampos();        // TODO add your handling code here:
+        borrarCampos();        
         cargarProveedor();
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        // TODO add your handling code here:
+        
         int fila = jtProveedor.getSelectedRow();
         if (fila != -1) {
             int idProveedor = (Integer) jtProveedor.getValueAt(fila, 0);
@@ -500,7 +493,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-        // TODO add your handling code here:
+        
         try {
             if (jtIdProveedor.getText().isEmpty() || jtDomicilio.getText().isEmpty() || jtRazonSocial.getText().isEmpty() || jtTelefono.getText().isEmpty() || (!jrbActivo.isSelected() && !jrbInActivo.isSelected())) {
                 JOptionPane.showMessageDialog(null, "No debe haber campos vacios", "Error                       ", JOptionPane.ERROR_MESSAGE);
@@ -529,7 +522,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jtProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtProveedorMouseClicked
-        // TODO add your handling code here:
+        
         int fila = jtProveedor.getSelectedRow();
         if (fila != -1) {
             int idProveedor = (Integer) jtProveedor.getValueAt(fila, 0);
@@ -566,7 +559,7 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcActivoInActivoActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        // TODO add your handling code here:
+        
         dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 

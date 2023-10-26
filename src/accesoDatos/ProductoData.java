@@ -2,21 +2,15 @@ package accesoDatos;
 
 import entidades.Producto;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author roman
- */
+
 public class ProductoData {
 
     private Connection con = null;
@@ -65,7 +59,7 @@ public class ProductoData {
             ps.setInt(6, producto.getIdProducto());
             int exito = ps.executeUpdate();
             if (exito == 1) {
-                //JOptionPane.showMessageDialog(null, "PRODUCTO MODIFICADO");
+                
             }
             ps.close();
         } catch (SQLException ex) {

@@ -189,9 +189,6 @@
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfCompraActionPerformed"/>
-          </Events>
         </Component>
         <Component class="com.toedter.calendar.JCalendar" name="jcCalendario">
           <Properties>
@@ -231,9 +228,6 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbProveedorActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Proveedor&gt;"/>
           </AuxValues>
@@ -269,9 +263,6 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbProductosActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Producto&gt;"/>
           </AuxValues>
@@ -289,9 +280,6 @@
             <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value="0"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtTotalActionPerformed"/>
-          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>

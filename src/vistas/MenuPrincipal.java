@@ -1,25 +1,16 @@
 package vistas;
 
-
 import javax.swing.ImageIcon;
-
 import javax.swing.JLabel;
 
-
-
 public class MenuPrincipal extends javax.swing.JFrame {
-
 
     public MenuPrincipal() {
         initComponents();
         jdEscritorio();
-        
-        
-  
     }
-      
- 
-    private void  jdEscritorio(){
+
+    private void jdEscritorio() {
         String rutaImagen = "img\\fondo.jpg";
         jdEscritorio.setOpaque(false);
         ImageIcon fondo = new ImageIcon(rutaImagen);
@@ -27,10 +18,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         label.setBounds(0, 0, fondo.getIconWidth(), fondo.getIconHeight());
         jdEscritorio.add(label);
     }
-    
- 
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -177,12 +165,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jbProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProductoActionPerformed
 
-jdEscritorio.removeAll();
-jdEscritorio.repaint();
-ProductoVista pv = new ProductoVista();
-pv.setVisible(true);
-jdEscritorio.add(pv);
-
+        jdEscritorio.removeAll();
+        jdEscritorio.repaint();
+        ProductoVista pv = new ProductoVista();
+        pv.setVisible(true);
+        jdEscritorio.add(pv);
 
 
     }//GEN-LAST:event_jbProductoActionPerformed
@@ -208,19 +195,18 @@ jdEscritorio.add(pv);
     }//GEN-LAST:event_jbProveedoresActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        // TODO add your handling code here:
+        
+        System.exit(0);
     }//GEN-LAST:event_jbSalirActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
-       
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            MenuPrincipal frame = new MenuPrincipal();
-            frame.setLocationRelativeTo(null); // Centrar la ventana en la pantalla
-            frame.setVisible(true);
+                MenuPrincipal frame = new MenuPrincipal();
+                frame.setLocationRelativeTo(null); // Centrar la ventana en la pantalla
+                frame.setVisible(true);
             }
         });
     }

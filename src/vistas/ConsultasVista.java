@@ -182,8 +182,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         Comparator<Integer> comparadorPorValor = new Comparator<Integer>() {
             @Override
             public int compare(Integer clave2, Integer clave1) {
-                // Comparar los valores numéricos asociados a las claves
-                return mapa.get(clave1).compareTo(mapa.get(clave2));
+               return mapa.get(clave1).compareTo(mapa.get(clave2));
             }
         };
 
@@ -277,12 +276,6 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         jbCargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbCargarActionPerformed(evt);
-            }
-        });
-
-        jtIdCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtIdCompraActionPerformed(evt);
             }
         });
 
@@ -464,10 +457,6 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_jbCargarActionPerformed
-
-    private void jtIdCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIdCompraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtIdCompraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

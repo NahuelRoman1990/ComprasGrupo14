@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package accesoDatos;
 
-import entidades.Compra;
+
 import entidades.DetalleCompra;
 import entidades.Producto;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,10 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author roman
- */
 public class DetalleCompraData {
     
     private Connection con = null;
@@ -51,7 +42,7 @@ public class DetalleCompraData {
             
             if (rs.next()) {
                 detalleCompra.setIdDetalle(rs.getInt(1));
-                // JOptionPane.showMessageDialog(null, "DETALLE DE COMPRA GUARDADO");
+              
 
             }
         } catch (SQLException ex) {
@@ -59,7 +50,7 @@ public class DetalleCompraData {
         }
     }
 
-    ///Agregar metodo listar detalle compra(idProveedor)
+
     public List<DetalleCompra> listarDetalleCompras(int idCompra) {
         String sql = "SELECT idDetalle, cantidad, precioCosto, idProducto FROM detallecompra WHERE idCompra = ?";
         ArrayList<DetalleCompra> detalles = new ArrayList<>();

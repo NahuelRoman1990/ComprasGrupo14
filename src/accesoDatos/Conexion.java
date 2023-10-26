@@ -5,10 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author roman
- */
 public class Conexion {
     
     private static final String URL = "jdbc:mariadb://localhost/";

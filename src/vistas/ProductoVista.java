@@ -130,12 +130,6 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ID Producto");
 
-        jtIDProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtIDProductoActionPerformed(evt);
-            }
-        });
-
         jtProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -394,10 +388,6 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
     
     }//GEN-LAST:event_jbBuscarActionPerformed
-
-    private void jtIDProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIDProductoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtIDProductoActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         try {
