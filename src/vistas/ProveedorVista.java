@@ -34,6 +34,17 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
         JLabel label = new JLabel(fondo);
         label.setBounds(0, 0, fondo.getIconWidth(), fondo.getIconHeight());
         jpProveedores.add(label, new Integer(Integer.MIN_VALUE));
+        jbEliminar.setToolTipText("<html>Elimina el Proveedor<br>que seleccionaste en<br>la tabla proveedor</html>");
+        jbBuscar.setToolTipText("<html>Ingresa el ID del proveedor<br> que deseas buscar</html>");
+        jbGuardar.setToolTipText("<html>Completa los campos,<br> para agregar un proveedor<br>(ID Dejar vacio)</html>");
+        jbSalir.setToolTipText("Cierra la ventana proveedor");
+        jbModificar.setToolTipText("<html>Selecciona un Proveedor<br>de la tabla. <br>Modifica datos,<br> presiona modificar</html>");
+        jbNuevo.setToolTipText("<html>Limpia los campos,<br> para poder ingresar uno nuevo</html>");
+        jrbActivo.setToolTipText("<html>Proveedor <br> estado <br> Activo</html>");
+        jrbInActivo.setToolTipText("<html>Proveedor <br> estado <br> Inactivo</html>");
+        jcActivoInActivo.setToolTipText("<html>Selecciona el estado de proveedor<br> que desea listar</html>");
+        jtProveedor.setToolTipText("<html>Lista los proveedores <br> filtrados por la opcion <br> seleccionada</html>");
+        jtIdProveedor.setToolTipText("<html>Recuerde solo completar este campo <br> para busquedas</html>");
     }
 
     private void cargarCombo() {
