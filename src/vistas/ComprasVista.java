@@ -15,8 +15,7 @@ import entidades.Producto;
 import entidades.Proveedor;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -50,7 +49,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         cargarCabeceraStock();
         sumaTotal();
         mostrarOcultarTablaStockBajo(closable);
-        
+
         ocultarDetalles();
 
         jtStockBajo.setVisible(false);
@@ -87,7 +86,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         DefaultTableModel modeloStockBajo = (DefaultTableModel) jtStockBajo.getModel();
         modeloStockBajo.setRowCount(0);
         boolean hayProductos = false;
-        String mensaje = "REVISA LA TABLA:\nPRODUCTOS DE STOCK BAJO";
+        String mensaje = "REVISAR LA TABLA:\nPRODUCTOS DE STOCK BAJO";
         for (Producto producto : prd.listarProducto()) {
             if (producto.getStock() <= 5) {
                 Object[] rowData = {
@@ -126,7 +125,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         modelo.addColumn("ID Producto");
         modelo.addColumn("Nombre");
         modelo.addColumn("Descripción");
-        modelo.addColumn("Precio Costo");
+        modelo.addColumn("Precio Unidad");
         modelo.addColumn("Cantidad");
         jtCompras.setModel(modelo);
         JTableHeader tableHeader = jtCompras.getTableHeader();
@@ -181,7 +180,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), precioCosto, cantidad});
             jcbProductos.removeItem(producto);
         } catch (NumberFormatException np) {
-            JOptionPane.showMessageDialog(this, "INGRESE NUMEROS ENTEROS", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "INGRESE LA CANTIDAD QUE DESEA COMPRAR", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (NullPointerException nop) {
             JOptionPane.showMessageDialog(this, "CANTIDAD NO PUEDE SER UN CAMPO VACIO", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -197,7 +196,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
             jcbProductos.addItem(producto);
 
         } else if (jtCompras.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "TU LISTA ESTA VACIA", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "SU LISTA ESTA VACIA", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "SELECCIONE EL PRODUCTO QUE DESEA DESCARTAR", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -217,13 +216,14 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
     private void sumaTotal() {
         int cantidadFilas = jtCompras.getRowCount();
+        double total =0;
         try {
             if (cantidadFilas > 0) {
 
                 for (int fila = 0; fila <= cantidadFilas - 1; fila++) {
                     double precioCosto = Double.parseDouble(jtCompras.getValueAt(fila, 3).toString());
                     int cantidad = Integer.parseInt(jtCompras.getValueAt(fila, 4).toString());
-                    double total = +(precioCosto * cantidad);
+                    total += (precioCosto * cantidad);
                     jtTotal.setText(total + "");
 
                 }
@@ -231,7 +231,7 @@ public class ComprasVista extends javax.swing.JInternalFrame {
                 jtTotal.setText(0 + "");
             }
         } catch (NumberFormatException nf) {
-            JOptionPane.showMessageDialog(this, "La cantidad debe ser un numero entero");
+            JOptionPane.showMessageDialog(this, "LA CANTIDAD DEBE SER UN NÚMERO ENTERO");
         }
 
     }
@@ -634,33 +634,41 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     private void jbConfirmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarCompraActionPerformed
         jcbProveedor.setEnabled(true);
 
-        Compra compra = generarCompra();
-
         int filaTotales = jtCompras.getRowCount();
-        for (int i = 0; i <= filaTotales - 1; i++) {
-            int cantidad = Integer.parseInt(jtCompras.getValueAt(i, 4).toString());
-            double precioCosto = Double.parseDouble(jtCompras.getValueAt(i, 3).toString());
-            int idProducto = Integer.parseInt(jtCompras.getValueAt(i, 0).toString());
-            Producto producto = prd.buscarProducto(idProducto);
+        if (filaTotales != 0) {
 
-            DetalleCompra detalleCompra = new DetalleCompra(cantidad, precioCosto, compra, producto);
-            dcd.guardarDetalleCompra(detalleCompra);
+            Compra compra = generarCompra();
+
+            for (int i = 0; i <= filaTotales - 1; i++) {
+                int cantidad = Integer.parseInt(jtCompras.getValueAt(i, 4).toString());
+                double precioCosto = Double.parseDouble(jtCompras.getValueAt(i, 3).toString());
+                int idProducto = Integer.parseInt(jtCompras.getValueAt(i, 0).toString());
+                Producto producto = prd.buscarProducto(idProducto);
+
+                DetalleCompra detalleCompra = new DetalleCompra(cantidad, precioCosto, compra, producto);
+                dcd.guardarDetalleCompra(detalleCompra);
+            }
+
+            String mensajeCompra = "COMPRA REALIZADA CON EXITO:\n"
+                    + "FECHA: " + compra.getFecha() + "\n"
+                    + "ID COMPRA: " + cd.buscarUltimoId() + "\n"
+                    + "TOTAL: $" + jtTotal.getText();
+            JOptionPane.showMessageDialog(this, mensajeCompra, "DETALLE COMPRA", JOptionPane.INFORMATION_MESSAGE);
+
+            jtfCompra.setText(" ");
+            jtfCompra.setEnabled(false);
+            borrarFilas();
+            jcbProductos.removeAllItems();
+            cargarComboProducto();
+
+            alertaStock();
+            ocultarDetalles();
+            jtTotal.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "INGRESE LOS PRODUCTOS AL CARRO DE COMPRA", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
 
-        jtfCompra.setText(" ");
-        jtfCompra.setEnabled(false);
-        borrarFilas();
-        jcbProductos.removeAllItems();
-        cargarComboProducto();
 
-        alertaStock();
-        ocultarDetalles();
-
-        String mensajeCompra = "COMPRA REALIZADA CON EXITO:\n"
-                + "FECHA: " + compra.getFecha() + "\n"
-                + "ID COMPRA: " + cd.buscarUltimoId() + "\n"
-                + "TOTAL: $" + jtTotal.getText();
-        javax.swing.JOptionPane.showMessageDialog(this, mensajeCompra, "DETALLE COMPRA", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jbConfirmarCompraActionPerformed
 
     private Compra generarCompra() {
