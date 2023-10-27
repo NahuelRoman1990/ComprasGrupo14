@@ -3,12 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/ARG%20PROGRAMA/ARG-%20PROGRAMA/PROYECTO%20FINAL/ComprasGrupo14/src/vistas/ComprasVista.java</file>
-            <file>file:/D:/ARG%20PROGRAMA/ARG-%20PROGRAMA/PROYECTO%20FINAL/ComprasGrupo14/src/accesoDatos/ProductoData.java</file>
-            <file>file:/D:/ARG%20PROGRAMA/ARG-%20PROGRAMA/PROYECTO%20FINAL/ComprasGrupo14/src/vistas/ConsultasVista.java</file>
-            <file>file:/D:/ARG%20PROGRAMA/ARG-%20PROGRAMA/PROYECTO%20FINAL/ComprasGrupo14/src/vistas/MenuPrincipal.java</file>
-            <file>file:/D:/ARG%20PROGRAMA/ARG-%20PROGRAMA/PROYECTO%20FINAL/ComprasGrupo14/src/accesoDatos/CompraData.java</file>
-            <file>file:/D:/ARG%20PROGRAMA/ARG-%20PROGRAMA/PROYECTO%20FINAL/ComprasGrupo14/src/accesoDatos/DetalleCompraData.java</file>
+            <file>file:/D:/NetBeans/ComprasGrupo14/src/accesoDatos/DetalleCompraData.java</file>
+            <file>file:/D:/NetBeans/ComprasGrupo14/src/entidades/Proveedor.java</file>
+            <file>file:/D:/NetBeans/ComprasGrupo14/src/vistas/ProveedorVista.java</file>
+            <file>file:/D:/NetBeans/ComprasGrupo14/src/vistas/MenuPrincipal.java</file>
+            <file>file:/D:/NetBeans/ComprasGrupo14/src/comprasgrupo14/ComprasGrupo14.java</file>
+            <file>file:/D:/NetBeans/ComprasGrupo14/src/accesoDatos/CompraData.java</file>
+            <file>file:/D:/NetBeans/ComprasGrupo14/src/accesoDatos/ProveedorData.java</file>
+            <file>file:/D:/NetBeans/ComprasGrupo14/src/vistas/ComprasVista.java</file>
+            <file>file:/D:/NetBeans/ComprasGrupo14/src/accesoDatos/Conexion.java</file>
+            <file>file:/D:/NetBeans/ComprasGrupo14/src/vistas/ProductoVista.java</file>
+            <file>file:/D:/NetBeans/ComprasGrupo14/src/accesoDatos/ProductoData.java</file>
+            <file>file:/D:/NetBeans/ComprasGrupo14/src/vistas/ConsultasVista.java</file>
+            <file>file:/D:/NetBeans/ComprasGrupo14/src/entidades/Compra.java</file>
+            <file>file:/D:/NetBeans/ComprasGrupo14/src/entidades/DetalleCompra.java</file>
+            <file>file:/D:/NetBeans/ComprasGrupo14/src/entidades/Producto.java</file>
         </group>
     </open-files>
 </project-private>

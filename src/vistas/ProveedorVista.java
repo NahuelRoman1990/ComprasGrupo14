@@ -441,34 +441,72 @@ public class ProveedorVista extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        try {
-            if (jtRazonSocial.getText().isEmpty() || jtDomicilio.getText().isEmpty() || jtTelefono.getText().isEmpty() || (!jrbActivo.isSelected() && !jrbInActivo.isSelected())) {
-                JOptionPane.showMessageDialog(null, "No debe haber campos vacios", "Error                       ", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            int telefonoValidacion = Integer.parseInt(jtTelefono.getText());
+//        try {
+//            if (jtRazonSocial.getText().isEmpty() || jtDomicilio.getText().isEmpty() || jtTelefono.getText().isEmpty() || (!jrbActivo.isSelected() && !jrbInActivo.isSelected())) {
+//                JOptionPane.showMessageDialog(null, "No debe haber campos vacios", "Error                       ", JOptionPane.ERROR_MESSAGE);
+//                return;
+//            }
+//            int telefonoValidacion = Integer.parseInt(jtTelefono.getText());
+//
+//            String razonSocial = jtRazonSocial.getText();
+//            String domicilio = jtDomicilio.getText();
+//            String telefono = jtTelefono.getText();
+//            boolean estado = jrbActivo.isSelected();
+//
+//            Proveedor proveedor = new Proveedor(razonSocial, domicilio, telefono, estado);
+//            pd.guardarProveedor(proveedor);
+//
+//            if (estado) {
+//                cargarProveedorActivo();
+//            } else {
+//                cargarProveedorInactivo();
+//            }
+//            borrarCampos();
+//            
+//
+//        } catch (NullPointerException np) {
+//            JOptionPane.showMessageDialog(this, " ");
+//        } catch (NumberFormatException nf) {
+//            JOptionPane.showMessageDialog(this, "Ingrese un telefono válido");
+//        }
 
-            String razonSocial = jtRazonSocial.getText();
-            String domicilio = jtDomicilio.getText();
-            String telefono = jtTelefono.getText();
-            boolean estado = jrbActivo.isSelected();
-
-            Proveedor proveedor = new Proveedor(razonSocial, domicilio, telefono, estado);
-            pd.guardarProveedor(proveedor);
-
-            if (estado) {
-                cargarProveedorActivo();
-            } else {
-                cargarProveedorInactivo();
-            }
-            borrarCampos();
-            
-
-        } catch (NullPointerException np) {
-            JOptionPane.showMessageDialog(this, " ");
-        } catch (NumberFormatException nf) {
-            JOptionPane.showMessageDialog(this, "Ingrese un telefono válido");
+    try {
+        if (jtRazonSocial.getText().isEmpty() || jtDomicilio.getText().isEmpty() || jtTelefono.getText().isEmpty() || (!jrbActivo.isSelected() && !jrbInActivo.isSelected())) {
+            JOptionPane.showMessageDialog(null, "No debe haber campos vacíos", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+
+        String razonSocial = jtRazonSocial.getText();
+        String domicilio = jtDomicilio.getText();
+        String telefono = jtTelefono.getText();
+        boolean estado = jrbActivo.isSelected();
+        if (!razonSocial.matches(".*[a-zA-Z].*")) {
+            JOptionPane.showMessageDialog(null, "La razón social debe contener al menos una letra.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (domicilio.matches("^[0-9]+$")) {
+            JOptionPane.showMessageDialog(null, "El domicilio no puede consistir solo en números.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!telefono.matches("^[0-9]+$")) {
+            JOptionPane.showMessageDialog(null, "Ingrese un teléfono válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Proveedor proveedor = new Proveedor(razonSocial, domicilio, telefono, estado);
+        pd.guardarProveedor(proveedor);
+        if (estado) {
+            cargarProveedorActivo();
+        } else {
+            cargarProveedorInactivo();
+        }
+        borrarCampos();
+    } catch (NullPointerException np) {
+        JOptionPane.showMessageDialog(this, " ");
+    } catch (NumberFormatException nf) {
+        JOptionPane.showMessageDialog(this, "Ingrese un teléfono válido");
+    }
+
+
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
