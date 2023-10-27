@@ -38,29 +38,32 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="413" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jcbSelectProveedoroProducto" min="-2" pref="233" max="-2" attributes="0"/>
-                              <Component id="jlIdDetalle" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Component id="jdcFechaSelect" min="-2" pref="233" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jcbConsulta" min="-2" pref="233" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="jbCargar" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jlIngreseIdCompra" min="-2" pref="134" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jtIdCompra" min="-2" pref="94" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="jlIdDetalle" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="197" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jLabel1" alignment="0" min="-2" pref="281" max="-2" attributes="0"/>
                               <Component id="jScrollPane1" min="-2" pref="871" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="381" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jlIngreseIdCompra" min="-2" pref="134" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jtIdCompra" min="-2" pref="94" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jdcFechaSelect" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jcbSelectProveedoroProducto" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jcbConsulta" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Component id="jbCargar" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -85,16 +88,16 @@
                       <Component id="jcbConsulta" min="-2" max="-2" attributes="0"/>
                       <Component id="jbCargar" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jcbSelectProveedoroProducto" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                  <Component id="jcbSelectProveedoroProducto" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jdcFechaSelect" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jtIdCompra" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jlIngreseIdCompra" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="45" max="32767" attributes="0"/>
+                  <EmptySpace pref="49" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="408" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               </Group>
@@ -163,12 +166,13 @@
         <Component class="javax.swing.JComboBox" name="jcbConsulta">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Productos/Fecha"/>
-                <StringItem index="1" value="Compras/Proveedor"/>
-                <StringItem index="2" value="Productos/Compra"/>
-                <StringItem index="3" value="Productos/MasComprado"/>
-                <StringItem index="4" value=" "/>
+              <StringArray count="6">
+                <StringItem index="0" value="Seleccione la consulta que desea realizar"/>
+                <StringItem index="1" value="Productos/Fecha"/>
+                <StringItem index="2" value="Compras/Proveedor"/>
+                <StringItem index="3" value="Productos/Compra"/>
+                <StringItem index="4" value="Productos/MasComprado"/>
+                <StringItem index="5" value=" "/>
               </StringArray>
             </Property>
           </Properties>

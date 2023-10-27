@@ -121,7 +121,6 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jbEliminar = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
-        jbActualizar = new javax.swing.JButton();
 
         jdEscritorioProducto.setBackground(new java.awt.Color(255, 110, 35));
         jdEscritorioProducto.setForeground(new java.awt.Color(255, 255, 255));
@@ -218,14 +217,6 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             }
         });
 
-        jbActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/iconoa-ctualizado-32px.png"))); // NOI18N
-        jbActualizar.setText("Actualizar");
-        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbActualizarActionPerformed(evt);
-            }
-        });
-
         jdEscritorioProducto.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioProducto.setLayer(jtIDProducto, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioProducto.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -243,7 +234,6 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         jdEscritorioProducto.setLayer(jbEliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioProducto.setLayer(jbModificar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdEscritorioProducto.setLayer(jbSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jdEscritorioProducto.setLayer(jbActualizar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jdEscritorioProductoLayout = new javax.swing.GroupLayout(jdEscritorioProducto);
         jdEscritorioProducto.setLayout(jdEscritorioProductoLayout);
@@ -255,9 +245,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                     .addGroup(jdEscritorioProductoLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 983, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
-                        .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jbActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jdEscritorioProductoLayout.createSequentialGroup()
                         .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jdEscritorioProductoLayout.createSequentialGroup()
@@ -309,7 +297,7 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdEscritorioProductoLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGap(18, 22, Short.MAX_VALUE)
                         .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jdEscritorioProductoLayout.createSequentialGroup()
                                 .addComponent(jLabel3)
@@ -333,12 +321,9 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                         .addGap(8, 8, 8)
                         .addComponent(jbModificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jdEscritorioProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jdEscritorioProductoLayout.createSequentialGroup()
-                                .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jbEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(129, 129, 129))))
         );
 
@@ -466,12 +451,6 @@ public class ProductoVista extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jbSalirActionPerformed
 
-    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
-        cargarProductos();
-        borrarCampos();
-        JOptionPane.showMessageDialog(this, "Tabla actualizada");
-    }//GEN-LAST:event_jbActualizarActionPerformed
-
     private void jtProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtProductoMouseClicked
        int fila = jtProducto.getSelectedRow();
          if (fila != -1) {
@@ -497,7 +476,6 @@ public class ProductoVista extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
