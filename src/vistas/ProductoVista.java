@@ -3,6 +3,7 @@ package vistas;
 
 import accesoDatos.ProductoData;
 import entidades.Producto;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -82,8 +83,15 @@ public class ProductoVista extends javax.swing.JInternalFrame {
 
         borrarFilas();
         List<Producto> listaProductos = pd.listarProducto();
+        DecimalFormat formatoDecimal = new DecimalFormat("0.00");
         for (Producto producto : listaProductos) {
-            modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getPrecioActual(), producto.getStock()});
+            String precioActual = formatoDecimal.format(producto.getPrecioActual());
+            modelo.addRow(new Object[]{
+                producto.getIdProducto(), 
+                producto.getNombreProducto(), 
+                producto.getDescripcion(), 
+                precioActual, 
+                producto.getStock()});
 
         }
     }
@@ -352,16 +360,24 @@ public class ProductoVista extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Ingrese el ID del producto. ", "Error                       ", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            DecimalFormat formatoDecimal = new DecimalFormat("0.00");
             int id = Integer.parseInt(jtIDProducto.getText());
             Producto producto = pd.buscarProducto(id);
             borrarFilas();
+            String precioActual = formatoDecimal.format(producto.getPrecioActual());
             jtDescripcion.setText(producto.getDescripcion());
             jtNombre.setText(producto.getNombreProducto());
-            jtPrecio.setText(producto.getPrecioActual() + "");
+            jtPrecio.setText(precioActual);
             jtStock.setText(producto.getStock() + "");
 
           
-            modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), producto.getPrecioActual(), producto.getStock()});
+            modelo.addRow(new Object[]{
+                producto.getIdProducto(), 
+                producto.getNombreProducto(), 
+                producto.getDescripcion(), 
+                precioActual, 
+                producto.getStock()
+            });
             JOptionPane.showMessageDialog(null, "ID encontrado. ", "Confirmado                 ", JOptionPane.DEFAULT_OPTION);
         } catch (NumberFormatException nf) {
             JOptionPane.showMessageDialog(null, "Ingrese un ID válido. ", "Error                       ", JOptionPane.ERROR_MESSAGE);

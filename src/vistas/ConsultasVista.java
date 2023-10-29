@@ -9,6 +9,7 @@ import entidades.Compra;
 import entidades.DetalleCompra;
 import entidades.Producto;
 import entidades.Proveedor;
+import java.text.DecimalFormat;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -28,6 +29,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
     private ProveedorData prd = new ProveedorData();
     private ProductoData pd = new ProductoData();
     private CompraData cd = new CompraData();
+    private DecimalFormat formatoDecimal = new DecimalFormat("0.00");
 
     public ConsultasVista() {
         initComponents();
@@ -54,6 +56,14 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         }
     }
 
+    private void borrarFilas() {
+        int fila = jtConsultas.getRowCount() - 1;
+        DefaultTableModel modelo = (DefaultTableModel) jtConsultas.getModel();
+        for (; fila >= 0; fila--) {
+            modelo.removeRow(fila);
+        }
+
+    }
 
     private void listarDetallesFecha() {
         java.util.Date fechaSeleccionada = jdcFechaSelect.getDate();
@@ -79,7 +89,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
                         detalle.getIdDetalle(),
                         detalle.getProducto().toString(),
                         detalle.getCantidad(),
-                        detalle.getPrecioCosto(),});
+                        formatoDecimal.format(detalle.getPrecioCosto())});
 
                 }
             }
@@ -99,6 +109,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             List<Compra> comprasProveedor = cd.buscarComprasPorProveedor(proveedorSelect);
             List<DetalleCompra> todosLosDetalles = new ArrayList<>();
             modelo.setRowCount(0);
+            
 
             for (Compra compra : comprasProveedor) {
                 int idCompra = compra.getIdCompra();
@@ -108,13 +119,13 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
                     String producto = detalle.getProducto().toString();
                     int cantidad = detalle.getCantidad();
                     double totalCosto = cantidad * detalle.getPrecioCosto();
-
+                    String costo = formatoDecimal.format(totalCosto);
                     modelo.addRow(new Object[]{
                         idCompra,
                         proveedor,
                         producto,
                         cantidad,
-                        totalCosto
+                        costo
                     });
 
                 }
@@ -140,13 +151,15 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
                 int cantidad = detalle.getCantidad();
                 double costoUnidad = detalle.getPrecioCosto();
                 double totalCosto = cantidad * detalle.getPrecioCosto();
+                String totalCostoString = formatoDecimal.format(totalCosto);
+                String costoUnidadString = formatoDecimal.format(costoUnidad);
 
                 modelo.addRow(new Object[]{
                     idCompra,
                     producto,
                     cantidad,
-                    costoUnidad,
-                    totalCosto
+                    costoUnidadString,
+                    totalCostoString
                 });
             }
         } catch (NullPointerException np) {
@@ -182,7 +195,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         Comparator<Integer> comparadorPorValor = new Comparator<Integer>() {
             @Override
             public int compare(Integer clave2, Integer clave1) {
-               return mapa.get(clave1).compareTo(mapa.get(clave2));
+                return mapa.get(clave1).compareTo(mapa.get(clave2));
             }
         };
 
@@ -196,14 +209,16 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             int idProducto = producto.getIdProducto();
             double precioVenta = producto.getPrecioActual();
             double precioCompra = producto.getPrecioActual() * 0.7;
+            String precioVentaString = formatoDecimal.format(precioVenta);
+            String precioCompraString = formatoDecimal.format(precioCompra);
             int cantidadTotal = mapaOrdenado.get(idProducto);
 
             modelo.addRow(new Object[]{
                 idProducto,
                 Nombreproducto,
                 cantidadTotal,
-                precioVenta,
-                precioCompra
+                precioVentaString,
+                precioCompraString
             });
 
         }
@@ -369,12 +384,14 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         TableColumn quintaColum = header.getColumnModel().getColumn(4);
 
         if (seleccion.equals("Productos/Fecha")) {
+
             jpEscritorio.repaint();
             jtIdCompra.setVisible(false);
             jlIngreseIdCompra.setVisible(false);
             jcbSelectProveedoroProducto.setVisible(false);
             jcbSelectProveedoroProducto.removeAllItems();
             jdcFechaSelect.setVisible(true);
+            borrarFilas();
             tableHeader.setVisible(false);
             primeraColum.setHeaderValue("FECHA");
             segundaColum.setHeaderValue("ID COMPRA");
@@ -390,6 +407,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             jlIngreseIdCompra.setVisible(false);
             jcbSelectProveedoroProducto.setVisible(true);
             jcbSelectProveedoroProducto.removeAllItems();
+            borrarFilas();
             comboProveedor();
             tableHeader.setVisible(false);
             primeraColum.setHeaderValue("ID COMPRA");
@@ -407,6 +425,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             jcbSelectProveedoroProducto.setVisible(false);
             jcbSelectProveedoroProducto.removeAllItems();
             tableHeader.setVisible(false);
+            borrarFilas();
             primeraColum.setHeaderValue("ID COMPRA");
             segundaColum.setHeaderValue("PRODUCTO");
             terceraColum.setHeaderValue("CANTIDAD");
@@ -420,6 +439,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             jdcFechaSelect.setVisible(false);
             jcbSelectProveedoroProducto.setVisible(false);
             jcbSelectProveedoroProducto.removeAllItems();
+            borrarFilas();
             tableHeader.setVisible(false);
             primeraColum.setHeaderValue("ID PRODUCTO");
             segundaColum.setHeaderValue("PRODUCTO");
@@ -433,7 +453,15 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
             jtIdCompra.setVisible(false);
             jlIdDetalle.setVisible(false);
             jlIngreseIdCompra.setVisible(false);
-            
+            tableHeader.setVisible(false);
+            borrarFilas();
+            primeraColum.setHeaderValue("ID PRODUCTO");
+            segundaColum.setHeaderValue("PRODUCTO");
+            terceraColum.setHeaderValue("CANTIDAD");
+            cuartaColum.setHeaderValue("PRECIO VENTA");
+            quintaColum.setHeaderValue("PRECIO COMPRA");
+            tableHeader.setVisible(true);
+
         }
 
     }//GEN-LAST:event_jcbConsultaActionPerformed

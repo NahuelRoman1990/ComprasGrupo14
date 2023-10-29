@@ -9,6 +9,7 @@ import entidades.Compra;
 import entidades.DetalleCompra;
 import entidades.Producto;
 import entidades.Proveedor;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
@@ -29,12 +30,9 @@ public class ComprasVista extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo1 = new DefaultTableModel();
     private DefaultTableModel modelo = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
-            if (c == 4) {
-                return true;
-            } else {
+            
                 return false;
             }
-        }
     };
 
     public ComprasVista() {
@@ -176,9 +174,15 @@ public class ComprasVista extends javax.swing.JInternalFrame {
             if (cantidad == 0) {
                 JOptionPane.showMessageDialog(this, "CANTIDAD NO PUEDE SER '0' ", "Erorr", JOptionPane.ERROR_MESSAGE);
             }
-
+            DecimalFormat formatoDecimal = new DecimalFormat("0.00");
             double precioCosto = producto.getPrecioActual() * 0.7;
-            modelo.addRow(new Object[]{producto.getIdProducto(), producto.getNombreProducto(), producto.getDescripcion(), precioCosto, cantidad});
+            String precioCostoString = formatoDecimal.format(precioCosto);
+            modelo.addRow(new Object[]{
+                producto.getIdProducto(), 
+                producto.getNombreProducto(), 
+                producto.getDescripcion(), 
+                precioCostoString, 
+                cantidad});
             jcbProductos.removeItem(producto);
         } catch (NumberFormatException np) {
             JOptionPane.showMessageDialog(this, "INGRESE LA CANTIDAD QUE DESEA COMPRAR", "Error", JOptionPane.ERROR_MESSAGE);
@@ -203,33 +207,34 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         }
     }
 
-    private void modificarCompra() {
-        int filaSeleccionada = jtCompras.getSelectedRow();
-        if (filaSeleccionada != -1) {
-         
-        }
-
-       
-    }
+     
+    
 
     private void sumaTotal() {
         int cantidadFilas = jtCompras.getRowCount();
         double total =0;
+        DecimalFormat formatoDecimal = new DecimalFormat("0.00");
+        
         try {
             if (cantidadFilas > 0) {
 
                 for (int fila = 0; fila <= cantidadFilas - 1; fila++) {
-                    double precioCosto = Double.parseDouble(jtCompras.getValueAt(fila, 3).toString());
+                    int idProducto = Integer.parseInt(jtCompras.getValueAt(fila, 0).toString());
+                    Producto producto = prd.buscarProducto(idProducto);
+                    Double precioCosto = producto.getPrecioActual()*0.7;
                     int cantidad = Integer.parseInt(jtCompras.getValueAt(fila, 4).toString());
                     total += (precioCosto * cantidad);
-                    jtTotal.setText(total + "");
-
+                     
+                    jtTotal.setText(formatoDecimal.format(total));
                 }
+                
+                jtTotal.setText(formatoDecimal.format(total));
+                
             } else {
-                jtTotal.setText(0 + "");
+                jtTotal.setText(total + "");
             }
         } catch (NumberFormatException nf) {
-            JOptionPane.showMessageDialog(this, "LA CANTIDAD DEBE SER UN NÚMERO ENTERO");
+            
         }
 
     }
@@ -305,11 +310,6 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
             }
         ));
-        jtCompras.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtComprasMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jtCompras);
 
         jbAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconos de gui/anadir-producto-64-bit.png"))); // NOI18N
@@ -560,10 +560,6 @@ public class ComprasVista extends javax.swing.JInternalFrame {
         sumaTotal();
     }//GEN-LAST:event_jbAgregarActionPerformed
 
-    private void jtComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtComprasMouseClicked
-        modificarCompra();
-    }//GEN-LAST:event_jtComprasMouseClicked
-
     private void jbConfirmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmarCompraActionPerformed
         jcbProveedor.setEnabled(true);
 
@@ -574,9 +570,9 @@ public class ComprasVista extends javax.swing.JInternalFrame {
 
             for (int i = 0; i <= filaTotales - 1; i++) {
                 int cantidad = Integer.parseInt(jtCompras.getValueAt(i, 4).toString());
-                double precioCosto = Double.parseDouble(jtCompras.getValueAt(i, 3).toString());
                 int idProducto = Integer.parseInt(jtCompras.getValueAt(i, 0).toString());
                 Producto producto = prd.buscarProducto(idProducto);
+                Double precioCosto = producto.getPrecioActual()*0.7;
 
                 DetalleCompra detalleCompra = new DetalleCompra(cantidad, precioCosto, compra, producto);
                 dcd.guardarDetalleCompra(detalleCompra);
