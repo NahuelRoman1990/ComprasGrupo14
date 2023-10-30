@@ -458,6 +458,8 @@ public class ProductoVista extends javax.swing.JInternalFrame {
             
         } catch (NullPointerException np) {
             JOptionPane.showMessageDialog(this, " ");
+        } catch (NumberFormatException nf) {
+            JOptionPane.showMessageDialog(this, "Los campos precio y stock deben ser numericos");
         }
      
     }//GEN-LAST:event_jbModificarActionPerformed
